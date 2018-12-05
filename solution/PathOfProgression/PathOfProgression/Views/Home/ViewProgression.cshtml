@@ -1,0 +1,154 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>Track Progression</title>
+	<link rel="stylesheet" type="text/css" href="@Url.Content("~/Styles/prettify.css")">
+	<script src="https://code.jquery.com/jquery-3.3.1.js"
+			integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+			crossorigin="anonymous"></script>
+</head>
+<body class="flexColumn">
+	<div id="topBanner">
+		<div class="pushapart">
+			<ul id="rightNavigationPages" class="flexRow">
+				<li id="title" class="page">
+					<a href="/home">Path of Progression</a>
+				</li>
+				<li class="page">
+					<a href="/home">Home</a>
+				</li>
+				<li class="page">
+					<a href="/createProgression">Create Progression File</a>
+				</li>
+				<li class="page">
+					<a href="/viewProgression">View Progression</a>
+				</li>
+			</ul>
+			<ul id="leftNavigationPages" class="flexRow">
+				<li class="page">
+					<a href="https://github.com/bhaan23/NewShinyIdea">github</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div id="mainContainer">
+		<div id="header" clas="flexColumn">
+			<h1 id="pageTitle" class="centerText">Progression</h1>
+			<table id="serverInfoTable">
+				<tbody>
+					<tr>
+						<td>
+							<label>Upload Progression File:</label>
+							<input id="progressionFile" accept="*.json" type="file" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label>Account Name:</label>
+							<input id="accountName" maxlength="32" type="text" />
+							<button id="accountNameUpdate">Update</button>
+						</td>
+						<td>
+							<label>Select a character to track:</label>
+							<select id="characterNames" disabled></select>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div id="progressBar" class="centerText">
+				<div id="progress">60%</div>
+			</div>
+		</div>
+
+		<div id="tiles" class="flexColumn centerItems"></div>
+	</div>
+	<div id="footerContainer">
+
+	</div>
+</body>
+<script>
+	let progressionNodes = [{"id": 1,"title": "Level up","action": "[level] 2","description": "Level up","nodesNeeded": [],"completed": false,},{"id": 2,"title": "Trade with Vendors","action": "[enter] Lioneye's Watch","description": "Talk to Tarkleigh. Take Explosive trap as a reward and vendor rares/magic items.\nCheck for movespeed boots from Tarkleigh, then buy Freezing Pulse from Nessa","nodesNeeded": [1],"completed": false},{"id": 3,"title": "Travel to The Mud Flats","action": "[enter] The Coast","description": "Go to the Mud Flats after grabbing the waypoint","nodesNeeded": [2],"completed": false},{"id": 4,"title": "Travel to the Submerged Passage","action": "[enter] The Mud Flats","description": "","nodesNeeded": [3],"completed": false},{"id": 5,"title": "Go back for QS flask","action": "[enter] The Submerged Passage","description": "Take the waypoint back to the Coast. Go right to the Tidal Island for the medicine chest quest.","nodesNeeded": [4],"completed": false},{"id": 6,"title": "change test","action": "[kill] shaper","description": "Kill the shaper","nodesNeeded": [5],"completed": false}];
+	let lastCheckedTime = null;
+
+	let proptUser = function (msg) {
+		alert(msg);
+	};
+
+	let drawProgressionNodes = function () {
+		const tiles = $('#tiles');
+		for (var progression of progressionNodes) {
+			const tileHtml = `<div class="tile" data-severity="1" id="${progression.id}">
+								<div class="flexRow pushapart tileHeaders">
+									<span class="actionType">${progression.action}</span>
+									<span class="tileName">${progression.title}</span>
+									<span class="actionFlag">${progression.action}</span>
+								</div>
+								<p class="tileDescription">${progression.description}</p>
+							</div>`;
+			tiles.append(tileHtml);
+		}
+	};
+
+	drawProgressionNodes();
+
+	let updateCharacterNames = function (names) {
+		const characterSelection = $('#characterNames');
+		if (names.length > 0) {
+			$.each(names, (index, name) => {
+				characterSelection.append($('<option>', {
+					value: name,
+					text: name
+				}));
+			});
+			characterSelection.prop('disabled', false);
+		} else {
+			characterSelection.prop('disabled', true);
+		}
+	};
+
+	$('.tile .closeIcon').on('click', (event) => {
+		const tile = $(event.currentTarget).closest('.tile');
+		tile.addClass('fadeOut');
+	});
+
+	$('#accountNameUpdate').on('click', (event) => {
+		const accountName = $('#accountName').val();
+		if (!accountName) { promptUser('No account name given'); }
+		else {
+			$.ajax({
+				method: "POST",
+				url: window.location.origin + '/api/getCharacters',
+				data: { accountName },
+				dataType: 'json',
+				success: (response) => updateCharacterNames(response.names),
+				error: (error) => promptUser('Cannot find any characters for the account name of ' + accountName)
+			});
+		}
+	});
+
+	let refresh = function () {
+		const characterSelected = $('#characterNames > option:selected').text();
+		$.ajax({
+			method: "POST",
+			url: window.location.origin + "/api/getUpdates",
+			data: { characterName: characterSelected, lastTimestamp: lastCheckedTime, progressionNodes: JSON.stringify(progressionNodes) },
+			dataType: 'json',
+			success: (response) => renderUpdates(response),
+			error: (error) => console.log(error)
+		});
+		setTimeout(refresh, 60000);
+	};
+
+	let sleep = function (ms) {
+		return new Promise(resolve => setTimeout(resolve, ms));
+	}
+
+	let renderUpdates = async function (response) {
+		lastCheckedTime = response.lastCheckedTime;
+		for (var updatedNodeId of response.updates) {
+			$('#' + updatedNodeId).addClass('fadeOut');
+			await sleep(1000);
+		}
+	};
+</script>
+</html>
