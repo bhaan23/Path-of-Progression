@@ -1,0 +1,8 @@
+Take emitted data from poe-log-monitor and map it to the correct nodes in the progression structure
+Find out if there is a way to grab lab trial data from poe-log-monitor (consistent izaro phrases + zone?)
+Map out a full progression from EEs leveling guide
+Map out a full progression from a WR speedrun
+Design a good way to create new progressions (eventually lucidchart-like? d3?)
+Make css scalable for non-maximized screen
+Figure out how to have babel import string .html templates
+Map as many boss kills to logged message as possible to be used in progressions

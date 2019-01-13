@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>Track Progression</title>
+	<link rel="stylesheet" type="text/css" href="../prettify.css">
+</head>
+<body class="flexColumn">
+	<div id="topBanner">
+		<div class="pushapart">
+			<ul id="rightNavigationPages" class="flexRow">
+				<li id="title" class="page">
+					<a href="./index.html">Path of Progression</a>
+				</li>
+				<li class="page">
+					<a href="./index.html">Home</a>
+				</li>
+				<li class="page">
+					<a href="./createProgression.html">Create Progression</a>
+				</li>
+				<li class="page">
+					<a href="./viewProgression.html">View Progression</a>
+				</li>
+			</ul>
+			<ul id="leftNavigationPages" class="flexRow">
+				<li class="page">
+					<a id="githubRepo" data-outLink="https://github.com/bhaan23/NewShinyIdea">github</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div id="mainContainer">
+		<div id="header" clas="flexColumn">
+			<h1 id="pageTitle" class="centerText">Progression</h1>
+			<div id="userInputs">
+				<div>
+					<label>Account Name:</label>
+					<input id="accountName" maxlength="32" type="text" />
+					<button id="accountNameUpdate">Update</button>
+				</div>
+				<div>
+					<label>Select a character to track:</label>
+					<select id="characterNames" disabled></select>
+				</div>
+				<div>
+					<label>Upload Progression File:</label>
+					<button id="progressionFile">Choose Progression File</button>
+				</div>
+			</div>
+			<div id="progressBar" class="centerText" style="display: none;">
+				<div id="progress">60%</div>
+			</div>
+		</div>
+
+		<div id="tiles" class="flexColumn centerItems"></div>
+	</div>
+	<script>
+		require('babel-register');
+		require('../scripts/viewProgressionBootstrap');
+	</script>
+	<div id="footerContainer">
+
+	</div>
+</body>
+</html>
