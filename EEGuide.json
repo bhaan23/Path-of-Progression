@@ -2,9 +2,7 @@
 	{
 		"id": 1,
 		"title": "Kill Hillock",
-		"completionTriggers": [
-			"[area][act1][Lioneye's Watch]"
-		],
+		"completionTrigger": "[area][Lioneye's Watch]",
 		"description": "Kill Hilock, pick up as many items as you can and enter town.",
 		"nodesNeeded": [
 			
@@ -14,7 +12,7 @@
 	{
 		"id": 2,
 		"title": "Get movespeed boots",
-		"completionTriggers": [],
+		"completionTrigger": "[equip][boots][mod][% increased Movement Speed]",
 		"description": "Look to purchase movespeed boots from Tarkleigh.",
 		"nodesNeeded": [
 			1
@@ -23,8 +21,8 @@
 	},
 	{
 		"id": 3,
-		"title": "Find the waypoint in The Coast",
-		"completionTriggers": [],
+		"title": "Go to The Coast",
+		"completionTrigger": "[area][The Coast]",
 		"description": "Enter The Coast, run through any mobs and continue until you tag the waypoint.",
 		"nodesNeeded": [
 			1
@@ -34,7 +32,7 @@
 	{
 		"id": 4,
 		"title": "Grab a quicksilver flask",
-		"completionTriggers": [],
+		"completionTrigger": "[equip][flasks][type][Quicksilver]",
 		"description": "Enter The Tidal Island to the right of the Coast waypoint. Travel around the left side until you find find Hailrake. Kill him to get the Medicine Chest and portal back to town to get your quicksilver flask reward from Nessa.",
 		"nodesNeeded": [
 			3
@@ -44,7 +42,7 @@
 	{
 		"id": 5,
 		"title": "Break some eggs",
-		"completionTriggers": [],
+		"completionTrigger": "[area][The Submerged Passage]",
 		"description": "Enter The Mud Flats and pick up the three glyphs from the Rhoa nests. Touch the wall next to Nessa and make your way to The Submerged Passage.",
 		"nodesNeeded": [
 			3
@@ -54,7 +52,7 @@
 	{
 		"id": 6,
 		"title": "To The Ledge!",
-		"completionTriggers": [],
+		"completionTrigger": "[area][The Ledge]",
 		"description": "Enter The Submerged Passage and look for the bridge. Place a portal here to come back later for the sidequest. Then continue on to The Ledge.",
 		"nodesNeeded": [
 			5
@@ -64,17 +62,17 @@
 	{
 		"id": 7,
 		"title": "Find the tiny crab",
-		"completionTriggers": [],
+		"completionTrigger": "[area][The Flooded Depths]",
 		"description": "Once you have found the waypoint in The Ledge, return to the submerged passage waypoint you left and seach for The Flooded Depths.",
 		"nodesNeeded": [
-			6
+			5
 		],
 		"completed": false
 	},
 	{
 		"id": 8,
 		"title": "Kill the tiny crab",
-		"completionTriggers": [],
+		"completionTrigger": "[area][Lioneye's Watch]",
 		"description": "Navigate through the zone to find The Deep Dweller. Kill it to finish the quest, then portal back to town to recieve your reward.",
 		"nodesNeeded": [
 			7
@@ -84,7 +82,7 @@
 	{
 		"id": 9,
 		"title": "Proceed to The Climb",
-		"completionTriggers": [],
+		"completionTrigger": "[area][The Climb]",
 		"description": "Use a waypoint to go back to The Ledge and continue onwards to the next zone, The Climb.",
 		"nodesNeeded": [
 			6
@@ -94,17 +92,17 @@
 	{
 		"id": 10,
 		"title": "Continue to The Lower Prison",
-		"completionTriggers": [],
+		"completionTrigger": "[area][The Lower Prison]",
 		"description": "Continue through The Climb killing the unique boss The Faun, if you have not already, to unlock the NPC Navalli. Then enter the Lower Prison.",
 		"nodesNeeded": [
-			
+			9
 		],
 		"completed": false
 	},
 	{
 		"id": 11,
 		"title": "Move up in the Prison",
-		"completionTriggers": [],
+		"completionTrigger": "[area][The Upper Prison]",
 		"description": "Continue through the zone and enter The Upper Prison.",
 		"nodesNeeded": [
 			10
@@ -114,7 +112,7 @@
 	{
 		"id": 12,
 		"title": "Complete the trial of ascendency",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "Complete the trial of ascendency in The Lower Prison.",
 		"nodesNeeded": [
 			10
@@ -123,8 +121,8 @@
 	},
 	{
 		"id": 13,
-		"title": "Continue to The Warden's Chambers",
-		"completionTriggers": [],
+		"title": "Continue to The Warden's Chambers and Kill Brutus",
+		"completionTrigger": "[area][The Prisoner's Gate]",
 		"description": "Make your way through the zone and enter The Warden's Chambers.",
 		"nodesNeeded": [
 			11
@@ -132,29 +130,19 @@
 		"completed": false
 	},
 	{
-		"id": 14,
-		"title": "Find and Kill Brutus",
-		"completionTriggers": [],
-		"description": "Follow the blood trail to Brutus and kill him to complete the quest.",
+		"id": 15,
+		"title": "Go to The Ship Graveyard",
+		"completionTrigger": "[area][The Ship Graveyard]",
+		"description": "Continue through the prisoner's gate to The Ship Graveyard. You can also go back to town to pick up a movement skill as a reward for killing brutus.",
 		"nodesNeeded": [
 			13
 		],
 		"completed": false
 	},
 	{
-		"id": 15,
-		"title": "Go to The Ship Graveyard",
-		"completionTriggers": [],
-		"description": "Continue through the prisoner's gate to The Ship Graveyard. You can also go back to town to pick up a movement skill as a reward for killing brutus.",
-		"nodesNeeded": [
-			14
-		],
-		"completed": false
-	},
-	{
 		"id": 16,
 		"title": "Find The Ship Graveyard Cave",
-		"completionTriggers": [],
+		"completionTrigger": "[area][The Ship Graveyard Cave]",
 		"description": "Find The Ship Graveyard Cave so you can obtain the Allflame to bring back to Fairgraves.",
 		"nodesNeeded": [
 			15
@@ -163,8 +151,8 @@
 	},
 	{
 		"id": 17,
-		"title": "Grab the Allflame",
-		"completionTriggers": [],
+		"title": "Find the Allflame",
+		"completionTrigger": "[area][The Ship Graveyard]",
 		"description": "Find the Allflame at the end and bring it to Fairgraves to complete the quest.",
 		"nodesNeeded": [
 			16
@@ -174,7 +162,7 @@
 	{
 		"id": 18,
 		"title": "Find The Cavern of Wrath",
-		"completionTriggers": [],
+		"completionTrigger": "[area][The Cavern of Wrath]",
 		"description": "Continue through The Ship Graveyard to find The Cavern of Wrath.",
 		"nodesNeeded": [
 			15
@@ -184,7 +172,7 @@
 	{
 		"id": 19,
 		"title": "Kill Merveil",
-		"completionTriggers": [],
+		"completionTrigger": "[area][The Southern Forest]",
 		"description": "Continue through The Cavern of Wrath and The Cavern of Anger until you find Merveil's lair. Kill Merveil and proceed to Act 2.",
 		"nodesNeeded": [
 			18
@@ -194,7 +182,7 @@
 	{
 		"id": 20,
 		"title": "Find the Act 2 Town",
-		"completionTriggers": [],
+		"completionTrigger": "[area][The Forest Encampment]",
 		"description": "Find The Forest Encampment through The Southern Forest.",
 		"nodesNeeded": [
 			19
@@ -204,7 +192,7 @@
 	{
 		"id": 21,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			20
@@ -214,7 +202,7 @@
 	{
 		"id": 22,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -224,7 +212,7 @@
 	{
 		"id": 23,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -234,7 +222,7 @@
 	{
 		"id": 24,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -244,7 +232,7 @@
 	{
 		"id": 25,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -254,7 +242,7 @@
 	{
 		"id": 26,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -264,7 +252,7 @@
 	{
 		"id": 27,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -274,7 +262,7 @@
 	{
 		"id": 28,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -284,7 +272,7 @@
 	{
 		"id": 29,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -294,7 +282,7 @@
 	{
 		"id": 30,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -304,7 +292,7 @@
 	{
 		"id": 31,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -314,7 +302,7 @@
 	{
 		"id": 32,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -324,7 +312,7 @@
 	{
 		"id": 33,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -334,7 +322,7 @@
 	{
 		"id": 34,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -344,7 +332,7 @@
 	{
 		"id": 35,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -354,7 +342,7 @@
 	{
 		"id": 36,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -364,7 +352,7 @@
 	{
 		"id": 37,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -374,7 +362,7 @@
 	{
 		"id": 38,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -384,7 +372,7 @@
 	{
 		"id": 39,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -394,7 +382,7 @@
 	{
 		"id": 40,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -404,7 +392,7 @@
 	{
 		"id": 41,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -414,7 +402,7 @@
 	{
 		"id": 42,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -424,7 +412,7 @@
 	{
 		"id": 43,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -434,7 +422,7 @@
 	{
 		"id": 44,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -444,7 +432,7 @@
 	{
 		"id": 45,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -454,7 +442,7 @@
 	{
 		"id": 46,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -464,7 +452,7 @@
 	{
 		"id": 47,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -474,7 +462,7 @@
 	{
 		"id": 48,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -484,7 +472,7 @@
 	{
 		"id": 49,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -494,7 +482,7 @@
 	{
 		"id": 50,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -504,7 +492,7 @@
 	{
 		"id": 51,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -514,7 +502,7 @@
 	{
 		"id": 52,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -524,7 +512,7 @@
 	{
 		"id": 53,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -534,7 +522,7 @@
 	{
 		"id": 54,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -544,7 +532,7 @@
 	{
 		"id": 55,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -554,7 +542,7 @@
 	{
 		"id": 56,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -564,7 +552,7 @@
 	{
 		"id": 57,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -574,7 +562,7 @@
 	{
 		"id": 58,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -584,7 +572,7 @@
 	{
 		"id": 59,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -594,7 +582,7 @@
 	{
 		"id": 60,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -604,7 +592,7 @@
 	{
 		"id": 61,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -614,7 +602,7 @@
 	{
 		"id": 62,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -624,7 +612,7 @@
 	{
 		"id": 63,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -634,7 +622,7 @@
 	{
 		"id": 64,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -644,7 +632,7 @@
 	{
 		"id": 65,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -654,7 +642,7 @@
 	{
 		"id": 66,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -664,7 +652,7 @@
 	{
 		"id": 67,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -674,7 +662,7 @@
 	{
 		"id": 68,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -684,7 +672,7 @@
 	{
 		"id": 69,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -694,7 +682,7 @@
 	{
 		"id": 70,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -704,7 +692,7 @@
 	{
 		"id": 71,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -714,7 +702,7 @@
 	{
 		"id": 72,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -724,7 +712,7 @@
 	{
 		"id": 73,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -734,7 +722,7 @@
 	{
 		"id": 74,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -744,7 +732,7 @@
 	{
 		"id": 75,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -754,7 +742,7 @@
 	{
 		"id": 76,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -764,7 +752,7 @@
 	{
 		"id": 77,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -774,7 +762,7 @@
 	{
 		"id": 78,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -784,7 +772,7 @@
 	{
 		"id": 79,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -794,7 +782,7 @@
 	{
 		"id": 80,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -804,7 +792,7 @@
 	{
 		"id": 81,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -814,7 +802,7 @@
 	{
 		"id": 82,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -824,7 +812,7 @@
 	{
 		"id": 83,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -834,7 +822,7 @@
 	{
 		"id": 84,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -844,7 +832,7 @@
 	{
 		"id": 85,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -854,7 +842,7 @@
 	{
 		"id": 86,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -864,7 +852,7 @@
 	{
 		"id": 87,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -874,7 +862,7 @@
 	{
 		"id": 88,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -884,7 +872,7 @@
 	{
 		"id": 89,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -894,7 +882,7 @@
 	{
 		"id": 90,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -904,7 +892,7 @@
 	{
 		"id": 91,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -914,7 +902,7 @@
 	{
 		"id": 92,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -924,7 +912,7 @@
 	{
 		"id": 93,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -934,7 +922,7 @@
 	{
 		"id": 94,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -944,7 +932,7 @@
 	{
 		"id": 95,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -954,7 +942,7 @@
 	{
 		"id": 96,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -964,7 +952,7 @@
 	{
 		"id": 97,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -974,7 +962,7 @@
 	{
 		"id": 98,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -984,7 +972,7 @@
 	{
 		"id": 99,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -994,7 +982,7 @@
 	{
 		"id": 100,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1004,7 +992,7 @@
 	{
 		"id": 101,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1014,7 +1002,7 @@
 	{
 		"id": 102,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1024,7 +1012,7 @@
 	{
 		"id": 103,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1034,7 +1022,7 @@
 	{
 		"id": 104,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1044,7 +1032,7 @@
 	{
 		"id": 105,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1054,7 +1042,7 @@
 	{
 		"id": 106,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1064,7 +1052,7 @@
 	{
 		"id": 107,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1074,7 +1062,7 @@
 	{
 		"id": 108,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1084,7 +1072,7 @@
 	{
 		"id": 109,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1094,7 +1082,7 @@
 	{
 		"id": 110,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1104,7 +1092,7 @@
 	{
 		"id": 111,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1114,7 +1102,7 @@
 	{
 		"id": 112,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1124,7 +1112,7 @@
 	{
 		"id": 113,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1134,7 +1122,7 @@
 	{
 		"id": 114,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1144,7 +1132,7 @@
 	{
 		"id": 115,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1154,7 +1142,7 @@
 	{
 		"id": 116,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1164,7 +1152,7 @@
 	{
 		"id": 117,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1174,7 +1162,7 @@
 	{
 		"id": 118,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1184,7 +1172,7 @@
 	{
 		"id": 119,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1194,7 +1182,7 @@
 	{
 		"id": 120,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1204,7 +1192,7 @@
 	{
 		"id": 121,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1214,7 +1202,7 @@
 	{
 		"id": 122,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1224,7 +1212,7 @@
 	{
 		"id": 123,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1234,7 +1222,7 @@
 	{
 		"id": 124,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1244,7 +1232,7 @@
 	{
 		"id": 125,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1254,7 +1242,7 @@
 	{
 		"id": 126,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1264,7 +1252,7 @@
 	{
 		"id": 127,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1274,7 +1262,7 @@
 	{
 		"id": 128,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1284,7 +1272,7 @@
 	{
 		"id": 129,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1294,7 +1282,7 @@
 	{
 		"id": 130,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1304,7 +1292,7 @@
 	{
 		"id": 131,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1314,7 +1302,7 @@
 	{
 		"id": 132,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1324,7 +1312,7 @@
 	{
 		"id": 133,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1334,7 +1322,7 @@
 	{
 		"id": 134,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1344,7 +1332,7 @@
 	{
 		"id": 135,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1354,7 +1342,7 @@
 	{
 		"id": 136,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1364,7 +1352,7 @@
 	{
 		"id": 137,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1374,7 +1362,7 @@
 	{
 		"id": 138,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1384,7 +1372,7 @@
 	{
 		"id": 139,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1394,7 +1382,7 @@
 	{
 		"id": 140,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1404,7 +1392,7 @@
 	{
 		"id": 141,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1414,7 +1402,7 @@
 	{
 		"id": 142,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1424,7 +1412,7 @@
 	{
 		"id": 143,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1434,7 +1422,7 @@
 	{
 		"id": 144,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1444,7 +1432,7 @@
 	{
 		"id": 145,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1454,7 +1442,7 @@
 	{
 		"id": 146,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1464,7 +1452,7 @@
 	{
 		"id": 147,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1474,7 +1462,7 @@
 	{
 		"id": 148,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1484,7 +1472,7 @@
 	{
 		"id": 149,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1494,7 +1482,7 @@
 	{
 		"id": 150,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1504,7 +1492,7 @@
 	{
 		"id": 151,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1514,7 +1502,7 @@
 	{
 		"id": 152,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1524,7 +1512,7 @@
 	{
 		"id": 153,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1534,7 +1522,7 @@
 	{
 		"id": 154,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1544,7 +1532,7 @@
 	{
 		"id": 155,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1554,7 +1542,7 @@
 	{
 		"id": 156,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1564,7 +1552,7 @@
 	{
 		"id": 157,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1574,7 +1562,7 @@
 	{
 		"id": 158,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1584,7 +1572,7 @@
 	{
 		"id": 159,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1594,7 +1582,7 @@
 	{
 		"id": 160,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1604,7 +1592,7 @@
 	{
 		"id": 161,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1614,7 +1602,7 @@
 	{
 		"id": 162,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1624,7 +1612,7 @@
 	{
 		"id": 163,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1634,7 +1622,7 @@
 	{
 		"id": 164,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1644,7 +1632,7 @@
 	{
 		"id": 165,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1654,7 +1642,7 @@
 	{
 		"id": 166,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1664,7 +1652,7 @@
 	{
 		"id": 167,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1674,7 +1662,7 @@
 	{
 		"id": 168,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1684,7 +1672,7 @@
 	{
 		"id": 169,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1694,7 +1682,7 @@
 	{
 		"id": 170,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1704,7 +1692,7 @@
 	{
 		"id": 171,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1714,7 +1702,7 @@
 	{
 		"id": 172,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1724,7 +1712,7 @@
 	{
 		"id": 173,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1734,7 +1722,7 @@
 	{
 		"id": 174,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1744,7 +1732,7 @@
 	{
 		"id": 175,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1754,7 +1742,7 @@
 	{
 		"id": 176,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1764,7 +1752,7 @@
 	{
 		"id": 177,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1774,7 +1762,7 @@
 	{
 		"id": 178,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1784,7 +1772,7 @@
 	{
 		"id": 179,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1794,7 +1782,7 @@
 	{
 		"id": 180,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1804,7 +1792,7 @@
 	{
 		"id": 181,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1814,7 +1802,7 @@
 	{
 		"id": 182,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1824,7 +1812,7 @@
 	{
 		"id": 183,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1834,7 +1822,7 @@
 	{
 		"id": 184,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1844,7 +1832,7 @@
 	{
 		"id": 185,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1854,7 +1842,7 @@
 	{
 		"id": 186,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1864,7 +1852,7 @@
 	{
 		"id": 187,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1874,7 +1862,7 @@
 	{
 		"id": 188,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1884,7 +1872,7 @@
 	{
 		"id": 189,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1894,7 +1882,7 @@
 	{
 		"id": 190,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1904,7 +1892,7 @@
 	{
 		"id": 191,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1914,7 +1902,7 @@
 	{
 		"id": 192,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1924,7 +1912,7 @@
 	{
 		"id": 193,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1934,7 +1922,7 @@
 	{
 		"id": 194,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1944,7 +1932,7 @@
 	{
 		"id": 195,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1954,7 +1942,7 @@
 	{
 		"id": 196,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1964,7 +1952,7 @@
 	{
 		"id": 197,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1974,7 +1962,7 @@
 	{
 		"id": 198,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1984,7 +1972,7 @@
 	{
 		"id": 199,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -1994,7 +1982,7 @@
 	{
 		"id": 200,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -2004,7 +1992,7 @@
 	{
 		"id": 201,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -2014,7 +2002,7 @@
 	{
 		"id": 202,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -2024,7 +2012,7 @@
 	{
 		"id": 203,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -2034,7 +2022,7 @@
 	{
 		"id": 204,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -2044,7 +2032,7 @@
 	{
 		"id": 205,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -2054,7 +2042,7 @@
 	{
 		"id": 206,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -2064,7 +2052,7 @@
 	{
 		"id": 207,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -2074,7 +2062,7 @@
 	{
 		"id": 208,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -2084,7 +2072,7 @@
 	{
 		"id": 209,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -2094,7 +2082,7 @@
 	{
 		"id": 210,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -2104,7 +2092,7 @@
 	{
 		"id": 211,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -2114,7 +2102,7 @@
 	{
 		"id": 212,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -2124,7 +2112,7 @@
 	{
 		"id": 213,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -2134,7 +2122,7 @@
 	{
 		"id": 214,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -2144,7 +2132,7 @@
 	{
 		"id": 215,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -2154,7 +2142,7 @@
 	{
 		"id": 216,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -2164,7 +2152,7 @@
 	{
 		"id": 217,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -2174,7 +2162,7 @@
 	{
 		"id": 218,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -2184,7 +2172,7 @@
 	{
 		"id": 219,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -2194,7 +2182,7 @@
 	{
 		"id": 220,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -2204,7 +2192,7 @@
 	{
 		"id": 221,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -2214,7 +2202,7 @@
 	{
 		"id": 222,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -2224,7 +2212,7 @@
 	{
 		"id": 223,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -2234,7 +2222,7 @@
 	{
 		"id": 224,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -2244,7 +2232,7 @@
 	{
 		"id": 225,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -2254,7 +2242,7 @@
 	{
 		"id": 226,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -2264,7 +2252,7 @@
 	{
 		"id": 227,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -2274,7 +2262,7 @@
 	{
 		"id": 228,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -2284,7 +2272,7 @@
 	{
 		"id": 229,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -2294,7 +2282,7 @@
 	{
 		"id": 230,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -2304,7 +2292,7 @@
 	{
 		"id": 231,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -2314,7 +2302,7 @@
 	{
 		"id": 232,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -2324,7 +2312,7 @@
 	{
 		"id": 233,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -2334,7 +2322,7 @@
 	{
 		"id": 234,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -2344,7 +2332,7 @@
 	{
 		"id": 235,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -2354,7 +2342,7 @@
 	{
 		"id": 236,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -2364,7 +2352,7 @@
 	{
 		"id": 237,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -2374,7 +2362,7 @@
 	{
 		"id": 238,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -2384,7 +2372,7 @@
 	{
 		"id": 239,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -2394,7 +2382,7 @@
 	{
 		"id": 240,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -2404,7 +2392,7 @@
 	{
 		"id": 241,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -2414,7 +2402,7 @@
 	{
 		"id": 242,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -2424,7 +2412,7 @@
 	{
 		"id": 243,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -2434,7 +2422,7 @@
 	{
 		"id": 244,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -2444,7 +2432,7 @@
 	{
 		"id": 245,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -2454,7 +2442,7 @@
 	{
 		"id": 246,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -2464,7 +2452,7 @@
 	{
 		"id": 247,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -2474,7 +2462,7 @@
 	{
 		"id": 248,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -2484,7 +2472,7 @@
 	{
 		"id": 249,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			
@@ -2494,7 +2482,7 @@
 	{
 		"id": 250,
 		"title": "",
-		"completionTriggers": [],
+		"completionTrigger": "",
 		"description": "",
 		"nodesNeeded": [
 			

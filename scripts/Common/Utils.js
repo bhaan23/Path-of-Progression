@@ -1,93 +1,71 @@
 import vars from './Variables.js';
 
-export function buildProgressionMap() {
-	let progressionNodeMap = {};
+export function buildDependencyTree() {
+	let allNodes = {};
+	let nodeLookup = {};
+	let completedNodes = [];
 	for (let progressionNode of vars.progressionNodes) {
-		vars.progressionNodeMap[progressionNode.id] = progressionNode;
-	}
-	vars.progressionNodeMap = progressionNodeMap;
-}
-
-export function buildNodeDependencyGroups() {
-	let nodeDependencyGroups = {};
-	vars.largestParentLevel = {};
-	for (let id in progressionNodeMap) {
-
-		// Check for now for irrelevant nodes sitting empty in a progression file
-		if (!progressionNodeMap[id].title) { continue; }
-		
-		const level = _getLargestParentLevels(progressionNodeMap[id]);
-		if (nodeDependencyGroups[level]) {
-			nodeDependencyGroups[level].push(id);
-		} else {
-			nodeDependencyGroups[level] = [id];
-		}
-	}
-	vars.largestParentLevel = null;
-	vars.nodeDependencyGroups = nodeDependencyGroups;
-}
-
-function _getLargestParentLevels(node) {
-	let levels = [];
-	for (let needed of node.nodesNeeded) {
-		levels.push(_getLargestParentLevel(needed));
-	}
-	const maxValue = levels.length ? Math.max(levels) : 0;
-	vars.largestParentLevel[node] = maxValue;
-	return maxValue;
-}
-
-function _getLargestParentLevel(node) {
-	
-	// 'Cache'
-	if (vars.largestParentLevel[node]) {
-		return vars.largestParentLevel[node];
-	} else {
-		if (vars.progressionNodeMap[node].nodesNeeded.length) {
-			return 1 + _getLargestParentLevels(vars.progressionNodeMap[node])
-		} else {
-			return 0;
-		}
-	}
-}
-
-export function buildDependencyTree(progressionNodes) {
-	let progressionNodeMap = {};
-	for (let progressionNode of progressionNodes) {
-		progressionNodeMap[progressionNode.id] = new Node(progressionNode.id, progressionNode.completed);
-	}
-	for (let key of progressionNodeMap) {
-		let progressionNode = progressionNodeMap[key];
-		for (let id of progressionNode.nodesNeeded) {
-			if (!progressionNodeMap[id].completed) {
-				progressionNode.addDependantNode(progressionNodeMap[id]);
+		if (progressionNode.title && progressionNode.description) {
+			if (progressionNode.completed) {
+				completedNodes.push(progressionNode);
 			}
+			allNodes[progressionNode.id] = new Node(progressionNode.id, progressionNode);
+			nodeLookup[progressionNode.id] = progressionNode;
 		}
 	}
+	
+	let topNodes = [];
+	for (let id in allNodes) {
+		for (let dependantId of nodeLookup[id].nodesNeeded) {
+			allNodes[dependantId].addDependantNode(allNodes[id]);
+		}
+		if (nodeLookup[id].nodesNeeded.length === 0) {
+			topNodes.push(allNodes[id]);
+		}
+	}
+
+	vars.nodeLookup = nodeLookup;
+	vars.topNodes = topNodes;
+	vars.completedNodes = completedNodes;
 }
 
 class Node {
-	constructor(id, completed) {
+	constructor(id, data) {
 		this.id = id;
-		this.completed = completed;
-		this.dependantOn = [];
-		this.completedNodes = [];
+		this.data = data;
+		this.dependantNodes = [];
 	}
 
-	addDependantNode(node) {
-		this.dependantOn.push(node);
+	addDependantNode(id) {
+		this.dependantNodes.push(id);
 	}
 
-	removeDependantNode(node) {
-		for (let i = this.dependantOnNodes.length-1; i > -1; i--) {
-			if (node.id === this.dependantOnNodes[i].id) {
-				this.completedNodes.push(node);
-				this.dependantOnNodes.splice(i, i);
-				break;
-			}
+	getDependantNodes() {
+		return this.dependantNodes;
+	}
+
+	getNodeData() {
+		return this.data;
+	}
+}
+
+export class Queue {
+	constructor() {
+		this.items = [];
+	}
+
+	enqueue(element) {
+		this.items.push(element);
+	}
+
+	dequeue() {
+		if (this.items.length) {
+			return this.items.shift();
 		}
-		this.inNodes.filter((value, index, arr) => {
-			return value.id !== node.id;
-		});
+		throw new Exception('No elements to dequeue');
+	}
+
+	size() {
+		return this.items.length;
 	}
 }

@@ -2,14 +2,13 @@ import $ from 'jquery';
 import _ from 'underscore';
 import vars from '../Common/Variables.js';
 import LogMonitorHandler from './LogMonitorHandler.js';
-import { buildProgressionMap, buildNodeDependencyGroups } from '../Common/Utils.js';
-// import progressionNodeTemplate from './progressionNodeTemplate.html'; TODO: import string template
+import { buildDependencyTree, Queue } from '../Common/Utils.js';
+// import progressionNodeTemplate from './progressionNodeTemplate.html';
 
 export default class ProgressionNodesHandler {
 
 	constructor(parentEl) {
 		this.parentEl = $(parentEl);
-		
 		this.largestParentLevel = {};
 	}
 
@@ -28,27 +27,26 @@ export default class ProgressionNodesHandler {
 			}
 		}
 
-		$('.tile .closeIcon').on('click', (event) => {
-			const tile = $(event.currentTarget).closest('.tile');
-			tile.addClass('fadeOut');
-			setTimeout(function () {
-				tile.addClass('hidden');
-			}, 1300);
-		});
-
 		new LogMonitorHandler().addHandlers();
 	}
 
 	_createNodeTree() {
-		buildProgressionMap();
-		buildNodeDependencyGroups();
+		buildDependencyTree();
 
-		let finalList = [];
-		for (let key of Object.keys(vars.numDependentGroups).sort()) {
-			for (let node of vars.numDependentGroups[key]) {
-				finalList.push(node);
+		let q = new Queue();
+		for (let node of vars.topNodes) {
+			q.enqueue(node);
+		}
+
+		let nodeProgression = [];
+		while (q.size() > 0) {
+			const next = q.dequeue();
+			nodeProgression.push(next.getNodeData());
+			for (let node of next.getDependantNodes()) {
+				q.enqueue(node);
 			}
 		}
-		return finalList;
+
+		return nodeProgression;
 	}
 }

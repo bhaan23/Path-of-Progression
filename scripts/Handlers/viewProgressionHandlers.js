@@ -30,7 +30,7 @@ export default class ViewProgressionHandlers extends BaseHandlers {
 				]
 			});
 			
-			if (result.length) {
+			if (result) {
 				fs.readFile(result[0], { encoding: 'utf-8' }, (error, data) => {
 					const progressionNodes = JSON.parse(data);
 					vars.progressionNodes = progressionNodes.progression;
@@ -49,39 +49,42 @@ export default class ViewProgressionHandlers extends BaseHandlers {
 
 			$.ajax(`https://www.pathofexile.com/character-window/get-characters?accountName=${encodeURIComponent(accountName)}`, {
 				method: 'GET',
-				success: (response) => {
-					this.characterNameSelection.empty();
-
-					response.sort((a, b) => {
-						if (a.league === 'Betrayal' && b.league === 'Betrayal') {
-							return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
-						} else if (a.league === 'Betrayal') {
-							return -1;
-						} else if (b.league === 'Betrayal') {
-							return 1;
-						} else {
-							return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
-						}
-					});
-
-					for (let character of response) {
-						this.characterNameSelection.append($('<option>', {
-							value: character.name,
-							text: character.name
-						}));
-					}
-
-					if (this.characterNameSelection.children.length) {
-						this.characterNameSelection.prop('disabled', false);
-					} else {
-						this.characterNameSelection.prop('disabled', true);
-					}
-				},
+				success: (response) => this.populateCharacterNames(response),
 				error: (xhr, status, error) => {
+					alert('There was an error retrieving characters');
 					console.log(status, error);
 				},
 				dataType: 'json'
 			});
 		});
+	}
+
+	populateCharacterNames(response) {
+		this.characterNameSelection.empty();
+
+		response.sort((a, b) => {
+			if (a.league === 'Betrayal' && b.league === 'Betrayal') {
+				return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
+			} else if (a.league === 'Betrayal') {
+				return -1;
+			} else if (b.league === 'Betrayal') {
+				return 1;
+			} else {
+				return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
+			}
+		});
+
+		for (let character of response) {
+			this.characterNameSelection.append($('<option>', {
+				value: character.name,
+				text: character.name
+			}));
+		}
+
+		if (this.characterNameSelection.children.length) {
+			this.characterNameSelection.prop('disabled', false);
+		} else {
+			this.characterNameSelection.prop('disabled', true);
+		}
 	}
 }
