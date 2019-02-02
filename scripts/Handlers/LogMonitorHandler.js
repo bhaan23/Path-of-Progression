@@ -1,6 +1,7 @@
 import $ from 'jquery';
 import vars from '../Common/Variables.js';
 import PathOfExileLog from 'poe-log-monitor';
+import CharacterInventory from './CharacterInventory.js';
 
 export default class LogMonitorHandler {
 	
@@ -9,6 +10,7 @@ export default class LogMonitorHandler {
 			'logfile': "C:/Program Files/Steam/steamapps/common/Path of Exile/logs/Client.txt"
 		});
 
+		this.characterInventory = new CharacterInventory(this.checkItemData);
 		this.queue = new Queue();
 	}
 
@@ -26,6 +28,14 @@ export default class LogMonitorHandler {
 			const tile = $(event.currentTarget).closest('.tile');
 			this.findNode(tile.attr('id'));
 		});
+
+		// Check to see if we should start searching for items
+		for (let node of vars.topNodes) {
+			if (node.completionTrigger.startswith('[equip]')) {
+				this.characterInventory.itemService.start();
+				break;
+			}
+		}
 
 		// this.poeLog.parseLog();
 	}
@@ -81,6 +91,63 @@ export default class LogMonitorHandler {
 		vars.completedNodes.push(node);
 		for (let dependantNode of node.getDependantNodes()) {
 			vars.topNodes.push(dependantNode);
+		}
+	}
+
+	checkItemData() {
+		for (let node of vars.topNodes) {
+			if (node.completionTrigger.startswith('[equip]')) {
+				
+				const match = node.completionTrigger.match(/\[equip\](\[\w+\])(\[\w+\])(\[.+\])/i);
+				let itemData;
+				switch (match[1].toLowerCase()) { // Find the right item type to search for
+					case 'amulet':
+						itemData = [this.characterInventory.amulet];
+						break;
+					case 'belt':
+						itemData = [this.characterInventory.belt];
+						break;
+					case 'bodyArmour':
+						itemData = [this.characterInventory.bodyArmour];
+						break;
+					case 'boots':
+						itemData = [this.characterInventory.boots];
+						break;
+					case 'flask':
+						itemData = this.characterInventory.flasks.splice(0);
+						break;
+					case 'gloves':
+						itemData = [this.characterInventory.gloves];
+						break;
+					case 'helm':
+						itemData = [this.characterInventory.helmet];
+						break;
+					case 'ring':
+						itemData = [this.characterInventory.ring1, this.characterInventory.ring2];
+						break;
+					case 'weapon':
+						itemData = [this.characterInventory.weapon1, this.characterInventory.weapon2];
+						break;
+				}
+
+				let compareData;
+				switch (match[2].toLowerCase()) { // Find where to look within the item
+					case 'mod':
+						compareData = [itemData.craftedMods.join('|'), itemData.enchantMods.join('|'), itemData.explicitMods.join('|'),
+										itemData.implicitMods.join('|'), itemData.utilityMods.join('|')].join('|');
+					case 'base':
+						compareData = itemData.name;
+				}
+
+				let found = true;
+				for (let text of match[3].split(',')) { // Check if we match all text we are looking for
+					found &= compareData.includes(text.trim());
+				}
+
+				if (found) {
+					this.findNode(node.id);
+				}
+			}
 		}
 	}
 }

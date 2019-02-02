@@ -14,6 +14,8 @@
   "dependencies": {
     "babel-preset-es2015": "^6.24.1",
     "babel-register": "^6.26.0",
+    "electron-prompt": "^1.3.0",
+    "electron-settings": "^3.2.0",
     "jquery": "^3.3.1",
     "poe-log-monitor": "^1.2.5",
     "underscore": "^1.9.1"

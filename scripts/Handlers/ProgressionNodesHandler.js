@@ -33,6 +33,7 @@ export default class ProgressionNodesHandler {
 	_createNodeTree() {
 		buildDependencyTree();
 
+		let nodeHistory = []
 		let q = new Queue();
 		for (let node of vars.topNodes) {
 			q.enqueue(node);
@@ -41,6 +42,13 @@ export default class ProgressionNodesHandler {
 		let nodeProgression = [];
 		while (q.size() > 0) {
 			const next = q.dequeue();
+
+			// Don't add duplicate nodes
+			if (nodeHistory.includes(next)) {
+				continue;
+			} else {
+				nodeHistory.push(next);
+			}
 			nodeProgression.push(next.getNodeData());
 			for (let node of next.getDependantNodes()) {
 				q.enqueue(node);
