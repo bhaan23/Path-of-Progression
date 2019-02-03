@@ -37,24 +37,12 @@
 	background-color: darkgray;
 	padding: 1em;
 	cursor: pointer;
-	transition: 800ms ease all;
-}
-
-.newButton::before {
-	border-bottom: 3px solid darkgray;
-	border-left: 3px solid darkgray;
-	transform-origin: 0% 100%;
-}
-
-.newButton::after {
-	border-top: 3px solid darkgray;
-	border-right: 3px solid darkgray;
-	transform-origin: 100% 0%;
+	transition: 750ms ease all;
 }
 
 .newButton:hover {
-	background: white;
-	color: black;
+	background: #404040;
+	color: white;
 }
 
 .newButton:hover::before, .newButton:hover::after {

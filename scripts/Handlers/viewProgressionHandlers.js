@@ -47,6 +47,8 @@ export default class ViewProgressionHandlers extends BaseHandlers {
 				return;
 			}
 
+			vars.accountName = accountName;
+
 			$.ajax(`https://www.pathofexile.com/character-window/get-characters?accountName=${encodeURIComponent(accountName)}`, {
 				method: 'GET',
 				success: (response) => this.populateCharacterNames(response),
@@ -57,29 +59,31 @@ export default class ViewProgressionHandlers extends BaseHandlers {
 				dataType: 'json'
 			});
 		});
+
+		this.characterNameSelection.on('change', () => {
+			vars.characterName = this.characterNameSelection.find('option:selected').text();
+		});
 	}
 
-	populateCharacterNames(response) {
+	populateCharacterNames(characters) {
 		this.characterNameSelection.empty();
 
-		response.sort((a, b) => {
-			if (a.league === 'Betrayal' && b.league === 'Betrayal') {
-				return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
-			} else if (a.league === 'Betrayal') {
-				return -1;
-			} else if (b.league === 'Betrayal') {
-				return 1;
-			} else {
-				return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
+		characters.sort((a, b) => {
+			if (a.experience == b.experience) {
+				return 0;
 			}
+			return a.experience < b.experience ? -1 : 1
 		});
 
-		for (let character of response) {
+		for (let character of characters) {
 			this.characterNameSelection.append($('<option>', {
 				value: character.name,
 				text: character.name
 			}));
 		}
+
+		// Set initial character name
+		vars.characterName = characters[0].name;
 
 		if (this.characterNameSelection.children.length) {
 			this.characterNameSelection.prop('disabled', false);

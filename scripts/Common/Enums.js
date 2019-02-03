@@ -1,26 +1,30 @@
 
 
-export const SocketColor = {
-	GREEN: Symbol('SocketColor.Green'),
-	BLUE: Symbol('SocketColor.Blue'),
-	RED: Symbol('SocketColor.Red'),
-	WHITE: Symbol('SocketColor.White'),
+class SocketColorEnum {
+	
+	constructor() {
+		this.GREEN = Symbol('SocketColor.Green');
+		this.BLUE = Symbol('SocketColor.Blue');
+		this.RED = Symbol('SocketColor.Red');
+		this.WHITE = Symbol('SocketColor.White');
+	}
 
-	lookup: (input) => {
+	lookup(input) {
 		switch (input.toLowerCase()) {
 			case 'g':
 			case 'green':
-				return SocketColor.GREEN;
+				return this.GREEN;
 			case 'r':
 			case 'red':
-				return SocketColor.RED;
+				return this.RED;
 			case 'b':
 			case 'blue':
-				return SocketColor.BLUE;
+				return this.BLUE;
 			case 'w':
 			case 'white':
-				return SocketColor.WHITE;
+				return this.WHITE;
 		}
 	}
-}
-Object.freeze(SocketColor);
+};
+
+export const SocketColor = new SocketColorEnum();

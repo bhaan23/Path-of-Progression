@@ -2,6 +2,7 @@ import $ from 'jquery';
 import vars from '../Common/Variables.js';
 import PathOfExileLog from 'poe-log-monitor';
 import CharacterInventory from './CharacterInventory.js';
+import { Queue } from '../Common/Utils.js';
 
 export default class LogMonitorHandler {
 	
@@ -10,11 +11,14 @@ export default class LogMonitorHandler {
 			'logfile': "C:/Program Files/Steam/steamapps/common/Path of Exile/logs/Client.txt"
 		});
 
-		this.characterInventory = new CharacterInventory(this.checkItemData);
+		this.characterInventory = new CharacterInventory();
 		this.queue = new Queue();
 	}
 
 	addHandlers() {
+
+		this.characterInventory.setup();
+		this.characterInventory.on('CharacterInventory.NewItems', () => this.checkItemData());
 
 		this.poeLog.on('area', (area) => this.checkNodes('area', area));
 		this.poeLog.on('level', (level) => this.checkNodes('level', level))
@@ -31,9 +35,8 @@ export default class LogMonitorHandler {
 
 		// Check to see if we should start searching for items
 		for (let node of vars.topNodes) {
-			if (node.completionTrigger.startswith('[equip]')) {
+			if (node.data.completionTrigger.startsWith('[equip]')) {
 				this.characterInventory.itemService.start();
-				break;
 			}
 		}
 
@@ -66,7 +69,7 @@ export default class LogMonitorHandler {
 			node = vars.topNodes.splice(index, 1)[0];
 		} else {
 			for (let i = vars.topNodes.length-1; i > -1; i--) {
-				if (vars.topNodes[i].id.toString() === id) {
+				if (vars.topNodes[i].id.toString() == id) {
 					node = vars.topNodes[i];
 					vars.topNodes.splice(i, 1);
 					i = -1;
@@ -91,14 +94,17 @@ export default class LogMonitorHandler {
 		vars.completedNodes.push(node);
 		for (let dependantNode of node.getDependantNodes()) {
 			vars.topNodes.push(dependantNode);
+			if (dependantNode.data.completionTrigger.startsWith('[equip]')) {
+				this.characterInventory.itemService.start();
+			}
 		}
 	}
 
 	checkItemData() {
 		for (let node of vars.topNodes) {
-			if (node.completionTrigger.startswith('[equip]')) {
+			if (node.data.completionTrigger.startsWith('[equip]')) {
 				
-				const match = node.completionTrigger.match(/\[equip\](\[\w+\])(\[\w+\])(\[.+\])/i);
+				const match = node.data.completionTrigger.match(/\[equip\]\[(\w+)\]\[(\w+)\]\[(.+)\]/i);
 				let itemData;
 				switch (match[1].toLowerCase()) { // Find the right item type to search for
 					case 'amulet':
@@ -130,22 +136,45 @@ export default class LogMonitorHandler {
 						break;
 				}
 
-				let compareData;
-				switch (match[2].toLowerCase()) { // Find where to look within the item
-					case 'mod':
-						compareData = [itemData.craftedMods.join('|'), itemData.enchantMods.join('|'), itemData.explicitMods.join('|'),
-										itemData.implicitMods.join('|'), itemData.utilityMods.join('|')].join('|');
-					case 'base':
-						compareData = itemData.name;
-				}
+				for (let item of itemData) {
+					if (!item) {
+						continue;
+					}
+					let compareData;
+					switch (match[2].toLowerCase()) { // Find where to look within the item
+						case 'mod':
+							compareData = [];
+							if (item.craftedMods) {
+								compareData.push(item.craftedMods.join('|'));
+							}
+							if (item.enchantMods) {
+								compareData.push(item.enchantMods.join('|'));
+							}
+							if (item.explicitMods) {
+								compareData.push(item.explicitMods.join('|'));
+							}
+							if (item.implicitMods) {
+								compareData.push(item.implicitMods.join('|'));
+							}
+							if (item.utilityMods) {
+								compareData.push(item.utilityMods.join('|'));
+							}
+							compareData = compareData.join('|');
+							break;
+						case 'base':
+							compareData = item.name;
+							break;
+					}
 
-				let found = true;
-				for (let text of match[3].split(',')) { // Check if we match all text we are looking for
-					found &= compareData.includes(text.trim());
-				}
+					let found = true;
+					for (let text of match[3].split(',')) { // Check if we match all text we are looking for
+						found &= compareData.includes(text.trim());
+					}
 
-				if (found) {
-					this.findNode(node.id);
+					if (found) {
+						this.findNode(node.id);
+						break;
+					}
 				}
 			}
 		}

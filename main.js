@@ -1,4 +1,5 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, session } from 'electron';
+import Settings from 'electron-settings';
 
 let win;
 
@@ -15,6 +16,12 @@ function createWindow() {
 
 	// Open dev tools for debugging
 	win.webContents.openDevTools();
+
+	session.defaultSession.cookies.get({ name: 'POESESSID' }, (error, cookies) => {
+		if (cookies) {
+			settings.set('POESESSID', cookies[0].value);
+		}
+	});
 }
 
 app.on('ready', createWindow);

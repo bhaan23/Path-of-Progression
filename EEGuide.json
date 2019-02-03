@@ -35,7 +35,7 @@
 	{
 		"id": 4,
 		"title": "Grab a quicksilver flask",
-		"completionTrigger": "[equip][flasks][base][Quicksilver]",
+		"completionTrigger": "[equip][flask][base][Quicksilver]",
 		"description": "Enter The Tidal Island to the right of the Coast waypoint. Travel around the left side until you find find Hailrake. Kill him to get the Medicine Chest and portal back to town to get your quicksilver flask reward from Nessa.",
 		"nodesNeeded": [
 			3

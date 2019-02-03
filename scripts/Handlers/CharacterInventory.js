@@ -1,9 +1,12 @@
 import ItemService from "./ItemService";
-import SocketColor from '../Common/Enums.js';
+import { SocketColor } from '../Common/Enums.js';
+import { EventEmitter } from 'events';
 
-export default class CharacterInventory {
+export default class CharacterInventory extends EventEmitter {
 
-	constructor(newInventoryCallback) {
+	constructor() {
+		super();
+
 		this.weapon1 = null;
 		this.weapon2 = null;
 		this.offhand1 = null;
@@ -21,20 +24,20 @@ export default class CharacterInventory {
 		this.gemLinkGroups = {};
 		this.socketGroups = {};
 
-		this.newInventoryCallback = newInventoryCallback;
-
 		this.itemService = new ItemService(this.parseInventoryData);
 	}
 
 	setup() {
 		this.itemService.setup();
+
+		this.itemService.on('ItemService.NewItems', (items) => this.parseInventoryData(items));
 	}
 
-	parseInventoryData(data) {
+	parseInventoryData(items) {
 		this.gemLinkGroups = {};
 		this.socketGroups = {};
 		this.flasks = [];
-		for (let item of data.items) {
+		for (let item of items) {
 
 			// Socket groups
 			if (item.sockets) {
@@ -52,7 +55,7 @@ export default class CharacterInventory {
 				}
 
 				// Add those socket groups to the overall map
-				for (let groupKey of groups) {
+				for (let groupKey of Object.keys(groups)) {
 					const group = groups[groupKey];
 					if (this.socketGroups[group.length]) {
 						this.socketGroups[group.length].push(group);
@@ -67,7 +70,7 @@ export default class CharacterInventory {
 				}
 
 				// Add those gem groups to the overall map
-				for (let gemGroupKey of gemGroups) {
+				for (let gemGroupKey of Object.keys(gemGroups)) {
 					const group = groups[gemGroupKey];
 					if (this.socketGroups[group.length]) {
 						this.socketGroups[group.length].push(group);
@@ -134,6 +137,6 @@ export default class CharacterInventory {
 			}
 		}
 
-		this.newInventoryCallback();
+		this.emit('CharacterInventory.NewItems');
 	}
 }
