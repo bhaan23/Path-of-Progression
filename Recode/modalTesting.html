@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script
+	src="https://code.jquery.com/jquery-3.3.1.min.js"
+	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="modal" class="modalBackground">
+	<div class="modalContent">
+		<div id="modalHeader">
+			<h2>Header Title</h2>
+		</div>
+		<div id="modalBody">
+			<div id="userInfo">
+				<div>
+					<label>Account Name:</label>
+					<input type="text" maxlength="32" id="accountName" />
+				</div>
+				<div>
+					<label>Character Name:</label>
+					<select id="characterNames">
+						<option>very_good_named_guy</option>
+						<option>PraiseBeToArc</option>
+						<option>Burn_Burn_Man</option>
+						<option>ItsATrZap</option>
+					</select>
+					<button id="accountNameSubmit">Update</button>
+				</div>
+				<div class="apiInfoListItem">
+					<label>Session Id:</label>
+					<input type="password" maxlength="32" id="sessionId" class="inputBox" />
+					<button id="sessionIdValidate">Validate</button>
+				</div>
+			</div>
+			<div>
+				<label>Continue without tracking:</label>
+				<input type="checkbox" id="bypass" />
+			</div>
+		</div>
+		<div id="modalFooter">
+			<button id="saveButton" class="newButton">Save</button>
+			<span><!-- This is to just add some free space --></span>
+			<button id="saveButton" class="newButton">Continue</button>
+		</div>
+	</div>
+</div>
+<style>
+
+	.modalBackground {
+		position: fixed;
+		z-index: 1;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		overflow: auto;
+		background-color: rgb(0,0,0,0.4); /* Need the opacity on specifically just the background-color */
+	}
+
+	.modalContent {
+		background-color: white;
+		margin: 15% auto;
+		border: 1px solid black;
+		box-shadow: 0 0 1em black;
+		min-width: 20%;
+		max-width: 40%;
+	}
+
+	.modalContent > div > * {
+		padding: 0.5em;
+	}
+
+	#modalHeader, #modalBody {
+		border-bottom: 1px solid gray;
+	}
+
+	#modalFooter, #modalBody {
+		margin: 1em auto;
+	}
+
+	#modalFooter {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+	}
+
+
+	#userInfo > div+div {
+		padding: 1em;
+		padding-left: 0;
+	}
+
+
+
+</style>
+
+<script>
+	$('#openModal').on('click', () => {
+		$('#modal').show();
+	});
+
+	$('')
+</script>
+</body>
+</html>

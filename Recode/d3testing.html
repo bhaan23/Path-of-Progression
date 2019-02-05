@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://d3js.org/d3.v5.js"></script>
+</head>
+<body>
+<svg id="container"></svg>
+</body>
+<script>
+// functions
+let dragStarted = function(d) {
+	// Raise to the top of all elements in the group
+	d3.select(this).raise();
+}
+
+let dragged = function(d) {
+	d3.select(this).attr('x', d.x = d3.event.x).attr('y', d.y = d3.event.y);
+}
+
+let dragEnded = function(d) {
+	// Nothing
+}
+
+</script>
+
+<script>
+let svg = d3.select('#container');
+
+svg.attr('width', 600)
+	.attr('height', 400);
+
+let zoomContainer = svg.append('g').attr('id', 'zoomContainer')
+					.append('rect')
+					.attr('width', '100%')
+					.attr('height', '100%')
+					.attr('fill', 'white')
+					.attr('stroke', 'black');
+
+let nodesGroup = svg.append('g').attr('id', 'nodes');
+nodesGroup
+	.append('rect')
+	.datum({x: 10, y:10, id: 14123123})
+	.attr('x', (d) => { return d.x })
+	.attr('y', (d) => { return d.y })
+	.attr('id', (d) => { return d.id })
+	.attr('width', 110)
+	.attr('height', 60)
+	.attr('fill', 'lightgray')
+	.attr('stroke', 'black')
+	.call(d3.drag()
+			.on('start', dragStarted)
+			.on('drag', dragged)
+			.on('end', dragEnded));
+
+nodesGroup
+	.append('rect')
+	.datum({x: 90, y:200, id: 8843917})
+	.attr('x', (d) => { return d.x })
+	.attr('y', (d) => { return d.y })
+	.attr('id', (d) => { return d.id })
+	.attr('width', 110)
+	.attr('height', 60)
+	.attr('fill', 'darkgray')
+	.attr('stroke', 'black')
+	.call(d3.drag()
+			.on('start', dragStarted)
+			.on('drag', dragged)
+			.on('end', dragEnded));
+
+
+</script>
+</html>

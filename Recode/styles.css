@@ -4,15 +4,6 @@
 	margin: 1em;
 }
 
-#about p, #about span {
-	font-size: 1.5em;
-}
-
-#about > h1 {
-	text-align: center;
-	text-decoration: underline;
-}
-
 .gettingStartedList > li {
 	margin-bottom: 1em;
 }
@@ -28,6 +19,52 @@
 	margin: 0 auto;
 }
 
+/* --------------------- View Progression ------------------------*/
+
+#apiInfoList {
+	list-style: none;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.apiInfoListItem {
+	flex-direction: row;
+	margin: .6em;
+}
+
+/* ---------------------------------------------------------------*/
+
+#mainContainer h1 {
+	text-align: center;
+	text-decoration: underline;
+}
+
+p, span, label, input, select {
+	font-size: 1.5em;
+}
+
+#characterNamesDropdown {
+	background: transparent;
+	border: 1px solid darkgray;
+	padding: 0.5em;
+}
+
+#characterNamesDropdown option {
+	background-color: aliceblue;
+}
+
+.inputBox {
+	background-color: transparent;
+	border: none;
+	border-bottom: 1px solid darkgray;
+}
+
+.inputBox:focus {
+	outline: none;
+	border-color: black;
+}
+
 .newButton a {
 	text-decoration: none;
 	color: inherit;
@@ -38,6 +75,7 @@
 	padding: 1em;
 	cursor: pointer;
 	transition: 750ms ease all;
+	border: none;
 }
 
 .newButton:hover {
@@ -49,7 +87,8 @@
 	transform: scale(1);
 }
 
-/* ---------------------------------------------------------------*/
+
+
 
 body, html {
 	height: 100%;

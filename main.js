@@ -1,5 +1,5 @@
 import { app, BrowserWindow, session } from 'electron';
-import Settings from 'electron-settings';
+import settings from 'electron-settings';
 
 let win;
 
@@ -12,13 +12,14 @@ function createWindow() {
 	win.maximize();
 
 	// load the home page of the app
-	win.loadFile('./pages/viewProgression.html');
+	// win.loadFile('./pages/viewProgression.html');
+	win.loadFile('./Recode/index.html');
 
 	// Open dev tools for debugging
 	win.webContents.openDevTools();
 
 	session.defaultSession.cookies.get({ name: 'POESESSID' }, (error, cookies) => {
-		if (cookies) {
+		if (cookies[0]) {
 			settings.set('POESESSID', cookies[0].value);
 		}
 	});

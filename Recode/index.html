@@ -22,19 +22,21 @@
 				</li>
 			</ul>
 			<ul id="leftNavigationPages" class="flexRow">
-				<li class="page">
+				<li class="page" id="githubLink">
 					<a data-linkOut="https://github.com/bhaan23/NewShinyIdea">github</a>
 				</li>
 			</ul>
 		</div>
 	</div>
 	<div id="mainContainer">
-		<div id="about">
+		<div id="about" class="hidden">
 			<h1>About</h1>
-			<p>
-				Hi, welcome to Path Of Progression. This is a third party tool for the game Path of Exile used to track character progression through the leveling process. This tool can track many different things, however the most useful is probably where to go next while leveling through the acts. This solves the problem of not knowing what to do next, if you forgot a skill point quest, or looking up where to snag that gem you need to link to arc.
-			</p>
-			<p>Here are three options to get started:</p>
+			<div>
+				<p>
+					Hello and welcome to Path Of Progression. This is a third party tool for the game Path of Exile used to track character progression through the leveling process. This tool can track many different things, however the most useful is probably where to go next while leveling through the acts. This solves the problem of not knowing what to do next, if you forgot a skill point quest, or looking up where to snag that gem you need to link to arc.
+				</p>
+				<p>Here are three options to get started:</p>
+			</div>
 			<ul class="gettingStartedList">
 				<li>
 					<span><b>Create your own:</b></span>
@@ -69,16 +71,56 @@
 				</ul>
 			</div>
 		</div>
+		<div id="viewProgression">
+			<h1>View Progression</h1>
+			<div id="apiInfo" class="">
+				<ul id="apiInfoList">
+					<li class="apiInfoListItem">
+						<label>Account Name:</label>
+						<input type="text" maxlength="32" id="accountNameInput" class="inputBox" />
+						<button id="accountNameSubmitButton" class="newButton">Update</button>
+					</li>
+					<li class="apiInfoListItem">
+						<label>Character Name:</label>
+						<select id="characterNamesDropdown">
+							<option>very good named guy</option>
+							<option>very good named guy</option>
+							<option>very good named guy</option>
+							<option>very good named guy</option>
+							<option>very good named guy</option>
+							<option>very good named guy</option>
+							<option>very good named guy</option>
+							<option>very good named guy</option>
+							<option>very good named guy</option>
+							<option>very good named guy</option>
+							<option>very good named guy</option>
+							<option>very good named guy</option>
+						</select>
+					</li>
+					<li class="apiInfoListItem">
+						<label>Session Id:</label>
+						<input type="password" maxlength="32" id="sessionIdInput" class="inputBox" />
+						<button id="sessionIdSubmitButton" class="newButton">Update</button>
+					</li>
+					<li class="apiInfoListItem">
+						<label>Progression File:</label>
+						<span id="currentProgressionFile" class="hidden"></span>
+						<button id="progressionFileUploadButton" class="newButton">Choose Progression File</button>
+					</li>
+				</ul>
+			</div>
+			<div id="tiles"></div>
+		</div>
 	</div>
 	<div id="footerContainer">
 
 	</div>
 </body>
 <script>
-	setTimeout(() => {
-		window.location.href = window.location.href
-	}, 10000);
+	// setTimeout(() => {
+	// 	window.location.href = window.location.href
+	// }, 20000);
 	require('babel-register');
-	
+	require('./Scripts/Bootstrap.js');
 </script>
 </html>
