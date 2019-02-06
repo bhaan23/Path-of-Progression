@@ -1,15 +1,18 @@
 import $ from 'jquery';
+import _ from 'underscore';
 import { EventEmitter } from 'events';
-import vars from '../Common/Variables.js';
-import electronPrompt from 'electron-prompt';
 import SettingsService from './SettingsService.js';
 import { StoredSettings } from '../Objects/Enums.js';
-const { dialog, session } = require('electron').remote;
+import Modal from '../Objects/Modal.js';
+const { session } = require('electron').remote;
 
 export default class ItemService extends EventEmitter {
 
 	constructor() {
 		super();
+		this.sessionId = null;
+		this.accountName = null;
+		this.characterName = null;
 		this.settingsService = SettingsService;
 		this.poeSessionIdName = 'POESESSID';
 		this.canFetchItems = false;
@@ -18,7 +21,7 @@ export default class ItemService extends EventEmitter {
 	setup() {
 		let neededValues = [];
 
-		let i = 0, sessionId;
+		let i = 0;
 		while (i < 3 || sessionId) {
 			switch (i) {
 				case 0:
@@ -33,6 +36,8 @@ export default class ItemService extends EventEmitter {
 			}
 			if (!isValidSessionId(sessionId)) {
 				sessionId = null;
+			} else {
+				this.sessionId = sessionId;
 			}
 		}
 
@@ -49,6 +54,9 @@ export default class ItemService extends EventEmitter {
 					neededValues.push(StoredSettings.ACCOUNT_NAME);
 					break;
 			}
+			if (accountName) {
+				this.accountName = accountName;
+			}
 		}
 
 		let i = 0, characterName;
@@ -64,10 +72,15 @@ export default class ItemService extends EventEmitter {
 					neededValues.push(StoredSettings.CHARACTER_NAME);
 					break;
 			}
+			if (characterName) {
+				this.characterName = characterName;
+			}
 		}
-
+		
 		if (neededValues.length > 0) {
 			this.canFetchItems = false;
+			new Modal("You're missing some data!", ``, ``).draw();
+			alert('Missing values');
 		} else {
 			this.canFetchItems = true;
 		}
@@ -77,7 +90,7 @@ export default class ItemService extends EventEmitter {
 		if (!id) {
 			return false;
 		}
-		return true;// TODO find a way to verify
+		return true; // TODO find a way to verify
 	}
 
 	fetchItems() {
@@ -91,18 +104,7 @@ export default class ItemService extends EventEmitter {
 		})
 	}
 
-	start() {
-		this.fetchItems();
-		this.interval = setInterval(() => {
-			this.fetchItems();
-		}, 60000); // One minute
-	}
-
-	stop() {
-		clearInterval(this.interval);
-	}
-
-	setCookie(sessid) {
+	resetCookie(sessid) {
 		const cookie = {
 			url: 'http://www.pathofexile.com',
 			name: this.poeSessionIdName,
@@ -112,9 +114,11 @@ export default class ItemService extends EventEmitter {
 			secure: false,
 			httpOnly: false,
 			expirationDate: undefined
-		}
-		session.defaultSession.cookies.set(cookie, (error) => {
-			console.log(error);
+		};
+		session.defaultSession.cookies.remove('http://www.pathofexile.com', this.poeSessionIdName, (error) => {
+			session.defaultSession.cookies.set(cookie, (error) => {
+				console.log(error);
+			});
 		});
 	}
 }

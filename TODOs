@@ -12,3 +12,7 @@ Map as many boss kills to logged message as possible to be used in progressions
 Find a nice color to use. Gray is too boring
 Add currency to inventory search?
 Store user entered information in settings so they don't need to be input every time
+
+- Hook up a generic input/button handler that will link to the ProgressionService
+- Create a startup page that lets the user input all of the api settings if they want, and force them to input the client.txt file
+- Opacity from 1 -> 67% -> 33% for levels from the top of the progression

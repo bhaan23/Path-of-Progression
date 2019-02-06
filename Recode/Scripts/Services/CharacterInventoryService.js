@@ -2,7 +2,7 @@ import ItemService from "./ItemService";
 import { SocketColor } from '../Common/Enums.js';
 import { EventEmitter } from 'events';
 
-export default class CharacterInventory extends EventEmitter {
+export default class CharacterInventoryService extends EventEmitter {
 
 	constructor() {
 		super();
@@ -24,13 +24,27 @@ export default class CharacterInventory extends EventEmitter {
 		this.gemLinkGroups = {};
 		this.socketGroups = {};
 
-		this.itemService = new ItemService(this.parseInventoryData);
+		this.itemService = new ItemService();
 	}
 
 	setup() {
 		this.itemService.setup();
 
 		this.itemService.on('ItemService.NewItems', (items) => this.parseInventoryData(items));
+	}
+
+	start() {
+		if (this.itemService.canFetchItems) {
+			this.itemService.resetCookie()
+			this.itemService.fetchItems();
+			this.interval = setInterval(() => {
+				this.itemService.fetchItems();
+			}, 60000); // One minute	
+		}
+	}
+
+	stop() {
+		clearInterval(this.interval);
 	}
 
 	parseInventoryData(items) {
@@ -137,6 +151,6 @@ export default class CharacterInventory extends EventEmitter {
 			}
 		}
 
-		this.emit('CharacterInventory.NewItems');
+		this.emit('CharacterInventoryService.NewItems');
 	}
 }

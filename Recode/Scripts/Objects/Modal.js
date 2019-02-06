@@ -26,6 +26,6 @@ export default class Modal {
 	}
 
 	addListeners(modalHtml) {
-
+		
 	}
 }
