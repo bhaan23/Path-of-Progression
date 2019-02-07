@@ -11,7 +11,7 @@ class SettingsService {
 	}
 
 	get(settingName) {
-		this.settings.get(settingName);
+		return this.settings.get(settingName);
 	}
 }
 

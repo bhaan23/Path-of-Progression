@@ -1,5 +1,4 @@
 import $ from 'jquery';
-import { shell } from 'electron';
 
 export default class TabbingService {
 
@@ -7,12 +6,6 @@ export default class TabbingService {
 
 	setup() {
 		$(window).on('hashchange', (event) => this.changeTab(event));
-
-		// This will also handle the link out to the github page
-		let github = $('#githubLink');
-		github.on('click', () => {
-			shell.openExternal(github.find('a').attr('data-linkOut'));
-		});
 	}
 
 	changeTab(event) {

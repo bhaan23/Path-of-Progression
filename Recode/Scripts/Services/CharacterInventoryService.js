@@ -1,5 +1,5 @@
 import ItemService from "./ItemService";
-import { SocketColor } from '../Common/Enums.js';
+import { SocketColor } from '../Objects/Enums.js';
 import { EventEmitter } from 'events';
 
 export default class CharacterInventoryService extends EventEmitter {

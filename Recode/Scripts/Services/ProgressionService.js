@@ -55,6 +55,11 @@ export default class ProgressionService {
 		}
 	}
 
+	shutdown() {
+		this.characterInventoryService.stop();
+		this.poeLog.pause();
+	}
+
 	checkTopNodes(trigger) {
 
 		// Go backwards since can remove some items
