@@ -1,6 +1,6 @@
 import fs from 'fs';
 
-class NodeService {
+export default class NodeService {
 
 	constructor() {
 		this.topNodeIds = null;
@@ -21,7 +21,7 @@ class NodeService {
 
 		const progressionData = fs.readFileSync(progressionFile, { encoding: 'utf-8' });
 		if (progressionData) {
-			this.allNodes = JSON.parse(progressionData);
+			this.allNodes = JSON.parse(progressionData).progression;
 			this.createNodeMap();
 			this.createDependencyGraph();
 		}
@@ -49,7 +49,7 @@ class NodeService {
 	createDependencyGraph() {
 		for (let id of Object.keys(this.nodeMap)) {
 			const dependantNodeIds = this.nodeMap[id].progressionData.nodesNeeded;
-			let i = 0; 
+			let i = 0;
 			for (let dependantId of dependantNodeIds) {
 				if (!this.completedNodeIds.includes(dependantId)) {
 					this.nodeMap[dependantId].dependantNodeIds.push(id);
@@ -87,5 +87,3 @@ class NodeService {
 		});
 	}
 }
-
-export default new NodeService();

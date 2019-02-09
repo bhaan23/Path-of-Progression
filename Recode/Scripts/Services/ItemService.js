@@ -23,13 +23,16 @@ export default class ItemService extends EventEmitter {
 		let accountName = this.settingsService.get(StoredSettings.ACCOUNT_NAME);
 		if (!accountName) {
 			neededValues.push(StoredSettings.ACCOUNT_NAME);
+		} else {
+			this.accountName = accountName;
+			this.characterName = this.settingsService.get(StoredSettings.CHARACTER_NAME);
 		}
 
 		let sessionId = this.settingsService.get(StoredSettings.SESSION_ID);
 		if (!sessionId) {
 			neededValues.push(StoredSettings.SESSION_ID);
 		} else {
-			resetCookie(sessionId);
+			resetCookie(sessionId, () => {});
 		}
 
 		if (neededValues.length > 0) {

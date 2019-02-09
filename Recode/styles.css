@@ -181,19 +181,19 @@ body {
 				margin 0.5s ease-in-out 0.75s;
 }
 
-.tile[data-severity="4"] {
+.tile[data-level="4"] {
 	background-image: linear-gradient(to bottom, red, #800000);
 }
 
-.tile[data-severity="3"] {
+.tile[data-level="3"] {
 	background-image: linear-gradient(to bottom, #feefb3, orange);
 }
 
-.tile[data-severity="2"] {
+.tile[data-level="2"] {
 	background-image: linear-gradient(to bottom, #dff2bf, green);
 }
 
-.tile[data-severity="1"] {
+.tile[data-level="1"] {
 	background-image: linear-gradient(to bottom, #bde5f8, blue);
 }
 

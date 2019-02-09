@@ -80,16 +80,15 @@ export default class UserInteractionService {
 			this.sessionIdInput.val(this.sessionIdInput.val().replace(/\s/g, '').substring(0, 32));
 		});
 
-		this.sessionIdUpdate.on('click', async () => {
-			console.log('making ajaz call');
-			const isValid = await isValidSessionId(this.sessionIdInput.val(), this.settings.get(StoredSettings.ACCOUNT_NAME), this.settings.get(StoredSettings.CHARACTER_NAME));
-			console.log('ajax call should be done');
-			console.log(isValid);
-			if (!isValid) {
-				
-			} else {
-				this.settings.set(StoredSettings.SESSION_ID, this.sessionIdInput.val());
-			}
+		this.sessionIdUpdate.on('click', () => {
+			isValidSessionId(this.sessionIdInput.val(), this.settings.get(StoredSettings.ACCOUNT_NAME), (isValid, response) => {
+				if (isValid) {
+					this.settings.set(StoredSettings.SESSION_ID, this.sessionIdInput.val());
+					alert('Your session id was updated successfully.');
+				} else {
+					alert(`Your session id was invalid. Here's why it was invalid: ${response.message}`);
+				}
+			});
 		});
 
 		this.progressionFileUploadButton.on('click', () => {
@@ -102,14 +101,14 @@ export default class UserInteractionService {
 				]
 			});
 
-			if (filename) {
+			if (filename.length > 0) {
 
 				// Clean the infinitely running functions before creating new ones 
 				if (this.progressionService) {
 					this.progressionService.shutdown();
 				}
-				this.progressionService = new ProgressionService();
-				this.progressionService.setup(filename);
+				this.progressionService = new ProgressionService($('#tiles'));
+				this.progressionService.setup(filename[0]);
 			}
 		});
 	}

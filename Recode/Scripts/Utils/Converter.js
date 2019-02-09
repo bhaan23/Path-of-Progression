@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import _ from 'underscore';
+import TileTemplate from '../../Templates/TileTemplate.html';
 
 export function logMessageToTrigger(type, logData) {
 	let trigger;
@@ -17,80 +18,85 @@ export function logMessageToTrigger(type, logData) {
 };
 
 export function hasNodeTriggeredFromItem(trigger, characterInventory) {
-				
-	const match = trigger.match(/\[equip\]\[(\w+)\]\[(\w+)\]\[(.+)\]/i);
-	let itemData;
-	switch (match[1].toLowerCase()) { // Find the right item type to search for
-		case 'amulet':
-			itemData = [characterInventory.amulet];
-			break;
-		case 'belt':
-			itemData = [characterInventory.belt];
-			break;
-		case 'bodyArmour':
-			itemData = [characterInventory.bodyArmour];
-			break;
-		case 'boots':
-			itemData = [characterInventory.boots];
-			break;
-		case 'flask':
-			itemData = characterInventory.flasks.splice(0);
-			break;
-		case 'gloves':
-			itemData = [characterInventory.gloves];
-			break;
-		case 'helm':
-			itemData = [characterInventory.helmet];
-			break;
-		case 'ring':
-			itemData = [characterInventory.ring1, characterInventory.ring2];
-			break;
-		case 'weapon':
-			itemData = [characterInventory.weapon1, characterInventory.weapon2];
-			break;
-	}
-
-	for (let item of itemData) {
-		if (!item) {
-			continue;
+	
+	if (trigger.toLowerCase().startsWith('[equip]')) {
+		const match = trigger.match(/\[equip\]\[(\w+)\]\[(\w+)\]\[(.+)\]/i);
+		let itemData;
+		switch (match[1].toLowerCase()) { // Find the right item type to search for
+			case 'amulet':
+				itemData = [characterInventory.amulet];
+				break;
+			case 'belt':
+				itemData = [characterInventory.belt];
+				break;
+			case 'bodyArmour':
+				itemData = [characterInventory.bodyArmour];
+				break;
+			case 'boots':
+				itemData = [characterInventory.boots];
+				break;
+			case 'flask':
+				itemData = characterInventory.flasks.slice(0);
+				break;
+			case 'gloves':
+				itemData = [characterInventory.gloves];
+				break;
+			case 'helm':
+				itemData = [characterInventory.helmet];
+				break;
+			case 'ring':
+				itemData = [characterInventory.ring1, characterInventory.ring2];
+				break;
+			case 'weapon':
+				itemData = [characterInventory.weapon1, characterInventory.weapon2];
+				break;
 		}
-		let compareData;
-		switch (match[2].toLowerCase()) { // Find where to look within the item
-			case 'mod':
-				compareData = [];
-				if (item.craftedMods) {
-					compareData.push(item.craftedMods.join('|'));
-				}
-				if (item.enchantMods) {
-					compareData.push(item.enchantMods.join('|'));
-				}
-				if (item.explicitMods) {
-					compareData.push(item.explicitMods.join('|'));
-				}
-				if (item.implicitMods) {
-					compareData.push(item.implicitMods.join('|'));
-				}
-				if (item.utilityMods) {
-					compareData.push(item.utilityMods.join('|'));
-				}
-				compareData = compareData.join('|');
-				break;
-			case 'base':
-				compareData = item.name;
-				break;
+
+		let compareData = '';
+		for (let item of itemData) {
+			if (!item) {
+				continue;
+			}
+			
+			switch (match[2].toLowerCase()) { // Find where to look within the item
+				case 'mod':
+					compareData = [];
+					if (item.craftedMods) {
+						compareData.push(item.craftedMods.join('|'));
+					}
+					if (item.enchantMods) {
+						compareData.push(item.enchantMods.join('|'));
+					}
+					if (item.explicitMods) {
+						compareData.push(item.explicitMods.join('|'));
+					}
+					if (item.implicitMods) {
+						compareData.push(item.implicitMods.join('|'));
+					}
+					if (item.utilityMods) {
+						compareData.push(item.utilityMods.join('|'));
+					}
+					compareData = compareData.join('|');
+					break;
+				case 'base':
+					compareData += item.name + '|';
+					break;
+			}
 		}
 
 		let found = true;
+		compareData = compareData.toLowerCase();
 		for (let text of match[3].split(',')) { // Check if we match all text we are looking for
-			found = found && compareData.includes(text.trim());
+			found = found && compareData.includes(text.trim().toLowerCase());
 		}
 		return found;
 	}
+	return false;
 };
 
 export function jsonNodeToHtml(nodeMap, topNodeIds) {
 	let tops = topNodeIds.length, middles = 0;
-	let nodeHtml = $();
+	let nodeHtml = $('<div>');
 	let queue = [].concat(topNodeIds);
 	while (queue.length > 0) {
 
@@ -104,15 +110,9 @@ export function jsonNodeToHtml(nodeMap, topNodeIds) {
 		}
 		const id = queue.shift();
 		const node = nodeMap[id];
-		queue.concat(node.dependantNodeIds);
-		nodeHtml.add(_.template(`<div class="tile <% if (progression.hidden) { print('hidden') } %>" data-level="<%=level%>" id="tile_<%=progression.id%>">
-									<div class="flexRow pushapart tileHeaders">
-										<span></span>
-										<span class="tileName"><%=progression.title%></span>
-										<span class="closeIcon">x</span>
-									</div>
-									<p class="tileDescription"><%=progression.description%></p>
-								</div>`))({ progresion: nodeMap[id].progressionData, level });
+		queue = queue.concat(node.dependantNodeIds);
+		const tileHtml = _.template(TileTemplate)({ progression: nodeMap[id].progressionData, level });
+		nodeHtml.append(tileHtml);
 		
 		if (tops > 0) {
 			tops -= 1;
@@ -122,5 +122,5 @@ export function jsonNodeToHtml(nodeMap, topNodeIds) {
 		}
 	}
 
-	return nodeHtml;
+	return nodeHtml.children();
 };

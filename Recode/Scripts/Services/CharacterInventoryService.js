@@ -35,7 +35,6 @@ export default class CharacterInventoryService extends EventEmitter {
 
 	start() {
 		if (this.itemService.canFetchItems) {
-			this.itemService.resetCookie()
 			this.itemService.fetchItems();
 			this.interval = setInterval(() => {
 				this.itemService.fetchItems();
@@ -78,9 +77,9 @@ export default class CharacterInventoryService extends EventEmitter {
 					}
 				}
 
-				// Loop through the socketed items and add them to their respective groups
+				// Loop through the socketed items and create the gem link groups
 				for (let socketItem of item.socketedItems) {
-					gemGroups[socketItem.socket].push(socketItem.typeLine); // Place only the name of the skill gem in the list
+					gemGroups[item.sockets[socketItem.socket].group].push(socketItem.typeLine); // Place only the name of the skill gem in the list
 				}
 
 				// Add those gem groups to the overall map

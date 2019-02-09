@@ -1,26 +1,23 @@
 import $ from 'jquery';
 const { session } = require('electron').remote;
 
-export async function isValidSessionId(id, accountName, characterName) {
+export function isValidSessionId(id, accountName, callback) {
 	if (!id) {
 		return false;
 	}
-	resetCookie(id);
-	return $.ajax(`https://www.pathofexile.com/character-window/get-stash-items?accountName=${encodeURIComponent(accountName)}&league=Standard&tabIndex=0`, {
-		method: 'GET',
-		success: (response) => {
-			return true;
-		},
-		error: (xhr, status, error) => {
-			alert('Your session id was not valid.');
-			console.log(status, error);
-			return false;
-		},
-		dataType: 'json'
-	}).promise();
+	resetCookie(id, () => {
+		$.ajax(`https://www.pathofexile.com/character-window/get-stash-items?accountName=${encodeURIComponent(accountName)}&league=Standard&tabIndex=0`, {
+			method: 'GET',
+			dataType: 'json',
+		}).then((response) => {
+			callback(response.numTabs > 0);
+		}, (jqXHR) => {
+			callback(false, jqXHR.responseJSON.error);
+		});
+	});
 };
 
-export function resetCookie(sessid) {
+export function resetCookie(sessid, callback) {
 	const cookie = {
 		url: 'http://www.pathofexile.com',
 		name: 'POESESSID',
@@ -31,9 +28,15 @@ export function resetCookie(sessid) {
 		httpOnly: false,
 		expirationDate: undefined
 	};
+	
 	session.defaultSession.cookies.remove('http://www.pathofexile.com', 'POESESSID', (error) => {
-		session.defaultSession.cookies.set(cookie, (error) => {
-			console.log(error);
-		});
+		
+		if (!error) {
+			session.defaultSession.cookies.set(cookie, (error) => {
+				if (!error) {
+					callback();
+				}
+			});
+		}
 	});
 };
