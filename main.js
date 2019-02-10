@@ -18,7 +18,7 @@ function createWindow() {
 	// win.maximize();
 
 	// load the home page of the app
-	win.loadFile('./Recode/index.html');
+	win.loadFile('./src/index.html');
 
 	// Open dev tools for debugging
 	win.webContents.openDevTools();
