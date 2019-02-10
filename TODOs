@@ -5,11 +5,7 @@ d3 progression creation tool:
 	- Make d3 creation tool infinitely draggable/zoomable
 	- Let creation tool take in a started progression and draw nodes from it
 	- Create a button to connect one node to another
-Make css scalable for non-maximized screen
 Map as many boss kills to logged message as possible to be used in progressions
 Add currency to inventory search?
 Move from <select> -> <ul> for character selection
 
-- Set up initial options for browserwindow in main.js
-- Opacity from 1 -> 67% -> 33% for levels from the top of the progression
-- Pick new colors for tiles

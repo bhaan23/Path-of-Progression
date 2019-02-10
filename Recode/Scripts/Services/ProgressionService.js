@@ -43,7 +43,9 @@ export default class ProgressionService {
 		progressionTileHtml.each((index, element) => {
 			let el = $(element);
 			el.find('.closeIcon').on('click', () => {
-				this.completeNode(el.attr('id').replace(/^tile_/, ''));
+				if (el.attr('data-level') === '1') {
+					this.completeNode(el.attr('id').replace(/^tile_/, ''));
+				}
 			});
 		});
 
@@ -97,9 +99,36 @@ export default class ProgressionService {
 
 		// Hide tile
 		const tile = this.tilesParent.find(`#tile_${nodeId}`);
-		tile.addClass('fadeOut');
+		tile.addClass('fadeout');
 		setTimeout(() => {
-			tile.toggleClass('hidden', true);
+			tile.remove();
 		}, 1300);
+
+		this.updateTiles(nodeId, 0);
+	}
+
+	updateTiles(nodeId, level) {
+		if (level > 0 && level < 3) {
+			const tile = $(`#tile_${nodeId}`);
+			let lastTileOfSameLevel = $(`.tile[data-level=${level}]`).last();
+			tile.attr('data-level', level);
+			let newLevel = level-1;
+			if (!lastTileOfSameLevel || lastTileOfSameLevel.length === 0) {
+				while (newLevel > 0 && !lastTileOfSameLevel) {
+					lastTileOfSameLevel = $(`.tile[data-level=${newLevel}]`).last();
+					newLevel--;
+				}
+			}
+			if (!lastTileOfSameLevel) {
+				$('#tiles').insertBefore($('#tiles').children().first());
+			} else {
+				tile.insertAfter(lastTileOfSameLevel);
+			}
+		}
+		if (level < 3) {
+			for (let dependantNodeId of this.nodeService.nodeMap[nodeId].dependantNodeIds) {
+				this.updateTiles(dependantNodeId, level+1);
+			}
+		}
 	}
 }

@@ -160,7 +160,7 @@ option {
 /* Main container styles */
 
 #backgroundContainer {
-	background-image: url('C:/Users/Brandon Haan/Documents/PathOfProgression/Recode/Path_of_Exile_Wallpaper_25.jpg');
+	background-image: url('./Path_of_Exile_Wallpaper_25.jpg');
 	background-position: fixed;
 	background-repeat: no-repeat;
 	background-size: 110% auto;
@@ -223,7 +223,7 @@ option {
 	grid-column-gap: 1rem;
 	grid-row-gap: 1rem;
 	grid-template-rows: auto;
-	grid-template-columns: 40% 40%;
+	grid-template-columns: 42% 42%;
 	justify-content: center;
 	grid-template-areas:
 		"accountName characterName"
@@ -291,7 +291,7 @@ option {
 	color: black;
 	height: 10rem;
 	width: 85%;
-	background-image: linear-gradient(to bottom, #bde5f8, blue);
+	/* background-image: linear-gradient(to bottom, #bde5f8, blue); */
 
 	transition: opacity 0.75s ease-out,
 				height 0.5s ease-in-out 0.75s,
@@ -300,27 +300,27 @@ option {
 }
 
 /* animation for getting rid of tiles */
-.fadeOut {
+.fadeout {
 	height: 0;
 	padding: 0;
 	margin: 0;
 	opacity: 0;
 }
 
-.fadeOut .closeIcon {
+.tile:not([data-level="1"]) .closeIcon, .fadeout .closeIcon {
 	opacity: 0;
 }
 
 .tile[data-level="1"] {
-	opacity: 1;
+	background-image: linear-gradient(to bottom, white, red);
 }
 
 .tile[data-level="2"] {
-	opacity: 0.67;
+	background-image: linear-gradient(to bottom, white, #ffa500);
 }
 
 .tile[data-level="3"] {
-	opacity: 0.33;
+	background-image: linear-gradient(to bottom, white, #00a048);
 }
 
 .closeIcon {

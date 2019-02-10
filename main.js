@@ -7,15 +7,17 @@ function createWindow() {
 
 	// Create the browser window
 	win = new BrowserWindow({
-		'minWidth': 850,
-		'minHeight': 600 
+		width: 1400,
+		height: 800,
+		minWidth: 850,
+		minHeight: 600,
+		center: true,
+		title: 'Path of Progression'
 	});
 	
-	// Until css is better, this is how it's gonna be
-	win.maximize();
+	// win.maximize();
 
 	// load the home page of the app
-	// win.loadFile('./pages/viewProgression.html');
 	win.loadFile('./Recode/index.html');
 
 	// Open dev tools for debugging
@@ -29,3 +31,6 @@ function createWindow() {
 }
 
 app.on('ready', createWindow);
+app.on('browser-window-created', (e, window) => {
+	window.setMenu(null);
+});

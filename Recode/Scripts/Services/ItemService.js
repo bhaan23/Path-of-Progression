@@ -1,7 +1,6 @@
 import $ from 'jquery';
 import _ from 'underscore';
 import { EventEmitter } from 'events';
-import Modal from '../Objects/Modal.js';
 import SettingsService from './SettingsService.js';
 import { StoredSettings } from '../Objects/Enums.js';
 import { resetCookie } from '../Utils/UtilFunctions.js';
@@ -37,8 +36,8 @@ export default class ItemService extends EventEmitter {
 
 		if (neededValues.length > 0) {
 			this.canFetchItems = false;
-			new Modal("You're missing some data!", ``, ``).draw();
-			alert('Missing values');
+			// new Modal("You're missing some data!", ``, ``).draw();
+			alert("We detected that you are looking for things on from your character's inventory. If you do not enter the needed fields, you will not be able to complete these nodes.");
 		} else {
 			this.canFetchItems = true;
 		}
