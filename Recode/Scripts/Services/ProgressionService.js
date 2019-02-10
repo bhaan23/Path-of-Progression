@@ -43,9 +43,7 @@ export default class ProgressionService {
 		progressionTileHtml.each((index, element) => {
 			let el = $(element);
 			el.find('.closeIcon').on('click', () => {
-				if (el.attr('data-level').toString() === "1") { // Only allow the user to close top level nodes
-					this.completeNode(el.attr('id').replace(/^tile_/, ''));
-				}
+				this.completeNode(el.attr('id').replace(/^tile_/, ''));
 			});
 		});
 

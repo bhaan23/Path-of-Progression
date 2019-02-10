@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import fs from 'fs';
 import Settings from './SettingsService.js';
 import { StoredSettings } from '../Objects/Enums.js';
 const { shell, dialog } = require('electron').remote;
@@ -15,7 +16,13 @@ export default class UserInteractionService {
 		this.sessionIdInput = $('#sessionIdInput');
 		this.sessionIdUpdate = $('#sessionIdUpdateButton');
 		this.progressionFileDisplay = $('#currentProgressionFile');
+		this.progressionFileHelpPath = null;
 		this.progressionFileUploadButton = $('#progressionFileUploadButton');
+		this.clientFileDisplay = $('#currentClientFile');
+		this.clientFileHelpPath = null;
+		this.clientFileUploadButton = $('#clientFileUploadButton');
+
+		this.noFileSelectedText = this.clientFileDisplay.text();
 
 		this.settings = Settings;
 		this.progressionService = null;
@@ -40,6 +47,16 @@ export default class UserInteractionService {
 			this.sessionIdInput.val(settingsSessionId);
 		}
 
+		const settingsProgressionFile = this.settings.get(StoredSettings.PROGRESSION_FILE);
+		if (settingsProgressionFile && fs.existsSync(settingsProgressionFile)) {
+			this.progressionFileHelpPath = settingsProgressionFile.substring(0, settingsProgressionFile.lastIndexOf('\\'));
+		}
+
+		const settingsClientLogFile = this.settings.get(StoredSettings.CLIENT_FILE_LOCATION);
+		if (settingsClientLogFile && fs.existsSync(settingsClientLogFile)) {
+			this.clientFileHelpPath = settingsClientLogFile.substring(0, settingsClientLogFile.lastIndexOf('\\'));
+			this.clientFileDisplay.text(settingsClientLogFile.substring(settingsClientLogFile.lastIndexOf('\\')+1));
+		}
 
 		this.githubLink.on('click', () => {
 			shell.openExternal(this.githubLink.find('a').attr('data-linkOut'));
@@ -73,7 +90,7 @@ export default class UserInteractionService {
 			} else {
 				alert('Please enter a valid account name to update your character selection.');
 			}
-		})
+		});
 
 		this.sessionIdInput.on('input', () => {
 			// Remove any spaces because they shouldn't be in the session id + substring to the length of a session id
@@ -92,25 +109,55 @@ export default class UserInteractionService {
 		});
 
 		this.progressionFileUploadButton.on('click', () => {
-			const filename = dialog.showOpenDialog({
+			const filenames = dialog.showOpenDialog({
 				filters: [{
-					name: 'Progression File', extensions: ['json']
+					name: 'Progression', extensions: ['json']
 				}],
 				properties: [
 					'openFile'
-				]
+				],
+				defaultPath: this.progressionFileHelpPath ? this.progressionFileHelpPath : null
 			});
 
-			if (filename.length > 0) {
-
-				// Clean the infinitely running functions before creating new ones 
-				if (this.progressionService) {
-					this.progressionService.shutdown();
-				}
-				this.progressionService = new ProgressionService($('#tiles'));
-				this.progressionService.setup(filename[0]);
+			if (filenames && filenames.length > 0) {
+				this.setupProgressionService(filenames[0]);
+			} else {
+				this.progressionFileDisplay.text(this.noFileSelectedText);
 			}
 		});
+
+		this.clientFileUploadButton.on('click', () => {
+			const filenames = dialog.showOpenDialog({
+				filters: [{
+					name: 'Client Log', extensions: ['txt']
+				}],
+				properties: [
+					'openFile'
+				],
+				defaultPath: this.clientFileHelpPath ? this.clientFileHelpPath : null
+			});
+
+			if (filenames && filenames.length > 0) {
+				const filename = filenames[0];
+				if (fs.existsSync(filename) && filename.toLowerCase().endsWith('client.txt')) {
+					this.settings.set(StoredSettings.CLIENT_FILE_LOCATION, filename);
+					this.clientFileDisplay.text(filename.substring(filename.lastIndexOf('\\')+1));
+				} else {
+					this.progressionFileDisplay.text(this.noFileSelectedText);
+				}
+			}
+		});
+	}
+
+	setupProgressionService(filename) {
+		// Clean the infinitely running functions before creating new ones 
+		if (this.progressionService) {
+			this.progressionService.shutdown();
+		}
+		this.progressionService = new ProgressionService($('#tiles'));
+		this.progressionService.setup(filename);
+		this.progressionFileDisplay.text(filename.substring(filename.lastIndexOf('\\')+1));
+		this.settings.set(StoredSettings.PROGRESSION_FILE, filename);
 	}
 
 	populateCharacterNames(characters) {
