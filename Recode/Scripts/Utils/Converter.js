@@ -108,6 +108,7 @@ export function jsonNodeToHtml(nodeMap, topNodeIds) {
 		} else {
 			level = 3;
 		}
+		
 		const id = queue.shift();
 		const node = nodeMap[id];
 		queue = queue.concat(node.dependantNodeIds);

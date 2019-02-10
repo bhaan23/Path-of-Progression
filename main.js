@@ -6,7 +6,10 @@ let win;
 function createWindow() {
 
 	// Create the browser window
-	win = new BrowserWindow();
+	win = new BrowserWindow({
+		'minWidth': 750,
+		'minHeight': 600 
+	});
 	
 	// Until css is better, this is how it's gonna be
 	win.maximize();

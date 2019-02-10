@@ -6,13 +6,10 @@ d3 progression creation tool:
 	- Let creation tool take in a started progression and draw nodes from it
 	- Create a button to connect one node to another
 Make css scalable for non-maximized screen
-Finish html/css/js rework
-Figure out how to have babel import string .html templates
 Map as many boss kills to logged message as possible to be used in progressions
-Find a nice color to use. Gray is too boring
 Add currency to inventory search?
-Store user entered information in settings so they don't need to be input every time
+Move from <select> -> <ul> for character selection
 
-- Create a startup page that lets the user input all of the api settings if they want, and force them to input the client.txt file
+- Set up initial options for browserwindow in main.js
 - Opacity from 1 -> 67% -> 33% for levels from the top of the progression
-- Setup async/await functions to avoid callback hell
+- Pick new colors for tiles

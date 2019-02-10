@@ -1,8 +1,7 @@
 <div class="tile <% if (progression.hidden) { print('hidden') } %>" data-level="<%=level%>" id="tile_<%=progression.id%>">
-	<div class="flexRow pushapart tileHeaders">
-		<span></span>
+	<span class="closeIcon"></span>
+	<div class="tileDescriptionContainer">
 		<span class="tileName"><%=progression.title%></span>
-		<span class="closeIcon">x</span>
+		<span class="tileDescription"><%=progression.description%></span>
 	</div>
-	<p class="tileDescription"><%=progression.description%></p>
 </div>
