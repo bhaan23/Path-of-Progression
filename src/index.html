@@ -24,7 +24,7 @@
 	</div>
 	<div id="backgroundContainer">
 		<div id="mainContainer">
-			<div id="about">
+			<div id="about" class="hidden">
 				<h1 class="pageTitle">About</h1>
 				<p>
 					Hello and welcome to Path Of Progression. This is a third party tool for the game Path of Exile used to track character progression through the leveling process. This tool can track many different things, however the most useful is probably where to go next while leveling through the acts. This solves the problem of not knowing what to do next, if you forgot a skill point quest, or looking up where to snag that gem you need to link to arc.
@@ -62,8 +62,80 @@
 					</div>
 				</div>
 			</div>
-			<div id="createProgression" class="hidden">
+			<div id="createProgression">
 				<h1 class="pageTitle">Create Progression</h1>
+				<div id="nodeInfo">
+					<div class="nodeInputData">
+						<div id="titleInputContainer">
+							<div>
+								<label>Title:</label>
+								<input type="text" id="titleInput" placeholder="Title" />
+							</div>
+							<div>
+								<label>Hidden:</label>
+								<span class="checkboxContainer">
+									<input type="checkbox" id="hiddenInput" />
+									<label class="customCheckbox"></label>
+								</span>
+							</div>
+							<div>
+								<label>Completed:</label>
+								<span class="checkboxContainer">
+									<input type="checkbox" id="completedInput" />
+									<label class="customCheckbox"></label>
+								</span>
+							</div>
+						</div>
+						<div id="descriptionContainer">
+							<label>Description:</label>
+							<textarea id="descriptionInput" placeholder="Description"></textarea>
+						</div>
+						<div id="completionInputContainer">
+							<label>Completion Trigger:</label>
+							<select id="completionType">
+								<option selected value="" class="hidden">Select a type...</option>
+								<option value="area">Enter area</option>
+								<option value="item">Equip item</option>
+								<option value="level">Level</option>
+							</select>
+							<span>
+								<input type="text" placeholder="Select an area..." id="areaInput" class="hidden" />
+								<ul class="typeaheadList hidden" id="areaInputTypeaheadList"></ul>
+							</span>
+							<select id="itemSlotSelection" class="hidden">
+								<option selected value="" class="hidden">Select a slot...</option>
+								<option value="amulet">Amulet</option>
+								<option value="belt">Belt</option>
+								<option value="bodyArmour">Body Armour</option>
+								<option value="boots">Boots</option>
+								<option value="flask">Flask</option>
+								<option value="gloves">Gloves</option>
+								<option value="helm">Helm</option>
+								<option value="ring">Ring</option>
+								<option value="weapon">Weapon</option>
+							</select>
+							<select id="levelSelection" class="hidden">
+								<option value="" selected class="hidden">Select a level...</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+							</select>
+							<input type="text" placeholder="Text to search..." id="modSearchInput" class="hidden" />
+						</div>
+					</div>
+					<div id="nodePreview">
+						<h2 class="pageTitle">Preview</h2>
+						<div class="tile" data-level="1">
+							<div class="tileDescriptionContainer">
+								<span class="tileTitle"></span>
+								<span class="tileDescription"></span>
+							</div>
+						</div>
+					</div>
+					<div id="progressionPreview" class="hidden">
+						<svg></svg>
+					</div>
+				</div>
 			</div>
 			<div id="viewProgression" class="hidden">
 				<h1 class="pageTitle">View Progression</h1>
@@ -84,12 +156,12 @@
 					</div>
 					<div class="apiInfoListItem" id="clientLogContainer">
 						<label>Client Log File:</label>
-						<span id="currentClientFile" class="fileSelected">No file selected</span>
-						<button id="clientFileUploadButton" class="primaryButton">Choose Client Log File</button>
+						<span id="currentClientFile">No file selected</span>
+						<button id="progressionFileUploadButton" class="primaryButton">Choose Client Log File</button>
 					</div>
 					<div class="apiInfoListItem" id="progressionFileContainer">
 						<label>Progression File:</label>
-						<span id="currentProgressionFile" class="fileSelected">No file selected</span>
+						<span id="currentProgressionFile">No file selected</span>
 						<button id="progressionFileUploadButton" class="primaryButton">Choose Progression File</button>
 					</div>
 				</div>

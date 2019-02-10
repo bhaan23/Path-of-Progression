@@ -1,12 +1,16 @@
 /* Page Independent Styles */
 
+head {
+	color: initial;
+}
+
 html, body {
 	height: 100%;
 	margin: 0;
 	padding: 0;
 }
 
-body, input, button, select {
+body, input, button, select, textarea {
 	font-size: 1.1rem;
 }
 
@@ -30,12 +34,6 @@ body {
 		"footer";
 }
 
-/* Utilities */
-
-.hidden {
-	display: none;
-}
-
 button {
 	padding: 0.5rem 1rem;
 	transition: all 0.5s;
@@ -49,8 +47,10 @@ button:not(:disabled):hover {
 	cursor: pointer;
 }
 
-button:focus {
-	outline: none;
+/* Utilities */
+
+.hidden {
+	display: none;
 }
 
 button.primaryButton {
@@ -79,13 +79,13 @@ button.largeButton {
 	padding: 1rem 2rem;
 }
 
-input, select {
+input, select, textarea {
 	border: 2px solid transparent;
 	padding: 0.4rem 0.8rem;
 	border-bottom-color: #0081ce;
 	background-color: transparent;
 	color: inherit;
-	transition: 0.25s linear;
+	transition: all 0.25s linear;
 }
 
 input:focus, select:focus {
@@ -101,11 +101,74 @@ input:not(:focus).success {
 	border-color: #009900;
 }
 
-option {
+option, optgroup {
 	color: black;
 	font-size: inherit;
 }
 
+textarea {
+	font-family: Arial;
+	border-width: 1px;
+	border-color: #0081ce;
+	width: 60%;
+	min-width: 15rem;
+	height: 5rem;
+	min-height: 4rem;
+	resize: none;
+	outline: 1px solid transparent;
+}
+
+textarea:focus {
+	outline: 1px solid #0081ce;
+}
+
+.checkboxContainer {
+	position: relative;
+	top: 5px;
+}
+
+input[type=checkbox] {
+	height: 100%;
+	width: 100%;
+	opacity: 0;
+	position: absolute;
+	z-index: 1;
+	cursor: pointer;
+}
+
+.checkboxContainer label {
+	width: 3rem;
+	height: 1.5rem;
+	background-color: lightgray;
+	display: inline-block;
+	border-radius: 100px;
+	position: relative;
+}
+
+.checkboxContainer label:after {
+	content: "";
+	position: absolute;
+	top: 2px;
+	left: 3px;
+	width: 1.25rem;
+	height: 1.25rem;
+	background-color: white;
+	border-radius: 90px;
+	transition: 0.3s;
+}
+
+input[type=checkbox]:checked + label {
+	background-color: #0081ce;
+}
+
+input[type=checkbox]:checked + label:after {
+	left: calc(100% + 5px - 3rem);
+	transform: translateX(100%);
+}
+
+label:active:after {
+	width: 1.3rem;
+}
 
 /* Header styles */
 
@@ -126,13 +189,17 @@ option {
 	align-items: baseline;
 }
 
-.page {
-	margin-left: 1rem;
-	padding: 1rem;
+#header > ul:last-child {
+	justify-content: flex-end;
 }
 
-.page:not(#title) {
-	font-size: 1.3rem;
+#header > ul:first-child {
+	justify-content: flex-start;
+	align-items: baseline;
+}
+
+.page {
+	padding-left: 1rem;
 }
 
 .page:not(#title):after {
@@ -160,7 +227,7 @@ option {
 /* Main container styles */
 
 #backgroundContainer {
-	background-image: url('./Path_of_Exile_Wallpaper_25.jpg');
+	background-image: url('C:\\Users\\Brandon Haan\\Documents\\PathOfProgression\\src\\Path_of_Exile_Wallpaper_25.jpg');
 	background-position: fixed;
 	background-repeat: no-repeat;
 	background-size: 110% auto;
@@ -214,8 +281,6 @@ option {
 	margin-bottom: 1rem;
 }
 
-/* Create Progression section */
-
 /* View Progression section */
 
 #userInfo {
@@ -223,7 +288,7 @@ option {
 	grid-column-gap: 1rem;
 	grid-row-gap: 1rem;
 	grid-template-rows: auto;
-	grid-template-columns: 42% 42%;
+	grid-template-columns: 40% 40%;
 	justify-content: center;
 	grid-template-areas:
 		"accountName characterName"
@@ -272,10 +337,6 @@ option {
 	color: #777777
 }
 
-.fileSelected {
-	padding: 1rem;
-}
-
 .apiInfoListItem > * {
 	margin-top: 1rem;
 }
@@ -289,9 +350,9 @@ option {
 .tile {
 	margin-top: 1rem;
 	color: black;
-	height: 10rem;
+	min-height: 10rem;
 	width: 85%;
-	/* background-image: linear-gradient(to bottom, #bde5f8, blue); */
+	background-image: linear-gradient(to bottom, #bde5f8, blue);
 
 	transition: opacity 0.75s ease-out,
 				height 0.5s ease-in-out 0.75s,
@@ -300,27 +361,23 @@ option {
 }
 
 /* animation for getting rid of tiles */
-.fadeout {
+.fadeOut {
 	height: 0;
 	padding: 0;
 	margin: 0;
 	opacity: 0;
 }
 
-.tile:not([data-level="1"]) .closeIcon, .fadeout .closeIcon {
-	opacity: 0;
-}
-
 .tile[data-level="1"] {
-	background-image: linear-gradient(to bottom, white, red);
+	opacity: 1;
 }
 
 .tile[data-level="2"] {
-	background-image: linear-gradient(to bottom, white, #ffa500);
+	opacity: 0.67;
 }
 
 .tile[data-level="3"] {
-	background-image: linear-gradient(to bottom, white, #00a048);
+	opacity: 0.33;
 }
 
 .closeIcon {
@@ -363,7 +420,7 @@ option {
 	margin: 1rem;
 }
 
-.tileName {
+.tileTitle {
 	align-self: center;
 	text-decoration: underline;
 	font-size: 1.4rem;
@@ -384,4 +441,61 @@ option {
 	justify-content: center;
 
 	grid-area: footer;
+}
+
+/* Create Progression section */
+
+#nodeInfo {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+#titleInputContainer {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: baseline;
+}
+
+#titleInputContainer > * {
+	padding: 1rem;
+}
+
+#titleInputContainer > *:first-child {
+	padding-left: 0;
+}
+
+#titleInputContainer > * {
+	padding: 1rem;
+}
+
+#titleInputContainer > *:first-child {
+	padding-left: 0;
+}
+
+#descriptionContainer label {
+	vertical-align: top;
+}
+
+#completionInputContainer {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: baseline;
+	justify-content: flex-start;
+}
+
+#completionInputContainer > * {
+	margin-right: 1rem;
+}
+
+#nodePreview {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#nodePreview .tile {
+	margin-top: 0;
 }

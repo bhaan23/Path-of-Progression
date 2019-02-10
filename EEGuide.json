@@ -13,7 +13,7 @@
 	{
 		"id": "2",
 		"title": "Get movespeed boots",
-		"completionTrigger": "[equip][boots][mod][% increased Movement Speed]",
+		"completionTrigger": "[item][boots][% increased Movement Speed]",
 		"description": "Look to purchase movespeed boots from Tarkleigh.",
 		"nodesNeeded": [
 			"1"
@@ -35,7 +35,7 @@
 	{
 		"id": "4",
 		"title": "Grab a quicksilver flask",
-		"completionTrigger": "[equip][flask][base][Quicksilver]",
+		"completionTrigger": "[item][flask][Quicksilver]",
 		"description": "Enter The Tidal Island to the right of the Coast waypoint. Travel around the left side until you find find Hailrake. Kill him to get the Medicine Chest and portal back to town to get your quicksilver flask reward from Nessa.",
 		"nodesNeeded": [
 			"3"

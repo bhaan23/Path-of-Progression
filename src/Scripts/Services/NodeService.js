@@ -35,7 +35,7 @@ export default class NodeService {
 				}
 				if (progressionNode.completed) {
 					this.completedNodeIds.push(progressionNode.id);
-				} else if (progressionNode.completionTrigger.toLowerCase().startsWith('[equip]')) {
+				} else if (progressionNode.completionTrigger.toLowerCase().startsWith('[item]')) {
 					this.needsItemLookup = true;
 				}
 				this.nodeMap[progressionNode.id] = {

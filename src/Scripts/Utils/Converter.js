@@ -19,8 +19,8 @@ export function logMessageToTrigger(type, logData) {
 
 export function hasNodeTriggeredFromItem(trigger, characterInventory) {
 	
-	if (trigger.toLowerCase().startsWith('[equip]')) {
-		const match = trigger.match(/\[equip\]\[(\w+)\]\[(\w+)\]\[(.+)\]/i);
+	if (trigger.toLowerCase().startsWith('[item]')) {
+		const match = trigger.match(/\[item\]\[(\w+)\]\[(\w+)\]\[(.+)\]/i);
 		let itemData;
 		switch (match[1].toLowerCase()) { // Find the right item type to search for
 			case 'amulet':
@@ -58,30 +58,24 @@ export function hasNodeTriggeredFromItem(trigger, characterInventory) {
 				continue;
 			}
 			
-			switch (match[2].toLowerCase()) { // Find where to look within the item
-				case 'mod':
-					compareData = [];
-					if (item.craftedMods) {
-						compareData.push(item.craftedMods.join('|'));
-					}
-					if (item.enchantMods) {
-						compareData.push(item.enchantMods.join('|'));
-					}
-					if (item.explicitMods) {
-						compareData.push(item.explicitMods.join('|'));
-					}
-					if (item.implicitMods) {
-						compareData.push(item.implicitMods.join('|'));
-					}
-					if (item.utilityMods) {
-						compareData.push(item.utilityMods.join('|'));
-					}
-					compareData = compareData.join('|');
-					break;
-				case 'base':
-					compareData += item.name + '|';
-					break;
+			textData = [];
+			if (item.craftedMods) {
+				textData.push(item.craftedMods.join('|'));
 			}
+			if (item.enchantMods) {
+				textData.push(item.enchantMods.join('|'));
+			}
+			if (item.explicitMods) {
+				textData.push(item.explicitMods.join('|'));
+			}
+			if (item.implicitMods) {
+				textData.push(item.implicitMods.join('|'));
+			}
+			if (item.utilityMods) {
+				textData.push(item.utilityMods.join('|'));
+			}
+			textData.push(item.name + '|');
+			compareData = textData.join('|');
 		}
 
 		let found = true;
