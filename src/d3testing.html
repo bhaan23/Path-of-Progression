@@ -21,6 +21,30 @@ let dragEnded = function(d) {
 	// Nothing
 }
 
+let addNode = function(x, y, id, text) {
+	let g = nodesGroup
+		.append('g')
+		.datum({x, y, id, text})
+		.attr('x', (d) => { return d.x })
+		.attr('y', (d) => { return d.y })
+		.attr('id', (d) => { return d.id })
+		.attr('width', 110)
+		.attr('height', 60)
+		.call(d3.drag()
+				.on('start', dragStarted)
+				.on('drag', dragged)
+				.on('end', dragEnded));
+	g
+		.append('rect')
+		.attr('fill', 'lightgray')
+		.attr('stroke', 'black');
+	g
+		.append('text')
+		.text((d) => { return d.text });
+
+
+}
+
 </script>
 
 <script>
@@ -66,6 +90,8 @@ nodesGroup
 			.on('start', dragStarted)
 			.on('drag', dragged)
 			.on('end', dragEnded));
+
+addNode(40, 80, 11934, 'sample text');
 
 
 </script>

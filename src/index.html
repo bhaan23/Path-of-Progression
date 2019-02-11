@@ -62,7 +62,7 @@
 					</div>
 				</div>
 			</div>
-			<div id="createProgression">
+			<div id="createProgression" class="hidden">
 				<h1 class="pageTitle">Create Progression</h1>
 				<div id="nodeInfo">
 					<div class="nodeInputData">
@@ -137,7 +137,7 @@
 					</div>
 				</div>
 			</div>
-			<div id="viewProgression" class="hidden">
+			<div id="viewProgression">
 				<h1 class="pageTitle">View Progression</h1>
 				<div id="userInfo">
 					<div class="apiInfoListItem" id="accountNameContainer">
@@ -157,12 +157,13 @@
 					<div class="apiInfoListItem" id="clientLogContainer">
 						<label>Client Log File:</label>
 						<span id="currentClientFile">No file selected</span>
-						<button id="progressionFileUploadButton" class="primaryButton">Choose Client Log File</button>
+						<button id="clientFileUploadButton" class="primaryButton">Choose Client Log File</button>
 					</div>
 					<div class="apiInfoListItem" id="progressionFileContainer">
 						<label>Progression File:</label>
 						<span id="currentProgressionFile">No file selected</span>
 						<button id="progressionFileUploadButton" class="primaryButton">Choose Progression File</button>
+						<button id="saveButton" class="primaryButton hidden">Save</button>
 					</div>
 				</div>
 				<div id="tiles"></div>

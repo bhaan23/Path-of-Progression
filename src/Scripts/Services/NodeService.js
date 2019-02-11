@@ -1,4 +1,5 @@
 import fs from 'fs';
+const { dialog } = require('electron').remote;
 
 export default class NodeService {
 
@@ -71,19 +72,23 @@ export default class NodeService {
 		for (let node of this.allNodes) {
 			outputList.push(this.nodeMap[node.id]);
 		}
-		const extension = this.progressionFileLocation.substring(this.progressionFileLocation.lastIndexOf('.') + 1, this.progressionFileLocation.length);
-		let filename;
-		if (extension) {
-			filename = this.progressionFileLocation.substring(this.progressionFileLocation.length - extension.length - 1) + `_${Date.now()}.${extension}`;
-		} else {
-			filename = this.progressionFileLocation + `_${Date.now()}.${extension}`;
-		}
-		fs.writeFile(filename, JSON.stringify({ progression: outputList }), { encoding: 'utf-8' }, (error) => {
-			if (error) {
-				alert('There was an error saving the progression.');
-			} else {
-				alert('Your progression was saved as ' + filename);
-			}
+		
+		
+
+		const filename = dialog.showSaveDialog({
+			filters: [{
+				name: 'Progression File', extensions: ['json']
+			}],
+			defaultPath: this.progressionFileLocation
 		});
+		if (filename) {
+			fs.writeFile(filename, JSON.stringify({ progression: outputList }), { encoding: 'utf-8' }, (error) => {
+				if (error) {
+					alert('There was an error saving the progression.');
+				} else {
+					alert('Your progression was saved as ' + filename);
+				}
+			});
+		}
 	}
 }

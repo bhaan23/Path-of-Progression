@@ -88,6 +88,6 @@ export default class ProgressionCreationService {
 	}
 
 	import(progressionNodes) {
-
+		
 	}
 }

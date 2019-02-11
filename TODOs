@@ -7,5 +7,9 @@ d3 progression creation tool:
 	- Create a button to connect one node to another
 Map as many boss kills to logged message as possible to be used in progressions
 Add currency to inventory search?
-Move from <select> -> <ul> for character selection
 
+Add save button to viewing page
+Add save/add buttons to creation page
+Add a way to add dependent nodes to creation page
+Add a way to edit nodes on the creation page
+Add a way to upload a progression file on the creation page

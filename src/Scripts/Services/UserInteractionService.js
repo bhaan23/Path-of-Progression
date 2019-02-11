@@ -21,6 +21,7 @@ export default class UserInteractionService {
 		this.clientFileDisplay = $('#currentClientFile');
 		this.clientFileHelpPath = null;
 		this.clientFileUploadButton = $('#clientFileUploadButton');
+		this.saveButton = $('#saveButton');
 
 		this.noFileSelectedText = this.clientFileDisplay.text();
 
@@ -121,8 +122,10 @@ export default class UserInteractionService {
 
 			if (filenames && filenames.length > 0) {
 				this.setupProgressionService(filenames[0]);
+				this.saveButton.removeClass('hidden');
 			} else {
 				this.progressionFileDisplay.text(this.noFileSelectedText);
+				this.saveButton.addClass('hidden');
 			}
 		});
 
@@ -146,6 +149,10 @@ export default class UserInteractionService {
 					this.progressionFileDisplay.text(this.noFileSelectedText);
 				}
 			}
+		});
+
+		this.saveButton.on('click', () => {
+			this.progressionService.save();
 		});
 	}
 
