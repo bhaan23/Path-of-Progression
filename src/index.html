@@ -24,7 +24,7 @@
 	</div>
 	<div id="backgroundContainer">
 		<div id="mainContainer">
-			<div id="about" class="hidden">
+			<div id="about">
 				<h1 class="pageTitle">About</h1>
 				<p>
 					Hello and welcome to Path Of Progression. This is a third party tool for the game Path of Exile used to track character progression through the leveling process. This tool can track many different things, however the most useful is probably where to go next while leveling through the acts. This solves the problem of not knowing what to do next, if you forgot a skill point quest, or looking up where to snag that gem you need to link to arc.
@@ -64,8 +64,26 @@
 			</div>
 			<div id="createProgression" class="hidden">
 				<h1 class="pageTitle">Create Progression</h1>
+				<div id="creationDescription">
+					<p>
+						From this tab you can create a new progression to follow or upload and edit an existing progression.
+					</p>
+				</div>
+				<div id="createFileOptions">
+					<span>
+						<button class="primaryButton" id="createProgressionSave" disabled>Save</button>
+						<button class="secondaryButton" id="createProgressionUpload">Upload</button>
+					</span>
+				</div>
 				<div id="nodeInfo">
-					<div class="nodeInputData">
+					<div id="nodeInputData">
+						<div id="currentNodeContainer">
+							<label>Current Node:</label>
+							<select id="allNodesSelection">
+								<option value="" selected class="hidden">Select a node to edit...</option>
+							</select>
+							<button class="primaryButton" id="createProgressionAddNode">Add Node</button>
+						</div>
 						<div id="titleInputContainer">
 							<div>
 								<label>Title:</label>
@@ -132,13 +150,46 @@
 							</div>
 						</div>
 					</div>
+					<div id="dependantNodes">
+						<h2 class="pageTitle">Dependant Nodes</h2>
+						<button class="primaryButton largeButton" id="addDependantNodesButton">Add Dependant Nodes</button>
+						<div id="dependantTiles">
+							<div class="tile" data-level="2">
+								<div class="tileDescriptionContainer">
+									<span class="tileTitle"></span>
+									<span class="tileDescription"></span>
+								</div>
+							</div>
+							<div class="tile" data-level="2">
+								<div class="tileDescriptionContainer">
+									<span class="tileTitle"></span>
+									<span class="tileDescription"></span>
+								</div>
+							</div>
+							<div class="tile" data-level="2">
+								<div class="tileDescriptionContainer">
+									<span class="tileTitle"></span>
+									<span class="tileDescription"></span>
+								</div>
+							</div>
+						</div>
+					</div>
 					<div id="progressionPreview" class="hidden">
 						<svg></svg>
 					</div>
 				</div>
 			</div>
-			<div id="viewProgression">
+			<div id="viewProgression" class="hidden">
 				<h1 class="pageTitle">View Progression</h1>
+				<div id="viewProgressionDescription">
+					<p>
+						From this tab you can track a specific progression with real time updates to areas and levels, while having near real time updates with items updates.
+						<br>
+						All progressions currently require your Client.txt file to be input.
+						<br>
+						If you want to track items with your progression, you will need to input your account name, select a character name, and input your session id.
+					</p>
+				</div>
 				<div id="userInfo">
 					<div class="apiInfoListItem" id="accountNameContainer">
 						<label>Account Name:</label>

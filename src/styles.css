@@ -112,6 +112,7 @@ textarea {
 	height: 5rem;
 	min-height: 4rem;
 	resize: none;
+	padding: 1rem;
 	outline: 1px solid transparent;
 }
 
@@ -277,6 +278,7 @@ label:active:after {
 /* View Progression section */
 
 #userInfo {
+	margin-bottom: 1rem;
 	display: grid;
 	grid-column-gap: 1rem;
 	grid-row-gap: 1rem;
@@ -357,7 +359,7 @@ label:active:after {
 }
 
 /* animation for getting rid of tiles */
-.fadeOut {
+.fadeout {
 	height: 0;
 	padding: 0;
 	margin: 0;
@@ -432,6 +434,10 @@ label:active:after {
 	margin-bottom: 1rem;
 }
 
+#viewProgressionDescription > p {
+	text-align: center;
+}
+
 /* Footer Banner */
 
 #footer {
@@ -448,7 +454,26 @@ label:active:after {
 #nodeInfo {
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+}
+
+#nodeInputData > * {
+	margin-bottom: 1.5rem;
+}
+
+#nodeInputData {
+	border-top: 1px solid white;
+	margin-top: 1rem;
+	padding-top: 1rem;
+}
+
+#createFileOptions {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#createProgressionSave {
+	margin-right: 1rem;
 }
 
 #titleInputContainer {
@@ -490,12 +515,33 @@ label:active:after {
 	margin-right: 1rem;
 }
 
-#nodePreview {
+#nodePreview, #dependantNodes, #dependantTiles {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 }
 
+#dependantTiles {
+	width: 100%;
+}
+
 #nodePreview .tile {
 	margin-top: 0;
+}
+
+#createProgressionAddNode {
+	align-self: center;
+}
+
+#currentNodeContainer > * {
+	margin-right: 1rem;
+}
+
+#creationDescription > p {
+	text-align: center;
+}
+
+#modSearchInput, #titleInput {
+	min-width: 14rem;
+	max-width: 37rem;
 }

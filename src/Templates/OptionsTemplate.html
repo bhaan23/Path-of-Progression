@@ -1,0 +1,3 @@
+<% for (let option of options) { %>
+	<option value="<%=option.value%>" <% if (!option.value) { print('selected class="hidden"') } %>><%=option.display%></option>
+<% } %>

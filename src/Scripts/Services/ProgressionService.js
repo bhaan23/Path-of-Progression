@@ -136,4 +136,9 @@ export default class ProgressionService {
 	save() {
 		this.nodeService.save();
 	}
+
+	// Wrapper for node service
+	canSave() {
+		return this.nodeService.canSave();
+	}
 }

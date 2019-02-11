@@ -25,6 +25,8 @@ export default class ProgressionCreationService {
 
 	setup() {
 		this.titleInput.on('input', () => {
+			this.modSearchInput.css('width', `${this.modSearchInput.val().length*.9}ch`);
+			
 			const text = this.titleInput.val() || '';
 			this.previewTitle.text(text);
 			this.currentProgressionNode.title = text;
@@ -84,6 +86,10 @@ export default class ProgressionCreationService {
 
 		this.levelSelection.on('change', () => {
 			this.currentTrigger[1] = `[${this.levelSelection.val()}]`;
+		});
+
+		this.modSearchInput.on('input', () => {
+			this.modSearchInput.css('width', `${this.modSearchInput.val().length*.9}ch`);
 		});
 	}
 

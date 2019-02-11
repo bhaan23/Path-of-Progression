@@ -2,7 +2,7 @@ import $ from 'jquery';
 import fs from 'fs';
 import Settings from './SettingsService.js';
 import { StoredSettings } from '../Objects/Enums.js';
-const { shell, dialog } = require('electron').remote;
+const { shell, dialog, app } = require('electron').remote;
 import ProgressionService from './ProgressionService.js';
 import { isValidSessionId } from '../Utils/UtilFunctions.js';
 
@@ -110,29 +110,33 @@ export default class UserInteractionService {
 		});
 
 		this.progressionFileUploadButton.on('click', () => {
-			const filenames = dialog.showOpenDialog({
-				filters: [{
-					name: 'Progression', extensions: ['json']
-				}],
-				properties: [
-					'openFile'
-				],
-				defaultPath: this.progressionFileHelpPath ? this.progressionFileHelpPath : null
-			});
-
-			if (filenames && filenames.length > 0) {
-				this.setupProgressionService(filenames[0]);
-				this.saveButton.removeClass('hidden');
+			if (this.clientFileDisplay.text() === this.noFileSelectedText) {
+				alert('You cannot track a progression without uploading your Client.txt file.');
 			} else {
-				this.progressionFileDisplay.text(this.noFileSelectedText);
-				this.saveButton.addClass('hidden');
+				const filenames = dialog.showOpenDialog({
+					filters: [{
+						name: 'Progression', extensions: ['json']
+					}],
+					properties: [
+						'openFile'
+					],
+					defaultPath: this.progressionFileHelpPath ? this.progressionFileHelpPath : null
+				});
+
+				if (filenames && filenames.length > 0) {
+					this.setupProgressionService(filenames[0]);
+					this.saveButton.removeClass('hidden');
+				} else {
+					this.progressionFileDisplay.text(this.noFileSelectedText);
+					this.saveButton.addClass('hidden');
+				}
 			}
 		});
 
 		this.clientFileUploadButton.on('click', () => {
 			const filenames = dialog.showOpenDialog({
 				filters: [{
-					name: 'Client Log', extensions: ['txt']
+					name: 'Client.txt Log', extensions: ['txt']
 				}],
 				properties: [
 					'openFile'
@@ -154,6 +158,23 @@ export default class UserInteractionService {
 		this.saveButton.on('click', () => {
 			this.progressionService.save();
 		});
+
+		// Check if the user wants to save data before the app closes
+		$(window).on('beforeunload', (event) => {
+			if (this.progressionService.canSave()) {
+				const result = dialog.showMessageBox({
+					type: 'question',
+					buttons: ['OK', 'Cancel'],
+					message: 'You have not saved the full progress of your progression. Would you like to save?'
+				});
+				if (result === 0) { // OK
+					event.preventDefault();
+					event.returnValue = false;
+					return false;
+				}
+			}
+		});
+
 	}
 
 	setupProgressionService(filename) {

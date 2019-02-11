@@ -1,4 +1,4 @@
-import { app, BrowserWindow, session } from 'electron';
+import { app, BrowserWindow, session, ipcMain } from 'electron';
 import settings from 'electron-settings';
 
 let win;
@@ -33,4 +33,7 @@ function createWindow() {
 app.on('ready', createWindow);
 app.on('browser-window-created', (e, window) => {
 	window.setMenu(null);
+});
+ipcMain.on('app_quit', (event, info) => {
+	app.quit();
 });

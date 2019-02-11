@@ -20,7 +20,7 @@ export function logMessageToTrigger(type, logData) {
 export function hasNodeTriggeredFromItem(trigger, characterInventory) {
 	
 	if (trigger.toLowerCase().startsWith('[item]')) {
-		const match = trigger.match(/\[item\]\[(\w+)\]\[(\w+)\]\[(.+)\]/i);
+		const match = trigger.match(/\[item\]\[(\w+)\]\[(.+)\]/i);
 		let itemData;
 		switch (match[1].toLowerCase()) { // Find the right item type to search for
 			case 'amulet':
@@ -58,7 +58,7 @@ export function hasNodeTriggeredFromItem(trigger, characterInventory) {
 				continue;
 			}
 			
-			textData = [];
+			let textData = [];
 			if (item.craftedMods) {
 				textData.push(item.craftedMods.join('|'));
 			}
@@ -80,7 +80,7 @@ export function hasNodeTriggeredFromItem(trigger, characterInventory) {
 
 		let found = true;
 		compareData = compareData.toLowerCase();
-		for (let text of match[3].split(',')) { // Check if we match all text we are looking for
+		for (let text of match[2].split(',')) { // Check if we match all text we are looking for
 			found = found && compareData.includes(text.trim().toLowerCase());
 		}
 		return found;

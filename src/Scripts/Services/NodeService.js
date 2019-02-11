@@ -59,7 +59,7 @@ export default class NodeService {
 			}
 
 			// Top level node
-			if (i === 0) {
+			if (i === 0 && !this.completedNodeIds.includes(id)) {
 				if (!this.topNodeIds.includes(id)) { // Watch for duplicates
 					this.topNodeIds.push(id);
 				}
@@ -67,13 +67,18 @@ export default class NodeService {
 		}
 	}
 
-	save() {
+	createSaveObject() {
 		let outputList = [];
 		for (let node of this.allNodes) {
-			outputList.push(this.nodeMap[node.id]);
+			if (this.nodeMap[node.id]) {
+				outputList.push(this.nodeMap[node.id].progressionData);
+			}
 		}
-		
-		
+		return JSON.stringify({ progression: outputList });
+	}
+
+	save() {
+		const saveData = this.createSaveObject();
 
 		const filename = dialog.showSaveDialog({
 			filters: [{
@@ -82,13 +87,18 @@ export default class NodeService {
 			defaultPath: this.progressionFileLocation
 		});
 		if (filename) {
-			fs.writeFile(filename, JSON.stringify({ progression: outputList }), { encoding: 'utf-8' }, (error) => {
+			fs.writeFile(filename, saveData, { encoding: 'utf-8' }, (error) => {
 				if (error) {
 					alert('There was an error saving the progression.');
 				} else {
+					this.lastSave = saveData;
 					alert('Your progression was saved as ' + filename);
 				}
 			});
 		}
+	}
+
+	canSave() {
+		return this.lastSave !== this.createSaveObject();
 	}
 }
