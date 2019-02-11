@@ -1,9 +1,5 @@
 /* Page Independent Styles */
 
-head {
-	color: initial;
-}
-
 html, body {
 	height: 100%;
 	margin: 0;
@@ -34,6 +30,12 @@ body {
 		"footer";
 }
 
+/* Utilities */
+
+.hidden {
+	display: none;
+}
+
 button {
 	padding: 0.5rem 1rem;
 	transition: all 0.5s;
@@ -46,12 +48,6 @@ button:disabled {
 
 button:not(:disabled):hover {
 	cursor: pointer;
-}
-
-/* Utilities */
-
-.hidden {
-	display: none;
 }
 
 button.primaryButton {
@@ -190,17 +186,13 @@ label:active:after {
 	align-items: baseline;
 }
 
-#header > ul:last-child {
-	justify-content: flex-end;
-}
-
-#header > ul:first-child {
-	justify-content: flex-start;
-	align-items: baseline;
-}
-
 .page {
-	padding-left: 1rem;
+	margin-left: 1rem;
+	padding: 1rem;
+}
+
+.page:not(#title) {
+	font-size: 1.3rem;
 }
 
 .page:not(#title):after {
@@ -228,7 +220,7 @@ label:active:after {
 /* Main container styles */
 
 #backgroundContainer {
-	background-image: url('C:\\Users\\Brandon Haan\\Documents\\PathOfProgression\\src\\Path_of_Exile_Wallpaper_25.jpg');
+	background-image: url('./Path_of_Exile_Wallpaper_25.jpg');
 	background-position: fixed;
 	background-repeat: no-repeat;
 	background-size: 110% auto;
@@ -289,7 +281,7 @@ label:active:after {
 	grid-column-gap: 1rem;
 	grid-row-gap: 1rem;
 	grid-template-rows: auto;
-	grid-template-columns: 40% 40%;
+	grid-template-columns: 42% 42%;
 	justify-content: center;
 	grid-template-areas:
 		"accountName characterName"
@@ -351,9 +343,8 @@ label:active:after {
 .tile {
 	margin-top: 1rem;
 	color: black;
-	min-height: 10rem;
+	height: 10rem;
 	width: 85%;
-	background-image: linear-gradient(to bottom, #bde5f8, blue);
 
 	transition: opacity 0.75s ease-out,
 				height 0.5s ease-in-out 0.75s,
@@ -362,7 +353,7 @@ label:active:after {
 }
 
 #saveButton {
-	
+	margin-left: 1.5rem;
 }
 
 /* animation for getting rid of tiles */
@@ -373,16 +364,20 @@ label:active:after {
 	opacity: 0;
 }
 
+.tile:not([data-level="1"]) .closeIcon, .fadeout .closeIcon {
+	opacity: 0;
+}
+
 .tile[data-level="1"] {
-	opacity: 1;
+	background-image: linear-gradient(to bottom, white, red);
 }
 
 .tile[data-level="2"] {
-	opacity: 0.67;
+	background-image: linear-gradient(to bottom, white, #ffa500);
 }
 
 .tile[data-level="3"] {
-	opacity: 0.33;
+	background-image: linear-gradient(to bottom, white, #00a048);
 }
 
 .closeIcon {
