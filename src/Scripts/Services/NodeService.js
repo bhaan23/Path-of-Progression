@@ -10,6 +10,8 @@ export default class NodeService {
 		this.completedNodeIds = null;
 		this.needsItemLookup = false;
 		this.progressionFileLocation = null;
+
+		this.lastSave = null;
 	}
 
 	setup(progressionFile) {
@@ -36,7 +38,7 @@ export default class NodeService {
 				}
 				if (progressionNode.completed) {
 					this.completedNodeIds.push(progressionNode.id);
-				} else if (progressionNode.completionTrigger.toLowerCase().startsWith('[item]')) {
+				} else if (progressionNode.completionTrigger.toLowerCase().startsWith('item|')) {
 					this.needsItemLookup = true;
 				}
 				this.nodeMap[progressionNode.id] = {
@@ -99,6 +101,6 @@ export default class NodeService {
 	}
 
 	canSave() {
-		return this.lastSave !== this.createSaveObject();
+		return this.lastSave && this.lastSave !== this.createSaveObject();
 	}
 }

@@ -1,8 +1,8 @@
 import $ from 'jquery';
-import fs from 'fs';
+import { fs, path, existsSync } from 'fs';
 import Settings from './SettingsService.js';
 import { StoredSettings } from '../Objects/Enums.js';
-const { shell, dialog, app } = require('electron').remote;
+const { shell, dialog } = require('electron').remote;
 import ProgressionService from './ProgressionService.js';
 import { isValidSessionId } from '../Utils/UtilFunctions.js';
 
@@ -49,12 +49,12 @@ export default class UserInteractionService {
 		}
 
 		const settingsProgressionFile = this.settings.get(StoredSettings.PROGRESSION_FILE);
-		if (settingsProgressionFile && fs.existsSync(settingsProgressionFile)) {
+		if (settingsProgressionFile && existsSync(settingsProgressionFile)) {
 			this.progressionFileHelpPath = settingsProgressionFile.substring(0, settingsProgressionFile.lastIndexOf('\\'));
 		}
 
 		const settingsClientLogFile = this.settings.get(StoredSettings.CLIENT_FILE_LOCATION);
-		if (settingsClientLogFile && fs.existsSync(settingsClientLogFile)) {
+		if (settingsClientLogFile && existsSync(settingsClientLogFile)) {
 			this.clientFileHelpPath = settingsClientLogFile.substring(0, settingsClientLogFile.lastIndexOf('\\'));
 			this.clientFileDisplay.text(settingsClientLogFile.substring(settingsClientLogFile.lastIndexOf('\\')+1));
 		}
@@ -99,14 +99,20 @@ export default class UserInteractionService {
 		});
 
 		this.sessionIdUpdate.on('click', () => {
-			isValidSessionId(this.sessionIdInput.val(), this.settings.get(StoredSettings.ACCOUNT_NAME), (isValid, response) => {
-				if (isValid) {
-					this.settings.set(StoredSettings.SESSION_ID, this.sessionIdInput.val());
-					alert('Your session id was updated successfully.');
-				} else {
-					alert(`Your session id was invalid. Here's why it was invalid: ${response.message}`);
-				}
-			});
+			const accountName = this.settings.get(StoredSettings.ACCOUNT_NAME) || this.accountNameInput.val();
+			if (!accountName) {
+				alert('Please enter a valid account name to validate your session id.');
+			} else {
+				isValidSessionId(this.sessionIdInput.val(), accountName, (isValid, response) => {
+					if (isValid) {
+						this.settings.set(StoredSettings.SESSION_ID, this.sessionIdInput.val());
+						this.settings.set(StoredSettings.ACCOUNT_NAME, accountName);
+						alert('Your session id was updated successfully.');
+					} else {
+						alert(`Your session id was invalid. Here's why it was invalid: ${response.message}`);
+					}
+				});
+			}
 		});
 
 		this.progressionFileUploadButton.on('click', () => {
@@ -164,17 +170,37 @@ export default class UserInteractionService {
 			if (this.progressionService.canSave()) {
 				const result = dialog.showMessageBox({
 					type: 'question',
-					buttons: ['OK', 'Cancel'],
+					buttons: ['Yes', 'No'],
 					message: 'You have not saved the full progress of your progression. Would you like to save?'
 				});
-				if (result === 0) { // OK
+				if (result === 0) { // Yes
 					event.preventDefault();
 					event.returnValue = false;
+					setTimeout(() => { $('#saveButton').click(); }, 1000);
 					return false;
 				}
 			}
 		});
 
+		// One time function for reloading your last file
+		$(document).one('load-progression-file', () => {
+			this.loadKnownProgression(this.settings.get(StoredSettings.PROGRESSION_FILE));
+		});
+
+		// Function for handling the about page button clicks
+		$(document).on('start-with-file', (event, file) => {
+			if (file === 'EEGuide') {
+				this.loadKnownProgression(path.resolve(__dirname, '..\\..\\..\\EEGuide.json'));
+			} else if (file === 'Speed') {
+				this.loadKnownProgression(path.resolve(__dirname, '..\\..\\..\\Speed.json'));
+			}
+		});
+	}
+
+	loadKnownProgression(progressionFile) {
+		if (progressionFile) {
+			this.setupProgressionService(progressionFile);
+		}
 	}
 
 	setupProgressionService(filename) {

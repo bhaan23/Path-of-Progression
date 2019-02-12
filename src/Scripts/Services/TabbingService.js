@@ -22,7 +22,6 @@ export default class TabbingService {
 		// Set an initial hash
 		window.location.hash = 'about';
 		this.previousTab = 'about';
-		$(window).trigger('hashchange');
 	}
 
 	changeTab(event) {
@@ -32,6 +31,11 @@ export default class TabbingService {
 			$(`#mainContainer`).children().not(`#${newPage}`).hide();
 			$(`#${newPage}`).show();
 			this.previousTab = newPage;
+			if (newPage === 'viewProgression') {
+				$(document).trigger('load-progression-file');
+			} else if (newHash.split('?').length > 1) {
+				$(document).trigger('start-with-file', newHash.split('?')[1]);
+			}
 		} else {
 			event.preventDefault();
 		}

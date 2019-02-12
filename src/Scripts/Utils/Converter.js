@@ -6,10 +6,10 @@ export function logMessageToTrigger(type, logData) {
 	let trigger;
 	switch (type) {
 		case 'level':
-			trigger = `[level][${logData.level}]`;
+			trigger = `level|${logData.level}`;
 			break;
 		case 'area':
-			trigger = `[area][${logData.name}]`;
+			trigger = `area|${logData.name}`;
 			break;
 		default:
 			console.log('Unkown log message: ' + JSON.stringify(logData));
@@ -19,10 +19,10 @@ export function logMessageToTrigger(type, logData) {
 
 export function hasNodeTriggeredFromItem(trigger, characterInventory) {
 	
-	if (trigger.toLowerCase().startsWith('[item]')) {
-		const match = trigger.match(/\[item\]\[(\w+)\]\[(.+)\]/i);
+	if (trigger.toLowerCase().startsWith('item|')) {
+		const triggerParts = trigger.toLowerCase().split('|');
 		let itemData;
-		switch (match[1].toLowerCase()) { // Find the right item type to search for
+		switch (triggerParts[0]) { // Find the right item type to search for
 			case 'amulet':
 				itemData = [characterInventory.amulet];
 				break;
@@ -80,8 +80,8 @@ export function hasNodeTriggeredFromItem(trigger, characterInventory) {
 
 		let found = true;
 		compareData = compareData.toLowerCase();
-		for (let text of match[2].split(',')) { // Check if we match all text we are looking for
-			found = found && compareData.includes(text.trim().toLowerCase());
+		for (let text of triggerParts[1].split(',')) { // Check if we match all text we are looking for
+			found = found && compareData.includes(text.trim());
 		}
 		return found;
 	}

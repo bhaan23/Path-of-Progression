@@ -45,17 +45,17 @@
 				<div id="startingOptionsContainer">
 					<div id="startingOptions">
 						<button class="primaryButton largeButton">
-							<a href="#createProgression?type=create">
+							<a href="#createProgression">
 								Create your own
 							</a>
 						</button>
 						<button class="primaryButton largeButton">
-							<a href="#createProgression?type=create">
+							<a href="#viewProgression?EEGuide">
 								Help me I'm new
 							</a>
 						</button>
 						<button class="primaryButton largeButton">
-							<a href="#createProgression?type=create">
+							<a href="#viewProgression?Speed">
 								Gotta go fast
 							</a>
 						</button>
@@ -120,24 +120,8 @@
 								<input type="text" placeholder="Select an area..." id="areaInput" class="hidden" />
 								<ul class="typeaheadList hidden" id="areaInputTypeaheadList"></ul>
 							</span>
-							<select id="itemSlotSelection" class="hidden">
-								<option selected value="" class="hidden">Select a slot...</option>
-								<option value="amulet">Amulet</option>
-								<option value="belt">Belt</option>
-								<option value="bodyArmour">Body Armour</option>
-								<option value="boots">Boots</option>
-								<option value="flask">Flask</option>
-								<option value="gloves">Gloves</option>
-								<option value="helm">Helm</option>
-								<option value="ring">Ring</option>
-								<option value="weapon">Weapon</option>
-							</select>
-							<select id="levelSelection" class="hidden">
-								<option value="" selected class="hidden">Select a level...</option>
-								<option value="1">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-							</select>
+							<select id="itemSlotSelection" class="hidden"></select>
+							<select id="levelSelection" class="hidden"></select>
 							<input type="text" placeholder="Text to search..." id="modSearchInput" class="hidden" />
 						</div>
 					</div>

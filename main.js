@@ -1,5 +1,5 @@
-import { app, BrowserWindow, session, ipcMain } from 'electron';
-import settings from 'electron-settings';
+const { app, BrowserWindow, session, ipcMain } = require('electron');
+const { settings } = require('electron-settings');
 
 let win;
 

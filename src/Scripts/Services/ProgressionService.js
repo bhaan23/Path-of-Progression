@@ -25,7 +25,7 @@ export default class ProgressionService {
 		// Set up log monitor
 		let logFileLocation = this.settings.get(StoredSettings.CLIENT_FILE_LOCATION);
 		if (!logFileLocation) {
-			alert('no log file found. Cannot continue setting up progression.');
+			alert('No log was file found. Cannot continue setting up progression.');
 			throw Error('no log file found. Cannot continue setting up progression.');
 		} else {
 			this.poeLog = new PathOfExileLog({
@@ -59,8 +59,12 @@ export default class ProgressionService {
 	}
 
 	shutdown() {
-		this.characterInventoryService.stop();
-		this.poeLog.pause();
+		if (this.characterInventoryService) {
+			this.characterInventoryService.stop();
+		}
+		if (this.poeLog) {
+			this.poeLog.pause();
+		}
 	}
 
 	checkTopNodes(trigger) {

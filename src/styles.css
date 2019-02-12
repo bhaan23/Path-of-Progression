@@ -368,10 +368,12 @@ label:active:after {
 
 .tile:not([data-level="1"]) .closeIcon, .fadeout .closeIcon {
 	opacity: 0;
+	height: 0;
+	width: 0;
 }
 
 .tile[data-level="1"] {
-	background-image: linear-gradient(to bottom, white, red);
+	background-image: linear-gradient(to bottom, white, #00a048);
 }
 
 .tile[data-level="2"] {
@@ -379,7 +381,7 @@ label:active:after {
 }
 
 .tile[data-level="3"] {
-	background-image: linear-gradient(to bottom, white, #00a048);
+	background-image: linear-gradient(to bottom, white, red);
 }
 
 .closeIcon {
