@@ -3,6 +3,8 @@ import _ from 'underscore';
 import NodeService from './NodeService.js';
 const { dialog } = require('electron').remote;
 import EventTriggers from '../Objects/EventTriggers.js';
+import TileTemplate from '../../Templates/TileTemplate.html';
+import { addDependantNodes } from '../Utils/UtilFunctions.js';
 // import ProgressionPreviewService from './ProgressionPreviewService.js';
 
 export default class ProgressionCreationService {
@@ -25,17 +27,22 @@ export default class ProgressionCreationService {
 		this.uploadButton = $('#createProgressionUpload');
 		this.saveButton = $('#createProgressionSave');
 		this.addDependantNodesButton = $('#addDependantNodesButton');
+		this.addNewNodeButton = $('#addNewNodeButton');
 
 		this.currentNodeList = $('#allNodesSelection');
+		this.dependantNodesContainer = $('#dependantTiles');
 
-		this.nodeService = null;
+		this.nodeService = new NodeService();
 		
 		this.currentTrigger = [];
-		this.currentProgression = {};
 		this.currentProgressionNode = {};
 	}
 
 	setup() {
+
+		// In case the user does not upload a file to start from
+		this.nodeService.setupShell();
+
 		this.titleInput.on('input', () => {
 			this.modSearchInput.css('width', `${this.modSearchInput.val().length*.9}ch`);
 			
@@ -85,8 +92,7 @@ export default class ProgressionCreationService {
 			this.currentTrigger[0] = `[${val}]`;
 		});
 
-		this.areaNameInput.on('input', () => {
-			// typeahead
+		this.areaNameInput.on('change', () => {
 			this.currentTrigger[1] = `[${this.areaNameInput.val()}]`;
 		});
 
@@ -121,20 +127,30 @@ export default class ProgressionCreationService {
 			}
 		});
 
-		this.saveButton.on('click', () => {
+		this.addNewNodeButton.on('click', () => {
+			const newId = this.generateSimpleId();
+			let newNode = this.nodeService.createEmptyNode();
+			newNode.id = newId;
+			newNode.title = `New node ${newId}`;
+			this.addCurrentNode(newNode, true);
+			this.setCurrentNode(newNode);
+		});
 
+		this.saveButton.on('click', () => {
+			this.nodeService.save();
 		});
 
 		this.addDependantNodesButton.on('click', () => {
-
+			addDependantNodes(this.currentNodeList.children().not(':selected'));
 		});
 
 		this.currentNodeList.on('change', () => {
-			this.setCurrentNode(this.currentProgression[this.currentNodeList.val()]);
+			this.setCurrentNode(this.nodeService.nodeMap[this.currentNodeList.val()].progressionData);
 		});
 
 		this.populateItemSlotsDropdown();
 		this.populateLevelDropdown();
+		this.populateZones();
 	}
 
 	populateItemSlotsDropdown() {
@@ -177,26 +193,67 @@ export default class ProgressionCreationService {
 		}
 	}
 
+	populateZones() {
+		this.areaNameInput.html('');
+
+		// Default option
+		this.areaNameInput.append($('<option>', {
+			value: '',
+			class: 'hidden',
+			selected: 'selected',
+			text: 'Select an area...'
+		}));
+
+		// Populate the other options
+		for (let act of Object.keys(EventTriggers.area)) {
+			let group = $('<optgroup>', {
+				label: act
+			});
+			for (let zone of Object.keys(EventTriggers.area[act])) {
+				group.append($('<option>', {
+					value: zone,
+					text: EventTriggers.area[act][zone]
+				}));
+			}
+			this.areaNameInput.append(group);
+		}
+	}
+
 	populateCurrentNodes() {
 		this.currentNodeList.html('');
-		for (let key of Object.keys(this.currentProgression)) {
-			this.addCurrentNode(this.currentProgression[key]);
+		for (let key of Object.keys(this.nodeService.nodeMap)) {
+			this.addCurrentNode(this.nodeService.nodeMap[key].progressionData);
 		}
 		
 		const firstNodeId = this.nodeService.topNodeIds[0];
 		if (firstNodeId) {
-			this.setCurrentNode(this.currentProgression[firstNodeId]);
+			this.setCurrentNode(this.nodeService.nodeMap[firstNodeId].progressionData);
 		}
 	}
 
-	addCurrentNode(progressionData) {
+	addCurrentNode(progressionData, newNode) {
 		this.currentNodeList.append($('<option>', {
 			value: progressionData.id,
 			text: progressionData.title
 		}));
+
+		if (this.currentNodeList.children().length > 1) {
+			this.addDependantNodesButton.prop('disabled', false);
+		}
+
+		if (newNode === true) {
+			this.nodeService.addNode(progressionData);
+		}
 	}
 
 	setCurrentNode(progressionData) {
+
+		if (this.currentProgressionNode.title) {
+			this.nodeService.nodeMap[this.currentProgressionNode.id].progressionData = this.currentProgressionNode;
+		}
+
+		this.currentProgressionNode = progressionData;
+
 		this.currentNodeList.val(progressionData.id);
 		this.titleInput.val(progressionData.title);
 		this.titleInput.trigger('input');
@@ -228,20 +285,46 @@ export default class ProgressionCreationService {
 			}
 		}
 
-		this.currentProgressionNode = progressionData;
+		this.dependantNodesContainer.html('');
+		if (progressionData.nodesNeeded.length > 0) {
+			for (let id of progressionData.nodesNeeded) {
+				let dependant = $(_.template(TileTemplate)({
+					level: '1',
+					progression: {
+						hidden: false,
+						id,
+						title: this.nodeService.nodeMap[id].progressionData.title,
+						description: this.nodeService.nodeMap[id].progressionData.description
+					}
+				}));
+
+				// Close icon removes the node
+				dependant.find('.closeIcon').on('click', () => {
+
+					// Remove from it's dependant nodes
+					this.nodeService.nodeMap[this.currentProgressionNode.id].progressionData.nodesNeeded = this.nodeService.nodeMap[this.currentProgressionNode.id].progressionData.nodesNeeded.filter((value) => { return value != id; });
+
+					// Remove the html
+					dependant.remove();
+				});
+				this.dependantNodesContainer.append(dependant);
+			}
+		}
+
 		this.currentTrigger = triggerParts;
 	}
 
 	importFromFile(progressionFile) {
-		this.nodeService = new NodeService();
 		this.nodeService.setup(progressionFile);
-
-		this.currentProgression = {};
-		for (let key of Object.keys(this.nodeService.nodeMap)) {
-			this.currentProgression[key] = this.nodeService.nodeMap[key].progressionData;
-		}
-
 		this.populateCurrentNodes();
-		this.nodeService = null;
+	}
+
+	generateSimpleId() {
+		let newId = 1;
+		const idList = this.nodeService.nodeMap ? Object.keys(this.nodeService.nodeMap) : [];
+		while (idList.includes(newId.toString())) {
+			newId += 1;
+		}
+		return newId;
 	}
 }

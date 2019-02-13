@@ -16,11 +16,7 @@ export default class NodeService {
 
 	setup(progressionFile) {
 		this.progressionFileLocation = progressionFile;
-		this.needsItemLookup = false;
-		this.topNodeIds = [];
-		this.allNodes = [];
-		this.nodeMap = {};
-		this.completedNodeIds = [];
+		this.setupShell();
 
 		const progressionData = fs.readFileSync(progressionFile, { encoding: 'utf-8' });
 		if (progressionData) {
@@ -28,12 +24,45 @@ export default class NodeService {
 			this.createNodeMap();
 			this.createDependencyGraph();
 		}
+
+		this.createSavePoint();
+	}
+
+	setupShell() {
+		this.needsItemLookup = false;
+		this.topNodeIds = [];
+		this.allNodes = [];
+		this.nodeMap = {};
+		this.completedNodeIds = [];
+
+		this.createSavePoint();
+	}
+
+	createEmptyNode() {
+		return {
+			id: '',
+			title: '',
+			completionTrigger: '',
+			description: '',
+			nodesNeeded: [],
+			hidden: false,
+			completed: false
+		}
+	}
+
+	addNode(progressionNode) {
+		this.allNodes.push(progressionNode);
+		this.nodeMap[progressionNode.id] = {
+			dependantNodeIds: [],
+			progressionData: progressionNode
+		}
 	}
 
 	createNodeMap() {
 		for (let progressionNode of this.allNodes) {
 			if (progressionNode.title) {
 				if (Object.keys(this.nodeMap).includes(progressionNode.id)) {
+					alert(`Two nodes with the same id:[${progressionNode.id}] have been found. Stopping creation...`);
 					throw Error(`A node with id:[${progressionNode.id}] already exists.`);
 				}
 				if (progressionNode.completed) {
@@ -62,9 +91,7 @@ export default class NodeService {
 
 			// Top level node
 			if (i === 0 && !this.completedNodeIds.includes(id)) {
-				if (!this.topNodeIds.includes(id)) { // Watch for duplicates
-					this.topNodeIds.push(id);
-				}
+				this.topNodeIds.push(id);
 			}
 		}
 	}
@@ -76,7 +103,12 @@ export default class NodeService {
 				outputList.push(this.nodeMap[node.id].progressionData);
 			}
 		}
-		return JSON.stringify({ progression: outputList });
+
+		return JSON.stringify({ progression: outputList }, null, 2);
+	}
+
+	createSavePoint() {
+		this.lastSave = this.createSaveObject();
 	}
 
 	save() {
@@ -101,6 +133,6 @@ export default class NodeService {
 	}
 
 	canSave() {
-		return this.lastSave && this.lastSave !== this.createSaveObject();
+		return this.lastSave !== this.createSaveObject();
 	}
 }

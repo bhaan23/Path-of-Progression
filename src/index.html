@@ -82,7 +82,7 @@
 							<select id="allNodesSelection">
 								<option value="" selected class="hidden">Select a node to edit...</option>
 							</select>
-							<button class="primaryButton" id="createProgressionAddNode">Add Node</button>
+							<button class="primaryButton" id="addNewNodeButton">Add New Node</button>
 						</div>
 						<div id="titleInputContainer">
 							<div>
@@ -117,8 +117,7 @@
 								<option value="level">Level</option>
 							</select>
 							<span>
-								<input type="text" placeholder="Select an area..." id="areaInput" class="hidden" />
-								<ul class="typeaheadList hidden" id="areaInputTypeaheadList"></ul>
+								<select id="areaInput" class="hidden"></select>
 							</span>
 							<select id="itemSlotSelection" class="hidden"></select>
 							<select id="levelSelection" class="hidden"></select>
@@ -136,27 +135,8 @@
 					</div>
 					<div id="dependantNodes">
 						<h2 class="pageTitle">Dependant Nodes</h2>
-						<button class="primaryButton largeButton" id="addDependantNodesButton">Add Dependant Nodes</button>
-						<div id="dependantTiles">
-							<div class="tile" data-level="2">
-								<div class="tileDescriptionContainer">
-									<span class="tileTitle"></span>
-									<span class="tileDescription"></span>
-								</div>
-							</div>
-							<div class="tile" data-level="2">
-								<div class="tileDescriptionContainer">
-									<span class="tileTitle"></span>
-									<span class="tileDescription"></span>
-								</div>
-							</div>
-							<div class="tile" data-level="2">
-								<div class="tileDescriptionContainer">
-									<span class="tileTitle"></span>
-									<span class="tileDescription"></span>
-								</div>
-							</div>
-						</div>
+						<button class="primaryButton largeButton" id="addDependantNodesButton" disabled>Add Dependant Nodes</button>
+						<div id="dependantTiles"></div>
 					</div>
 					<div id="progressionPreview" class="hidden">
 						<svg></svg>

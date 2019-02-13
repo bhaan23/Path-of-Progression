@@ -124,7 +124,7 @@ export default class ProgressionService {
 				}
 			}
 			if (!lastTileOfSameLevel) {
-				$('#tiles').insertBefore($('#tiles').children().first());
+				this.tilesParent.insertBefore(this.tilesParent.children().first());
 			} else {
 				tile.insertAfter(lastTileOfSameLevel);
 			}

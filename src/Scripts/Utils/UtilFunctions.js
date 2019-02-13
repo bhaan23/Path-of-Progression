@@ -1,5 +1,5 @@
 import $ from 'jquery';
-const { session } = require('electron').remote;
+const { session, BrowserWindow, getCurrentWindow } = require('electron').remote;
 
 export function isValidSessionId(id, accountName, callback) {
 	if (!id) {
@@ -40,3 +40,8 @@ export function resetCookie(sessid, callback) {
 		}
 	});
 };
+
+export function addDependantNodes(nodeSelectorHtml) {
+	let select = $(nodeSelectorHtml);
+	
+}

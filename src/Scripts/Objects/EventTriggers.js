@@ -173,7 +173,7 @@ const eventTriggers = {
 			"the canals": "The Canals",
 			"the feeding trough": "The Feeding Trough",
 		},
-		'epilogue': {
+		'Epilogue': {
 			"oriath": "Oriath",
 			"the templar laboratory": "The Templar Laboratory",
 		}
