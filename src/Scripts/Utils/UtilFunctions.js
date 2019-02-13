@@ -1,5 +1,6 @@
 import $ from 'jquery';
-const { session, BrowserWindow, getCurrentWindow } = require('electron').remote;
+const { session, dialog } = require('electron').remote;
+import EventTriggers from '../Objects/EventTriggers.js';
 
 export function isValidSessionId(id, accountName, callback) {
 	if (!id) {
@@ -46,6 +47,77 @@ export function addDependantNodes(nodeSelectorHtml) {
 	
 }
 
-export function checkSaveDontContinue() {
-	return false;
+export function userWantsToSave() {
+	const result = dialog.showMessageBox({
+		type: 'question',
+		buttons: ['Yes', 'No'],
+		message: 'Changes have been made, would you like to save?'
+	});
+	return result === 0; // They said yes
+}
+
+export function populateSelectionDropdownsWithEventData(itemSlotSelection, levelSelection, zoneSelection) {
+	
+	// Item slot population
+	itemSlotSelection.html('');
+
+	// Default option
+	itemSlotSelection.append($('<option>', {
+		value: '',
+		class: 'hidden',
+		selected: 'selected',
+		text: 'Select a slot...'
+	}));
+
+	// Populate all other options
+	for (let key of Object.keys(EventTriggers.item)) {
+		itemSlotSelection.append($('<option>', {
+			value: key,
+			text: EventTriggers.item[key]
+		}));
+	}
+
+	// Level population
+	levelSelection.html('');
+
+	// Default option
+	levelSelection.append($('<option>', {
+		value: '',
+		class: 'hidden',
+		selected: 'selected',
+		text: 'Select a level...'
+	}));
+
+	// Populate all other options
+	for (let key of Object.keys(EventTriggers.level)) {
+		levelSelection.append($('<option>', {
+			value: key,
+			text: key
+		}));
+	}
+
+	// Zone population
+	zoneSelection.html('');
+
+	// Default option
+	zoneSelection.append($('<option>', {
+		value: '',
+		class: 'hidden',
+		selected: 'selected',
+		text: 'Select an area...'
+	}));
+
+	// Populate the other options
+	for (let act of Object.keys(EventTriggers.area)) {
+		let group = $('<optgroup>', {
+			label: act
+		});
+		for (let zone of Object.keys(EventTriggers.area[act])) {
+			group.append($('<option>', {
+				value: zone,
+				text: EventTriggers.area[act][zone]
+			}));
+		}
+		zoneSelection.append(group);
+	}
 }

@@ -2,9 +2,8 @@ import $ from 'jquery';
 import _ from 'underscore';
 import NodeService from './NodeService.js';
 const { dialog } = require('electron').remote;
-import EventTriggers from '../Objects/EventTriggers.js';
 import TileTemplate from '../../Templates/TileTemplate.html';
-import { addDependantNodes, checkSaveDontContinue } from '../Utils/UtilFunctions.js';
+import { addDependantNodes, userWantsToSave, populateSelectionDropdownsWithEventData } from '../Utils/UtilFunctions.js';
 // import ProgressionPreviewService from './ProgressionPreviewService.js';
 
 export default class ProgressionCreationService {
@@ -37,7 +36,6 @@ export default class ProgressionCreationService {
 
 		this.nodeService = new NodeService();
 		
-		this.saveFileName = null;
 		this.currentTrigger = [];
 		this.currentProgressionNode = {};
 	}
@@ -114,8 +112,9 @@ export default class ProgressionCreationService {
 			this.modSearchInput.css('width', `${this.modSearchInput.val().length*.9}ch`);
 		});
 
-		this.uploadButton.on('click', () => {			
-			if (!checkSaveDontContinue()) {
+		this.uploadButton.on('click', () => {
+			let doSave = false;
+			if (!this.nodeService.canSave() || !(doSave = userWantsToSave())) {
 				const filenames = dialog.showOpenDialog({
 					filters: [{
 						name: 'Progression', extensions: ['json']
@@ -128,10 +127,11 @@ export default class ProgressionCreationService {
 	
 				if (filenames && filenames.length > 0) {
 					this.importFromFile(filenames[0]);
-					this.saveFileName = filenames[0];
 					this.saveButton.removeClass('hidden');
 					this.creationContainer.show();
 				}
+			} else if (doSave) {
+				this.nodeService.save();
 			}
 		});
 
@@ -140,16 +140,21 @@ export default class ProgressionCreationService {
 		});
 
 		this.saveButton.on('click', () => {
-			this.nodeService.save(this.saveFileName);
+			this.nodeService.save();
 		});
 
 		this.createProgressionButton.on('click', () => {
-			if (!checkSaveDontContinue()) {
+			let doSave = false;
+			if (!this.nodeService.canSave() || !(doSave = userWantsToSave())) {
 				this.resetSelections();
+				this.currentProgressionNode = {};
 				this.nodeService.setupShell();
 				this.addNewNode();
+				this.nodeService.createSavePoint();
 				this.saveButton.removeClass('hidden');
 				this.creationContainer.show();
+			} else if (doSave) {
+				this.nodeService.save();
 			}
 		});
 
@@ -165,75 +170,7 @@ export default class ProgressionCreationService {
 			this.setCurrentNode(this.nodeService.nodeMap[this.currentNodeList.val()].progressionData);
 		});
 
-		this.populateItemSlotsDropdown();
-		this.populateLevelDropdown();
-		this.populateZones();
-	}
-
-	populateItemSlotsDropdown() {
-		this.itemSlotSelection.html('');
-
-		// Default option
-		this.itemSlotSelection.append($('<option>', {
-			value: '',
-			class: 'hidden',
-			selected: 'selected',
-			text: 'Select a slot...'
-		}));
-
-		// Populate all other options
-		for (let key of Object.keys(EventTriggers.item)) {
-			this.itemSlotSelection.append($('<option>', {
-				value: key,
-				text: EventTriggers.item[key]
-			}));
-		}
-	}
-
-	populateLevelDropdown() {
-		this.levelSelection.html('');
-
-		// Default option
-		this.levelSelection.append($('<option>', {
-			value: '',
-			class: 'hidden',
-			selected: 'selected',
-			text: 'Select a level...'
-		}));
-
-		// Populate all other options
-		for (let key of Object.keys(EventTriggers.level)) {
-			this.levelSelection.append($('<option>', {
-				value: key,
-				text: key
-			}));
-		}
-	}
-
-	populateZones() {
-		this.zoneSelection.html('');
-
-		// Default option
-		this.zoneSelection.append($('<option>', {
-			value: '',
-			class: 'hidden',
-			selected: 'selected',
-			text: 'Select an area...'
-		}));
-
-		// Populate the other options
-		for (let act of Object.keys(EventTriggers.area)) {
-			let group = $('<optgroup>', {
-				label: act
-			});
-			for (let zone of Object.keys(EventTriggers.area[act])) {
-				group.append($('<option>', {
-					value: zone,
-					text: EventTriggers.area[act][zone]
-				}));
-			}
-			this.zoneSelection.append(group);
-		}
+		populateSelectionDropdownsWithEventData(this.itemSlotSelection, this.levelSelection, this.zoneSelection);
 	}
 
 	populateCurrentNodes() {

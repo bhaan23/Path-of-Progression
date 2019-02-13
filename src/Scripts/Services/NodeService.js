@@ -15,8 +15,8 @@ export default class NodeService {
 	}
 
 	setup(progressionFile) {
-		this.progressionFileLocation = progressionFile;
 		this.setupShell();
+		this.progressionFileLocation = progressionFile;
 
 		const progressionData = fs.readFileSync(progressionFile, { encoding: 'utf-8' });
 		if (progressionData) {
@@ -29,6 +29,7 @@ export default class NodeService {
 	}
 
 	setupShell() {
+		this.progressionFileLocation = null;
 		this.needsItemLookup = false;
 		this.topNodeIds = [];
 		this.allNodes = [];
