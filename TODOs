@@ -15,4 +15,5 @@ Add a way to edit nodes on the creation page
 Link to EEs guide
 Link to _'s WR post
 
-On creation page: Start with Upload/Create new where create new shows the main container and adds a starting node. Upload shows the main container and does what it does right now
+Move dropdown population functions out into a larger utility function
+Change alert popups to non-blocking alerts

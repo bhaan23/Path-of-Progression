@@ -134,7 +134,7 @@
 	{
 		"id": "13",
 		"title": "Continue to The Warden's Chambers and Kill Brutus",
-		"completionTrigger": "area|The Prisoner's Gate",
+		"completionTrigger": "area|Prisoner's Gate",
 		"description": "Make your way through the zone and enter The Warden's Chambers.",
 		"nodesNeeded": [
 			"11"

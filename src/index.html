@@ -71,18 +71,18 @@
 				</div>
 				<div id="createFileOptions">
 					<span>
-						<button class="primaryButton" id="createProgressionSave" disabled>Save</button>
+						<button class="primaryButton hidden" id="createProgressionSave">Save</button>
+						<button class="primaryButton" id="createProgressionCreate">Create</button>
 						<button class="secondaryButton" id="createProgressionUpload">Upload</button>
 					</span>
 				</div>
-				<div id="nodeInfo">
+				<div id="nodeInfo" style="display: none;">
 					<div id="nodeInputData">
 						<div id="currentNodeContainer">
 							<label>Current Node:</label>
-							<select id="allNodesSelection">
-								<option value="" selected class="hidden">Select a node to edit...</option>
-							</select>
+							<select id="allNodesSelection"></select>
 							<button class="primaryButton" id="addNewNodeButton">Add New Node</button>
+							<button class="secondaryButton hidden" id="deleteCurrentNodeButton">Delete Current Node</button>
 						</div>
 						<div id="titleInputContainer">
 							<div>
@@ -116,9 +116,7 @@
 								<option value="item">Equip item</option>
 								<option value="level">Level</option>
 							</select>
-							<span>
-								<select id="areaInput" class="hidden"></select>
-							</span>
+							<select id="areaInput" class="hidden"></select>
 							<select id="itemSlotSelection" class="hidden"></select>
 							<select id="levelSelection" class="hidden"></select>
 							<input type="text" placeholder="Text to search..." id="modSearchInput" class="hidden" />

@@ -58,6 +58,11 @@ export default class NodeService {
 		}
 	}
 
+	removeNode(id) {
+		delete this.allNodes[id];
+		delete this.nodeMap[id];
+	}
+
 	createNodeMap() {
 		for (let progressionNode of this.allNodes) {
 			if (progressionNode.title) {
@@ -111,25 +116,33 @@ export default class NodeService {
 		this.lastSave = this.createSaveObject();
 	}
 
-	save() {
+	save(filename) {
 		const saveData = this.createSaveObject();
 
-		const filename = dialog.showSaveDialog({
-			filters: [{
-				name: 'Progression File', extensions: ['json']
-			}],
-			defaultPath: this.progressionFileLocation
-		});
-		if (filename) {
-			fs.writeFile(filename, saveData, { encoding: 'utf-8' }, (error) => {
-				if (error) {
-					alert('There was an error saving the progression.');
-				} else {
-					this.lastSave = saveData;
-					alert('Your progression was saved as ' + filename);
-				}
+		if (filename || this.progressionFileLocation) {
+			this._writeSaveData(filename, saveData);
+		} else {
+			filename = dialog.showSaveDialog({
+				filters: [{
+					name: 'Progression File', extensions: ['json']
+				}]
 			});
+			if (filename) {
+				this._writeSaveData(filename, saveData);
+				this.progressionFileLocation = filename;
+			}
 		}
+	}
+
+	_writeSaveData(filename, saveData) {
+		fs.writeFile(filename, saveData, { encoding: 'utf-8' }, (error) => {
+			if (error) {
+				alert('There was an error saving the progression.');
+			} else {
+				this.lastSave = saveData;
+				alert('Your progression was saved as ' + filename);
+			}
+		});
 	}
 
 	canSave() {

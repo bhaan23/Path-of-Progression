@@ -4,7 +4,7 @@ import NodeService from './NodeService.js';
 const { dialog } = require('electron').remote;
 import EventTriggers from '../Objects/EventTriggers.js';
 import TileTemplate from '../../Templates/TileTemplate.html';
-import { addDependantNodes } from '../Utils/UtilFunctions.js';
+import { addDependantNodes, checkSaveDontContinue } from '../Utils/UtilFunctions.js';
 // import ProgressionPreviewService from './ProgressionPreviewService.js';
 
 export default class ProgressionCreationService {
@@ -15,7 +15,7 @@ export default class ProgressionCreationService {
 		this.completedCheckbox = $('#completedInput');
 		this.descriptionInput = $('#descriptionInput');
 		this.comletionTypeSelect = $('#completionType');
-		this.areaNameInput = $('#areaInput');
+		this.zoneSelection = $('#areaInput');
 		this.areaNameTypeahead = $('#areaInputTypeaheadList');
 		this.itemSlotSelection = $('#itemSlotSelection');
 		this.levelSelection = $('#levelSelection');
@@ -28,12 +28,16 @@ export default class ProgressionCreationService {
 		this.saveButton = $('#createProgressionSave');
 		this.addDependantNodesButton = $('#addDependantNodesButton');
 		this.addNewNodeButton = $('#addNewNodeButton');
+		this.deleteCurrentNodeButton = $('#deleteCurrentNodeButton');
+		this.createProgressionButton = $('#createProgressionCreate');
 
 		this.currentNodeList = $('#allNodesSelection');
 		this.dependantNodesContainer = $('#dependantTiles');
+		this.creationContainer = $('#nodeInfo');
 
 		this.nodeService = new NodeService();
 		
+		this.saveFileName = null;
 		this.currentTrigger = [];
 		this.currentProgressionNode = {};
 	}
@@ -68,21 +72,21 @@ export default class ProgressionCreationService {
 		this.comletionTypeSelect.on('change', () => {
 			const val = this.comletionTypeSelect.val() || '';
 			if (val === 'area') {
-				this.areaNameInput.removeClass('hidden');
-				this.areaNameInput.val('');
+				this.zoneSelection.removeClass('hidden');
+				this.zoneSelection.val('');
 				this.itemSlotSelection.addClass('hidden');
 				this.levelSelection.addClass('hidden');
 				this.modSearchInput.addClass('hidden');
 				this.currentTrigger = [null, null];
 			} else if (val === 'item') {
-				this.areaNameInput.addClass('hidden');
+				this.zoneSelection.addClass('hidden');
 				this.itemSlotSelection.removeClass('hidden');
 				this.itemSlotSelection.val('');
 				this.levelSelection.addClass('hidden');
 				this.modSearchInput.addClass('hidden');
 				this.currentTrigger = [null, null, null];
 			} else if (val === 'level') {
-				this.areaNameInput.addClass('hidden');
+				this.zoneSelection.addClass('hidden');
 				this.itemSlotSelection.addClass('hidden');
 				this.levelSelection.removeClass('hidden');
 				this.levelSelection.val('');
@@ -92,8 +96,8 @@ export default class ProgressionCreationService {
 			this.currentTrigger[0] = `[${val}]`;
 		});
 
-		this.areaNameInput.on('change', () => {
-			this.currentTrigger[1] = `[${this.areaNameInput.val()}]`;
+		this.zoneSelection.on('change', () => {
+			this.currentTrigger[1] = `[${this.zoneSelection.val()}]`;
 		});
 
 		this.itemSlotSelection.on('change', () => {
@@ -110,34 +114,47 @@ export default class ProgressionCreationService {
 			this.modSearchInput.css('width', `${this.modSearchInput.val().length*.9}ch`);
 		});
 
-		this.uploadButton.on('click', () => {
-			const filenames = dialog.showOpenDialog({
-				filters: [{
-					name: 'Progression', extensions: ['json']
-				}],
-				properties: [
-					'openFile'
-				],
-				defaultPath: this.progressionFileHelpPath ? this.progressionFileHelpPath : null
-			});
-
-			if (filenames && filenames.length > 0) {
-				this.importFromFile(filenames[0]);
-				this.saveButton.prop('disabled', false);
+		this.uploadButton.on('click', () => {			
+			if (!checkSaveDontContinue()) {
+				const filenames = dialog.showOpenDialog({
+					filters: [{
+						name: 'Progression', extensions: ['json']
+					}],
+					properties: [
+						'openFile'
+					],
+					defaultPath: this.progressionFileHelpPath ? this.progressionFileHelpPath : null
+				});
+	
+				if (filenames && filenames.length > 0) {
+					this.importFromFile(filenames[0]);
+					this.saveFileName = filenames[0];
+					this.saveButton.removeClass('hidden');
+					this.creationContainer.show();
+				}
 			}
 		});
 
 		this.addNewNodeButton.on('click', () => {
-			const newId = this.generateSimpleId();
-			let newNode = this.nodeService.createEmptyNode();
-			newNode.id = newId;
-			newNode.title = `New node ${newId}`;
-			this.addCurrentNode(newNode, true);
-			this.setCurrentNode(newNode);
+			this.addNewNode();
 		});
 
 		this.saveButton.on('click', () => {
-			this.nodeService.save();
+			this.nodeService.save(this.saveFileName);
+		});
+
+		this.createProgressionButton.on('click', () => {
+			if (!checkSaveDontContinue()) {
+				this.resetSelections();
+				this.nodeService.setupShell();
+				this.addNewNode();
+				this.saveButton.removeClass('hidden');
+				this.creationContainer.show();
+			}
+		});
+
+		this.deleteCurrentNodeButton.on('click', () => {
+			this.deleteCurrentNode();
 		});
 
 		this.addDependantNodesButton.on('click', () => {
@@ -194,10 +211,10 @@ export default class ProgressionCreationService {
 	}
 
 	populateZones() {
-		this.areaNameInput.html('');
+		this.zoneSelection.html('');
 
 		// Default option
-		this.areaNameInput.append($('<option>', {
+		this.zoneSelection.append($('<option>', {
 			value: '',
 			class: 'hidden',
 			selected: 'selected',
@@ -215,7 +232,7 @@ export default class ProgressionCreationService {
 					text: EventTriggers.area[act][zone]
 				}));
 			}
-			this.areaNameInput.append(group);
+			this.zoneSelection.append(group);
 		}
 	}
 
@@ -231,6 +248,16 @@ export default class ProgressionCreationService {
 		}
 	}
 
+	addNewNode() {
+		const newId = this.generateSimpleId();
+		let newNode = this.nodeService.createEmptyNode();
+		newNode.id = newId;
+		newNode.title = `New node ${newId}`;
+		newNode.description = `Description for node ${newId}`;
+		this.addCurrentNode(newNode, true);
+		this.setCurrentNode(newNode);
+	}
+
 	addCurrentNode(progressionData, newNode) {
 		this.currentNodeList.append($('<option>', {
 			value: progressionData.id,
@@ -239,11 +266,30 @@ export default class ProgressionCreationService {
 
 		if (this.currentNodeList.children().length > 1) {
 			this.addDependantNodesButton.prop('disabled', false);
+			this.deleteCurrentNodeButton.removeClass('hidden');
+		} else {
+			this.deleteCurrentNodeButton.addClass('hidden');
+			this.addDependantNodesButton.prop('disabled', true);
 		}
 
 		if (newNode === true) {
 			this.nodeService.addNode(progressionData);
 		}
+	}
+
+	deleteCurrentNode() {
+		this.currentNodeList.find(`option[value="${this.currentProgressionNode.id}"]`).remove();
+		this.nodeService.removeNode(this.currentProgressionNode.id);
+
+		if (this.currentNodeList.children().length === 1) {
+			this.addDependantNodesButton.prop('disabled', true);
+			this.deleteCurrentNodeButton.addClass('hidden');
+		}
+
+		const newSelectedNode = this.currentNodeList.children().first();
+		newSelectedNode.attr('selected', 'selected');
+		this.currentProgressionNode = {};
+		this.setCurrentNode(this.nodeService.nodeMap[newSelectedNode.attr('value')].progressionData);
 	}
 
 	setCurrentNode(progressionData) {
@@ -276,7 +322,7 @@ export default class ProgressionCreationService {
 					this.levelSelection.val(triggerParts[1]);
 					break;
 				case 'area':
-					this.areaNameInput.val(triggerParts[1]);
+					this.zoneSelection.val(triggerParts[1]);
 					break;
 			}
 
@@ -314,8 +360,19 @@ export default class ProgressionCreationService {
 		this.currentTrigger = triggerParts;
 	}
 
+	resetSelections() {
+		this.currentNodeList.html('');
+		this.itemSlotSelection.val('');
+		this.comletionTypeSelect.val('');
+		this.zoneSelection.val('');
+		this.itemSlotSelection.val('');
+		this.modSearchInput.val('');
+		this.levelSelection.val('');
+	}
+
 	importFromFile(progressionFile) {
 		this.nodeService.setup(progressionFile);
+		this.currentProgressionNode = {};
 		this.populateCurrentNodes();
 	}
 

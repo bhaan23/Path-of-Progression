@@ -45,3 +45,7 @@ export function addDependantNodes(nodeSelectorHtml) {
 	let select = $(nodeSelectorHtml);
 	
 }
+
+export function checkSaveDontContinue() {
+	return false;
+}
