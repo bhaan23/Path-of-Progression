@@ -1,5 +1,4 @@
-const { app, BrowserWindow, session, ipcMain } = require('electron');
-const { settings } = require('electron-settings');
+const { app, BrowserWindow, ipcMain } = require('electron');
 
 let win;
 
@@ -15,25 +14,24 @@ function createWindow() {
 		title: 'Path of Progression'
 	});
 	
-	// win.maximize();
+	win.maximize();
 
 	// load the home page of the app
 	win.loadFile('./src/index.html');
 
 	// Open dev tools for debugging
 	win.webContents.openDevTools();
-
-	session.defaultSession.cookies.get({ name: 'POESESSID' }, (error, cookies) => {
-		if (cookies[0]) {
-			settings.set('POESESSID', cookies[0].value);
-		}
-	});
 }
 
+// Start app
 app.on('ready', createWindow);
+
+// Get rid of menu on load
 app.on('browser-window-created', (e, window) => {
 	window.setMenu(null);
 });
+
+// Call to make sure the app closes if closed in an odd way
 ipcMain.on('app_quit', (event, info) => {
 	app.quit();
 });

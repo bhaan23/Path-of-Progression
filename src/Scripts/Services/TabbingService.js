@@ -1,4 +1,5 @@
 import $ from 'jquery';
+const { ipcMain } = require('electron').remote;
 
 export default class TabbingService {
 
@@ -22,6 +23,11 @@ export default class TabbingService {
 		// Set an initial hash
 		window.location.hash = 'about';
 		this.previousTab = 'about';
+
+		// If the window is ever closed not by hitting the 'x' icon, send an event to shut things down
+		$(window).on('unload', () => {
+			ipcMain.emit('app_quit');
+		});
 	}
 
 	changeTab(event) {
