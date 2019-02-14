@@ -1,15 +1,14 @@
 import $ from 'jquery';
-import { fs, path, existsSync } from 'fs';
+import { path, existsSync } from 'fs';
 import Settings from './SettingsService.js';
+const { dialog } = require('electron').remote;
 import { StoredSettings } from '../Objects/Enums.js';
-const { shell, dialog } = require('electron').remote;
 import ProgressionService from './ProgressionService.js';
-import { isValidSessionId } from '../Utils/UtilFunctions.js';
+import { isValidSessionId, userWantsToSave } from '../Utils/UtilFunctions.js';
 
 export default class UserInteractionService {
 	
 	constructor() {
-		this.githubLink = $('#githubLink');
 		this.accountNameInput = $('#accountNameInput');
 		this.characterNameDropdown = $('#characterNamesDropdown');
 		this.characterNameUpdate = $('#characterNamesUpdateButton');
@@ -19,7 +18,6 @@ export default class UserInteractionService {
 		this.progressionFileHelpPath = null;
 		this.progressionFileUploadButton = $('#progressionFileUploadButton');
 		this.clientFileDisplay = $('#currentClientFile');
-		this.clientFileHelpPath = null;
 		this.clientFileUploadButton = $('#clientFileUploadButton');
 		this.saveButton = $('#saveButton');
 
@@ -55,13 +53,9 @@ export default class UserInteractionService {
 
 		const settingsClientLogFile = this.settings.get(StoredSettings.CLIENT_FILE_LOCATION);
 		if (settingsClientLogFile && existsSync(settingsClientLogFile)) {
-			this.clientFileHelpPath = settingsClientLogFile.substring(0, settingsClientLogFile.lastIndexOf('\\'));
 			this.clientFileDisplay.text(settingsClientLogFile.substring(settingsClientLogFile.lastIndexOf('\\')+1));
+			this.progressionFileUploadButton.prop('disabled', false);
 		}
-
-		this.githubLink.on('click', () => {
-			shell.openExternal(this.githubLink.find('a').attr('data-linkOut'));
-		});
 
 		this.accountNameInput.on('input', () => {
 			// Remove any letters that aren't able to be part of an account name
@@ -140,6 +134,8 @@ export default class UserInteractionService {
 		});
 
 		this.clientFileUploadButton.on('click', () => {
+			const clientSuggestedPath = existsSync('C:/Program Files/Steam/steamapps/common/Path of Exile/logs') ?
+				'C:/Program Files/Steam/steamapps/common/Path of Exile/logs' : 'C:/Program Files (x86)/Grinding Gear Games/Path of Exile/logs';
 			const filenames = dialog.showOpenDialog({
 				filters: [{
 					name: 'Client.txt Log', extensions: ['txt']
@@ -147,14 +143,17 @@ export default class UserInteractionService {
 				properties: [
 					'openFile'
 				],
-				defaultPath: this.clientFileHelpPath ? this.clientFileHelpPath : null
+
+				// Two default paths for POE logs to help people out
+				defaultPath: clientSuggestedPath
 			});
 
 			if (filenames && filenames.length > 0) {
 				const filename = filenames[0];
-				if (fs.existsSync(filename) && filename.toLowerCase().endsWith('client.txt')) {
+				if (existsSync(filename) && filename.toLowerCase().endsWith('client.txt')) {
 					this.settings.set(StoredSettings.CLIENT_FILE_LOCATION, filename);
 					this.clientFileDisplay.text(filename.substring(filename.lastIndexOf('\\')+1));
+					this.progressionFileUploadButton.prop('disabled', false);
 				} else {
 					this.progressionFileDisplay.text(this.noFileSelectedText);
 				}
@@ -168,12 +167,7 @@ export default class UserInteractionService {
 		// Check if the user wants to save data before the app closes
 		$(window).on('beforeunload', (event) => {
 			if (this.progressionService.canSave()) {
-				const result = dialog.showMessageBox({
-					type: 'question',
-					buttons: ['Yes', 'No'],
-					message: 'You have not saved the full progress of your progression. Would you like to save?'
-				});
-				if (result === 0) { // Yes
+				if (userWantsToSave()) { // Yes
 					event.preventDefault();
 					event.returnValue = false;
 					setTimeout(() => { $('#saveButton').click(); }, 1000);

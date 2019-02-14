@@ -8,12 +8,11 @@ d3 progression creation tool:
 Map as many boss kills to logged message as possible to be used in progressions
 Add currency to inventory search?
 
-Add save/add buttons to creation page
-Add a way to add dependent nodes to creation page
-Add a way to edit nodes on the creation page
+Find out why app starts up before finishing the install
+Find out why there is no choice where to install the app
+Find out what the update.exe file does
 
-Link to EEs guide
-Link to _'s WR post
+Add link for how to add session information and such to the view progression page
 
-Move dropdown population functions out into a larger utility function
+Add gems/links/colors to mod reading
 Change alert popups to non-blocking alerts

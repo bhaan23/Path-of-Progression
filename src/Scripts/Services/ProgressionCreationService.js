@@ -3,7 +3,7 @@ import _ from 'underscore';
 import NodeService from './NodeService.js';
 const { dialog } = require('electron').remote;
 import TileTemplate from '../../Templates/TileTemplate.html';
-import { addDependantNodes, userWantsToSave, populateSelectionDropdownsWithEventData } from '../Utils/UtilFunctions.js';
+import { getDependantNodes, userWantsToSave, populateSelectionDropdownsWithEventData } from '../Utils/UtilFunctions.js';
 // import ProgressionPreviewService from './ProgressionPreviewService.js';
 
 export default class ProgressionCreationService {
@@ -46,7 +46,7 @@ export default class ProgressionCreationService {
 		this.nodeService.setupShell();
 
 		this.titleInput.on('input', () => {
-			this.modSearchInput.css('width', `${this.modSearchInput.val().length*.9}ch`);
+			this.titleInput.css('width', `${this.titleInput.val().length*.9}ch`);
 			
 			const text = this.titleInput.val() || '';
 			this.previewTitle.text(text);
@@ -162,8 +162,10 @@ export default class ProgressionCreationService {
 			this.deleteCurrentNode();
 		});
 
-		this.addDependantNodesButton.on('click', () => {
-			addDependantNodes(this.currentNodeList.children().not(':selected'));
+		this.addDependantNodesButton.on('click', (event) => {
+			const selected = this.currentNodeList.val();
+			getDependantNodes(this.findPossibleDependantNodes(), (ids) => this.addDependantNodeIds(ids));
+			event.stopPropagation();
 		});
 
 		this.currentNodeList.on('change', () => {
@@ -271,30 +273,51 @@ export default class ProgressionCreationService {
 		this.dependantNodesContainer.html('');
 		if (progressionData.nodesNeeded.length > 0) {
 			for (let id of progressionData.nodesNeeded) {
-				let dependant = $(_.template(TileTemplate)({
-					level: '1',
-					progression: {
-						hidden: false,
-						id,
-						title: this.nodeService.nodeMap[id].progressionData.title,
-						description: this.nodeService.nodeMap[id].progressionData.description
-					}
-				}));
-
-				// Close icon removes the node
-				dependant.find('.closeIcon').on('click', () => {
-
-					// Remove from it's dependant nodes
-					this.nodeService.nodeMap[this.currentProgressionNode.id].progressionData.nodesNeeded = this.nodeService.nodeMap[this.currentProgressionNode.id].progressionData.nodesNeeded.filter((value) => { return value != id; });
-
-					// Remove the html
-					dependant.remove();
-				});
-				this.dependantNodesContainer.append(dependant);
+				this.addDependantNode(id);
 			}
 		}
 
 		this.currentTrigger = triggerParts;
+	}
+
+	addDependantNodeIds(ids) {
+		for (let id of ids) {
+			this.currentProgressionNode.nodesNeeded.push(id);
+			this.addDependantNode(id);
+		}
+	}
+
+	addDependantNode(id) {
+		let dependant = $(_.template(TileTemplate)({
+			level: '1',
+			progression: {
+				hidden: false,
+				id,
+				title: this.nodeService.nodeMap[id].progressionData.title,
+				description: this.nodeService.nodeMap[id].progressionData.description
+			}
+		}));
+
+		// Close icon removes the node
+		dependant.find('.closeIcon').on('click', () => {
+
+			// Remove from it's dependant nodes
+			this.nodeService.nodeMap[this.currentProgressionNode.id].progressionData.nodesNeeded = this.nodeService.nodeMap[this.currentProgressionNode.id].progressionData.nodesNeeded.filter((value) => { return value != id; });
+
+			// Remove the html
+			dependant.remove();
+		});
+		this.dependantNodesContainer.append(dependant);
+	}
+
+	// Find only the nodes that can be added as dependants
+	// This excludes the node we are adding to, plus those that are already added
+	findPossibleDependantNodes() {
+		const selected = this.currentNodeList.val();
+		const dependants = this.currentProgressionNode.nodesNeeded;
+		return this.currentNodeList.children().clone().filter((index, element) => {
+			return element.value !== selected && !dependants.includes(element.value);
+		});
 	}
 
 	resetSelections() {

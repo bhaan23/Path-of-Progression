@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import Modal from '../Objects/Modal.js';
 const { session, dialog } = require('electron').remote;
 import EventTriggers from '../Objects/EventTriggers.js';
 
@@ -42,9 +43,41 @@ export function resetCookie(sessid, callback) {
 	});
 };
 
-export function addDependantNodes(nodeSelectorHtml) {
-	let select = $(nodeSelectorHtml);
-	
+export function getDependantNodes(nodeSelectorHtml, callback) {
+	let select = $('<select>', {
+		multiple: 'multiple',
+		autofocus: 'autofocus',
+		id: 'dependantNodesSelector',
+		size: nodeSelectorHtml.length > 10 ? 10 : nodeSelectorHtml.length
+	});
+	select.html(nodeSelectorHtml);
+
+	new DepdantNodesModal(select[0].outerHTML, callback).draw();
+}
+
+class DepdantNodesModal extends Modal {
+	constructor(body, callback) {
+		super('Select Dependant Nodes', body, [{
+			id: 'modalAddButton',
+			class: 'primaryButton',
+			text: 'Add'
+		}, {
+			id: 'modalCancelButton',
+			class: 'secondaryButton',
+			text: 'Cancel'
+		}]);
+		this.callback = callback;
+	}
+
+	addListeners() {
+		super.addListeners();
+		$('#modalAddButton').on('click', () => {
+			const values = $('#dependantNodesSelector').val();
+			this.erase();
+			this.callback(values);
+		});
+		$('#modalCancelButton').on('click', () => this.erase());
+	}
 }
 
 export function userWantsToSave() {

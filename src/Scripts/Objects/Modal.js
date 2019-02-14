@@ -1,31 +1,34 @@
+import $ from 'jquery';
 import _ from 'underscore';
-// import ModalTemplate from '../../Templates/ModalTemplate.html';
+import ModalTemplate from '../../Templates/ModalTemplate.html';
 
 export default class Modal {
 
-	constructor(title, mainHtml, footerHtml) {
-		this.title = title;
-		this.mainHtml = mainHtml || '';
-		this.footerHtml = footerHtml || '';
+	constructor(header, body, footerButtons) {
+		this.header = header;
+		this.body = body;
+		this.footerButtons = footerButtons;
 	}
 
 	draw() {
-		const modalTemplate = ``;
-		const modalHtml = $(_.template(modalTemplate, {
-			title: this.title,
-			mainHtml: this.mainHtml,
-			footerHtml: this.footerHtml
+		const modalHtml = $(_.template(ModalTemplate)({
+			header: this.header,
+			body: this.body,
+			footerButtons: this.footerButtons
 		}));
 
-		addListeners(modalHtml);
 		$('body').prepend(modalHtml);
+		this.addListeners();
 	}
 
 	erase() {
-		$('body').children().first().remove();
+		$('#modal').remove();
 	}
 
-	addListeners(modalHtml) {
-		
+	addListeners() {
+		$('#modal').on('click', (event) => {
+			event.stopPropagation();
+		});
+		$('#modalCloseIcon').on('click', () => this.erase());
 	}
 }

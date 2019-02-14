@@ -1,0 +1,22 @@
+<div id="modal">
+	<div id="modalContent">
+		<div id="modalHeader">
+			<% if (header) { %>
+				<h2><%=header%></h2>
+			<% } %>
+			<span id="modalCloseIcon" class="closeIcon"></span>
+		</div>
+		<% if (body) { %>
+			<div id="modalBody">
+				<%=body%>
+			</div>
+		<% } %>
+		<% if (footerButtons) { %>
+			<div id="modalFooter">
+				<% for (let button of footerButtons) { %>
+					<button id="<%=button.id%>" class="<%=button.class%>"><%=button.text%></button>
+				<% } %>
+			</div>
+		<% } %>
+	</div>
+</div>
