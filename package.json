@@ -6,7 +6,8 @@
   "scripts": {
     "start": "electron -r babel-register .",
     "build-windows": "electron-packager . path-of-progression --overwrite --platform=win32 --arch=ia32 --prune=true --out=release-builds --version-string.ProductName=\"Path of Progression\"",
-    "build-installer-windows": "node installers/windows/createinstaller.js"
+    "build-installer-windows": "node installers/windows/createinstaller.js",
+    "publish": "build --win -p always"
   },
   "private": true,
   "repository": {
@@ -16,10 +17,18 @@
   "author": {
     "name": "Brandon Haan"
   },
+  "build": {
+    "publish": [{
+      "provider": "github",
+      "owner": "bhaan23",
+      "repo": "Path-of-Progression"
+    }]
+  },
   "license": "ISC",
   "devDependencies": {
     "electron": "^4.0.1",
     "electron-packager": "^13.0.1",
+    "electron-updater": "^4.0.6",
     "electron-winstaller": "^2.7.0"
   },
   "dependencies": {

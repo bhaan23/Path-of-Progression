@@ -1,10 +1,11 @@
 import $ from 'jquery';
-const { ipcMain } = require('electron').remote;
+import { remote } from 'electron';
 
 export default class TabbingService {
 
 	constructor() {
 		this.previousTab = null;
+		this.startedWithFile = false;
 	}
 
 	setup() {
@@ -23,24 +24,27 @@ export default class TabbingService {
 		// Set an initial hash
 		window.location.hash = 'about';
 		this.previousTab = 'about';
-
-		// If the window is ever closed not by hitting the 'x' icon, send an event to shut things down
-		$(window).on('unload', () => {
-			ipcMain.emit('app_quit');
-		});
 	}
 
-	changeTab(event) {
-		const newHash = event.target.location.hash;
-		const newPage = newHash ? newHash.split('?')[0].substring(1) : 'about';
+	changeTab(event) { // #newpage?params
+		
+		let newPage = 'about', query;
+		if (event.target.location.hash) {
+			newPage = event.target.location.hash.substring(1).split('?')[0];
+			query = event.target.location.hash.substring(1).split('?')[1];
+		}
+
 		if (newPage != this.previousTab) {
 			$(`#mainContainer`).children().not(`#${newPage}`).hide();
 			$(`#${newPage}`).show();
 			this.previousTab = newPage;
-			if (newPage === 'viewProgression') {
-				$(document).trigger('load-progression-file');
-			} else if (newHash.split('?').length > 1) {
-				$(document).trigger('start-with-file', newHash.split('?')[1]);
+			if (newPage === 'viewProgression' && !this.startedWithFile) {
+				remote.getCurrentWindow().send('load-progression');
+			} else if (query === 'create') {
+				remote.getCurrentWindow().send('create-progression');
+			} else if (query) {
+				remote.getCurrentWindow().send('start-with-file', query);
+				this.startedWithFile = true;
 			}
 		} else {
 			event.preventDefault();

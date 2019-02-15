@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import { path, existsSync } from 'fs';
+import { ipcRenderer } from 'electron';
 import Settings from './SettingsService.js';
 const { dialog } = require('electron').remote;
 import { StoredSettings } from '../Objects/Enums.js';
@@ -177,12 +178,12 @@ export default class UserInteractionService {
 		});
 
 		// One time function for reloading your last file
-		$(document).one('load-progression-file', () => {
+		ipcRenderer.once('load-progression', () => {
 			this.loadKnownProgression(this.settings.get(StoredSettings.PROGRESSION_FILE));
 		});
 
 		// Function for handling the about page button clicks
-		$(document).on('start-with-file', (event, file) => {
+		ipcRenderer.on('start-with-file', (event, file) => {
 			if (file === 'EEGuide') {
 				this.loadKnownProgression(path.resolve(__dirname, '..\\..\\..\\EEGuide.json'));
 			} else if (file === 'Speed') {

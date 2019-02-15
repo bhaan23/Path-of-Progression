@@ -40,3 +40,16 @@ class StoredSettingsEnum {
 }
 
 export const StoredSettings = new StoredSettingsEnum();
+
+
+class AlertTypeEnum {
+
+	constructor() {
+		this.POSITIVE = 1;
+		this.NEGATIVE = 2;
+		this.WARNING = 3;
+		this.MESSAGE = 4;
+	}
+}
+
+export const AlertType = new AlertTypeEnum();

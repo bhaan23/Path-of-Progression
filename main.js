@@ -1,4 +1,5 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
+const { autoUpdater } = require('electron-updater');
 
 let win;
 
@@ -21,17 +22,33 @@ function createWindow() {
 
 	// Open dev tools for debugging
 	win.webContents.openDevTools();
+
+	win.on('close', () => { win = null; });
 }
 
 // Start app
-app.on('ready', createWindow);
+app.on('ready', () => {
+	createWindow();
+	// autoUpdater.checkForUpdates();
+});
+
+autoUpdater.on('update-available', (info) => { });
+
+// Send a message to the window that a new update is ready
+autoUpdater.on('update-downloaded', () => {
+	ipcMain.send('update-ready', { callback: autoUpdater.quitAndInstall });
+});
+
 
 // Get rid of menu on load
 app.on('browser-window-created', (e, window) => {
 	window.setMenu(null);
 });
 
-// Call to make sure the app closes if closed in an odd way
+app.on('window-all-closed', () => {
+	app.quit();
+});
+
 ipcMain.on('app_quit', (event, info) => {
 	app.quit();
 });

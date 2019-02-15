@@ -36,6 +36,11 @@ body {
 	display: none;
 }
 
+.normalLink {
+	cursor: pointer;
+	text-decoration: underline;
+}
+
 button {
 	padding: 0.5rem 1rem;
 	transition: all 0.5s;
@@ -603,4 +608,63 @@ label:active:after {
 #dependantNodesSelector {
 	width: 75%;
 	border-color: #0081ce;
+}
+
+/* Alerts styles */
+
+#alerts {
+	position: fixed;
+	bottom: 3rem;
+	left: 1rem;;
+	display: flex;
+	flex-direction: column-reverse;
+}
+
+.alert {
+	margin-bottom: 1rem;
+	padding: 1rem;
+	border-width: 3px;
+	border-radius: 10px;
+	border-style: solid;
+	max-width: 14rem;
+	opacity: 0;
+	transition: all 0.7s;
+	transform: translateX(-400px);
+}
+
+.alert[data-alertType="1"] {
+	background-color: rgb(11, 128, 0, 0.6);
+	border-color: rgb(11, 128, 0);
+}
+
+.alert[data-alertType="2"] {
+	background-color: rgb(255, 230, 0, 0.6);
+	border-color: rgb(255, 200, 0);
+	color: black;
+}
+
+.alert[data-alertType="3"] {
+	background-color: rgb(255, 30, 0, 0.6);
+	border-color: rgb(255, 30, 0);
+}
+
+.alert[data-alertType="4"] {
+	background-color: rgb(0, 129, 206, 0.9);
+	border-color: rgb(0, 78, 255);
+}
+
+.alert .closeIcon {
+	margin-top: -0.8rem;
+	margin-right: -0.8rem;
+}
+
+.alert .closeIcon:before,
+.alert .closeIcon::after {
+	left: 1rem;
+	height: 1rem;
+}
+
+.showAlert {
+	transform: translateX(0px);
+	opacity: 1;
 }

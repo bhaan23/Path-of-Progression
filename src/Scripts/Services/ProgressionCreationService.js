@@ -4,6 +4,7 @@ import NodeService from './NodeService.js';
 const { dialog } = require('electron').remote;
 import TileTemplate from '../../Templates/TileTemplate.html';
 import { getDependantNodes, userWantsToSave, populateSelectionDropdownsWithEventData } from '../Utils/UtilFunctions.js';
+import { ipcRenderer } from 'electron';
 // import ProgressionPreviewService from './ProgressionPreviewService.js';
 
 export default class ProgressionCreationService {
@@ -141,6 +142,11 @@ export default class ProgressionCreationService {
 
 		this.saveButton.on('click', () => {
 			this.nodeService.save();
+		});
+
+		ipcRenderer.on('create-progression', () => {
+			this.nodeService.setupShell();
+			this.createProgressionButton.click();
 		});
 
 		this.createProgressionButton.on('click', () => {
