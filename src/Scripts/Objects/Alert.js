@@ -28,6 +28,13 @@ export default class Alert {
 
 		this.listenerCallback(alertHtml);
 		$('#alerts').append(alertHtml);
-		html.addClass('showAlert');
+
+		// Only allow for four alerts at a time.
+		if ($('#alerts').children() > 4) {
+			$('#alerts').first().remove();
+		}
+		setTimeout(() => {
+			alertHtml.addClass('showAlert');
+		}, 300);
 	}
 }

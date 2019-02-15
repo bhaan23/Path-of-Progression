@@ -1,7 +1,9 @@
 import $ from 'jquery';
+import Alert from '../Objects/Alert.js';
 import NodeService from './NodeService.js';
 import Settings from './SettingsService.js';
 import PathOfExileLog from 'poe-log-monitor';
+import { AlertType } from '../Objects/Enums.js';
 import { StoredSettings } from '../Objects/Enums.js';
 import CharacterInventoryService from './CharacterInventoryService';
 import { logMessageToTrigger, hasNodeTriggeredFromItem, jsonNodeToHtml } from '../Utils/Converter.js';
@@ -25,8 +27,9 @@ export default class ProgressionService {
 		// Set up log monitor
 		let logFileLocation = this.settings.get(StoredSettings.CLIENT_FILE_LOCATION);
 		if (!logFileLocation) {
-			alert('No log was file found. Cannot continue setting up progression.');
-			throw Error('no log file found. Cannot continue setting up progression.');
+			const alertBody = 'No log file found. Cannot continue setting up progression.';
+			new Alert(alertBody, AlertType.NEGATIVE, () => { });
+			throw Error(alertBody);
 		} else {
 			this.poeLog = new PathOfExileLog({
 				'logfile': logFileLocation

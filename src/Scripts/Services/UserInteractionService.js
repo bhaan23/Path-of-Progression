@@ -1,8 +1,11 @@
 import $ from 'jquery';
-import { path, existsSync } from 'fs';
+import path from 'path';
+import { existsSync } from 'fs';
 import { ipcRenderer } from 'electron';
+import Alert from '../Objects/Alert.js';
 import Settings from './SettingsService.js';
 const { dialog } = require('electron').remote;
+import { AlertType } from '../Objects/Enums.js';
 import { StoredSettings } from '../Objects/Enums.js';
 import ProgressionService from './ProgressionService.js';
 import { isValidSessionId, userWantsToSave } from '../Utils/UtilFunctions.js';
@@ -78,13 +81,13 @@ export default class UserInteractionService {
 					method: 'GET',
 					success: (response) => this.populateCharacterNames(response),
 					error: (xhr, status, error) => {
-						alert('There was an error retrieving characters');
+						new Alert('There was an error retrieving characters', AlertType.NEGATIVE, () => { });
 						console.log(status, error);
 					},
 					dataType: 'json'
 				});
 			} else {
-				alert('Please enter a valid account name to update your character selection.');
+				new Alert('Please enter a valid account name to update your character selection.', AlertType.WARNING, () => { });
 			}
 		});
 
@@ -96,15 +99,15 @@ export default class UserInteractionService {
 		this.sessionIdUpdate.on('click', () => {
 			const accountName = this.settings.get(StoredSettings.ACCOUNT_NAME) || this.accountNameInput.val();
 			if (!accountName) {
-				alert('Please enter a valid account name to validate your session id.');
+				new Alert('Please enter a valid account name to validate your session id.', AlertType.WARNING, () => { });
 			} else {
 				isValidSessionId(this.sessionIdInput.val(), accountName, (isValid, response) => {
 					if (isValid) {
 						this.settings.set(StoredSettings.SESSION_ID, this.sessionIdInput.val());
 						this.settings.set(StoredSettings.ACCOUNT_NAME, accountName);
-						alert('Your session id was updated successfully.');
+						new Alert('Your session id was updated successfully.', AlertType.POSITIVE, () => { });
 					} else {
-						alert(`Your session id was invalid. Here's why it was invalid: ${response.message}`);
+						new Alert(`Your session id was invalid. Here's why: ${response.message}`, AlertType.NEGATIVE, () => { });
 					}
 				});
 			}
@@ -112,7 +115,7 @@ export default class UserInteractionService {
 
 		this.progressionFileUploadButton.on('click', () => {
 			if (this.clientFileDisplay.text() === this.noFileSelectedText) {
-				alert('You cannot track a progression without uploading your Client.txt file.');
+				new Alert('You cannot track a progression without uploading your Client.txt file.', AlertType.NEGATIVE, () => { });
 			} else {
 				const filenames = dialog.showOpenDialog({
 					filters: [{
@@ -180,14 +183,17 @@ export default class UserInteractionService {
 		// One time function for reloading your last file
 		ipcRenderer.once('load-progression', () => {
 			this.loadKnownProgression(this.settings.get(StoredSettings.PROGRESSION_FILE));
+			this.saveButton.removeClass('hidden');
 		});
 
 		// Function for handling the about page button clicks
 		ipcRenderer.on('start-with-file', (event, file) => {
 			if (file === 'EEGuide') {
 				this.loadKnownProgression(path.resolve(__dirname, '..\\..\\..\\EEGuide.json'));
+				this.saveButton.removeClass('hidden');
 			} else if (file === 'Speed') {
 				this.loadKnownProgression(path.resolve(__dirname, '..\\..\\..\\Speed.json'));
+				this.saveButton.removeClass('hidden');
 			}
 		});
 	}

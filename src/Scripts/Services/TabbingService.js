@@ -38,13 +38,13 @@ export default class TabbingService {
 			$(`#mainContainer`).children().not(`#${newPage}`).hide();
 			$(`#${newPage}`).show();
 			this.previousTab = newPage;
-			if (newPage === 'viewProgression' && !this.startedWithFile) {
-				remote.getCurrentWindow().send('load-progression');
-			} else if (query === 'create') {
+			if (query === 'create') {
 				remote.getCurrentWindow().send('create-progression');
 			} else if (query) {
 				remote.getCurrentWindow().send('start-with-file', query);
 				this.startedWithFile = true;
+			} else if (newPage === 'viewProgression' && !this.startedWithFile) {
+				remote.getCurrentWindow().send('load-progression');
 			}
 		} else {
 			event.preventDefault();

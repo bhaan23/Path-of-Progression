@@ -1,5 +1,7 @@
 import fs from 'fs';
+import Alert from '../Objects/Alert.js';
 const { dialog } = require('electron').remote;
+import { AlertType } from '../Objects/Enums.js';
 
 export default class NodeService {
 
@@ -68,7 +70,8 @@ export default class NodeService {
 		for (let progressionNode of this.allNodes) {
 			if (progressionNode.title) {
 				if (Object.keys(this.nodeMap).includes(progressionNode.id)) {
-					alert(`Two nodes with the same id:[${progressionNode.id}] have been found. Stopping creation...`);
+					const alertBody = `Two nodes with the same id:[${progressionNode.id}] have been found. Stopping the upload.`;
+					new Alert(alertBody, AlertType.NEGATIVE, () => { });
 					throw Error(`A node with id:[${progressionNode.id}] already exists.`);
 				}
 				if (progressionNode.completed) {
@@ -121,7 +124,7 @@ export default class NodeService {
 		const saveData = this.createSaveObject();
 
 		if (filename || this.progressionFileLocation) {
-			this._writeSaveData(filename, saveData);
+			this._writeSaveData(filename || this.progressionFileLocation, saveData);
 		} else {
 			filename = dialog.showSaveDialog({
 				filters: [{
@@ -138,10 +141,10 @@ export default class NodeService {
 	_writeSaveData(filename, saveData) {
 		fs.writeFile(filename, saveData, { encoding: 'utf-8' }, (error) => {
 			if (error) {
-				alert('There was an error saving the progression.');
+				new Alert('There was an error saving the progression.', AlertType.NEGATIVE, () => { });
 			} else {
 				this.lastSave = saveData;
-				alert('Your progression was saved as ' + filename);
+				new Alert('Your progression was saved.', AlertType.POSITIVE, () => { });
 			}
 		});
 	}

@@ -1,6 +1,8 @@
 import $ from 'jquery';
 import _ from 'underscore';
 import { EventEmitter } from 'events';
+import Alert from '../Objects/Alert.js';
+import { AlertType } from '../Objects/Enums.js';
 import SettingsService from './SettingsService.js';
 import { StoredSettings } from '../Objects/Enums.js';
 import { resetCookie } from '../Utils/UtilFunctions.js';
@@ -36,8 +38,8 @@ export default class ItemService extends EventEmitter {
 
 		if (neededValues.length > 0) {
 			this.canFetchItems = false;
-			// new Modal("You're missing some data!", ``, ``).draw();
-			alert("We detected that you are looking for things on from your character's inventory. If you do not enter the needed fields, you will not be able to complete these nodes.");
+			const alertBody = `We detected that you are looking for things on from your character's inventory. If you do not enter your ${neededValues.toString()}, you will not be able to complete these nodes.`;
+			new Alert(alertBody, AlertType.WARNING, () => { });
 		} else {
 			this.canFetchItems = true;
 		}
@@ -54,7 +56,7 @@ export default class ItemService extends EventEmitter {
 				error: (jqXHR, status, error) => console.log(jqXHR, status, error)
 			});
 		} else {
-			alert('Missing account data, cannot fetch items.');
+			new Alert('Missing account data, cannot fetch items.', AlertType.NEGATIVE, () => { });
 		}
 	}
 }
