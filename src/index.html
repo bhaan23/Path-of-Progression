@@ -36,10 +36,10 @@
 						<span><b>Create your own: </b>This will bring you to a blank template where you can start from scratch and input the things you want to track. You can also edit a template from there as well.</span>
 					</li>
 					<li>
-						<span><b>Help me I'm new: </b>This is a template based off of EngineeringEternity's <a class="normalLink" data-linkout="https://www.youtube.com/watch?v=STec8eND38w&list=PL7GqFLebBU8hhd5u7sKzae_kd7r6LRI9s">leveling guide</a> that released just before patch 3.5 which is a great starter's guide to leveling through the acts.</span>
+						<span><b>Help me I'm new: </b>This is a template based off of <a class="normalLink" data-linkout="https://www.youtube.com/watch?v=STec8eND38w&list=PL7GqFLebBU8hhd5u7sKzae_kd7r6LRI9s">EngineeringEternity's leveling guide</a> that released just before patch 3.5 which is a great starter's guide to leveling through the acts.</span>
 					</li>
 					<li>
-						<span><b>Gotta go fast: </b>This is a template based off of FITE GARR's <a class="normalLink" data-linkout="https://www.youtube.com/watch?v=jojMV60ntBE">speed run</a> to killing Kitava. Useful for those looking to get into speed running, those looking to improve their leveling times, or those speed running carefully planning out the next record breaking run.</span>
+						<span><b>Gotta go fast: </b>This is a template based off of <a class="normalLink" data-linkout="https://www.youtube.com/watch?v=jojMV60ntBE">FITE GARR's speed run</a> to killing Kitava. Useful for those looking to get into speed running, those looking to improve their leveling times, or those speed running carefully planning out the next record breaking run.</span>
 					</li>
 				</ul>
 				<div id="startingOptionsContainer">
@@ -115,11 +115,17 @@
 								<option value="area">Enter area</option>
 								<option value="item">Equip item</option>
 								<option value="level">Level</option>
+								<option value="gems">Link gems</option>
 							</select>
-							<select id="areaInput" class="hidden"></select>
-							<select id="itemSlotSelection" class="hidden"></select>
-							<select id="levelSelection" class="hidden"></select>
-							<input type="text" placeholder="Text to search..." id="modSearchInput" class="hidden" />
+							<span id="group2">
+								<select id="areaInput" class="hidden"></select>
+								<select id="itemSlotSelection" class="hidden"></select>
+								<select id="levelSelection" class="hidden"></select>
+								<select id="gemSelection" multiple size="5" class="hidden"></select>
+							</span>
+							<span id="group3">
+								<input type="text" placeholder="Text to search..." id="modSearchInput" class="hidden" />
+							</span>
 						</div>
 					</div>
 					<div id="nodePreview">
@@ -128,6 +134,7 @@
 							<div class="tileDescriptionContainer">
 								<span class="tileTitle"></span>
 								<span class="tileDescription"></span>
+								<span id="gemSelectionPreview" class="gemPreviewContainer hidden"></span>
 							</div>
 						</div>
 					</div>
@@ -184,9 +191,14 @@
 		</div>
 	</div>
 	<div id="footer">
-		<a data-linkout="https://github.com/bhaan23/NewShinyIdea" class="hidden">github</a>
+		<span>
+			Version: <span id="version">x.x.x</span>
+		</span>
+		<span>
+			<a class="normalLink" data-linkout="https://github.com/bhaan23/Path-of-Progression">GitHub Repo</a>
+		</span>
 	</div>
-	<div id="alerts" class="hidden"></div>
+	<div id="alerts"></div>
 </body>
 <script>
 	require('babel-register');

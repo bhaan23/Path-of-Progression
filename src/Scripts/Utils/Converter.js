@@ -1,6 +1,8 @@
 import $ from 'jquery';
 import _ from 'underscore';
+import { GemImageMap } from '../Objects/GemImageMap';
 import TileTemplate from '../../Templates/TileTemplate.html';
+import eventTriggers from '../Objects/EventTriggers';
 
 export function logMessageToTrigger(type, logData) {
 	let trigger;
@@ -106,7 +108,17 @@ export function jsonNodeToHtml(nodeMap, topNodeIds) {
 		const id = queue.shift();
 		const node = nodeMap[id];
 		queue = queue.concat(node.dependantNodeIds);
-		const tileHtml = _.template(TileTemplate)({ progression: nodeMap[id].progressionData, level });
+
+		let gems = $();
+		if (nodeMap[id].progressionData.completionTrigger.toLowerCase().startsWith('gems|')) {
+			const group = $('<div>');
+			for (let gemValue of nodeMap[id].progressionData.completionTrigger.split('|')[1].split(',')) {
+				group.append(buildGemLookup(gemValue));
+			}
+			gems = group;
+		}
+
+		const tileHtml = _.template(TileTemplate)({ progression: nodeMap[id].progressionData, level, gems });
 		nodeHtml.append(tileHtml);
 		
 		if (tops > 0) {
@@ -119,3 +131,38 @@ export function jsonNodeToHtml(nodeMap, topNodeIds) {
 
 	return nodeHtml.children();
 };
+
+export function createNode(node, level) {
+	let gems = $();
+	if (node.completionTrigger.toLowerCase().startsWith('gems|')) {
+		gems = createGemHtml(node.completionTrigger);
+	}
+	return _.template(TileTemplate)({ progression: node, level, gems });
+}
+
+export function createGemHtml(completionTrigger) {
+	const group = $('<div>');
+	for (let gemValue of completionTrigger.split('|')[1].split(',')) {
+		group.append(buildGemLookup(gemValue));
+	}
+	return group;
+}
+
+export function buildGemLookup(skillValue) {
+	const skillDisplayValue = eventTriggers.gems['Active Skill Gems'][skillValue] || eventTriggers.gems['Support Skill Gems'][skillValue];
+	const gem = $('<span>', {
+		class: 'gemPreview'
+	});
+
+	const img = $('<img>', {
+		src: GemImageMap[skillValue]
+	});
+
+	const text = $('<span>', {
+		text: skillDisplayValue
+	});
+
+	gem.append(img);
+	gem.append(text);
+	return gem;
+}

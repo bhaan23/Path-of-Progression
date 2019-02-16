@@ -1,10 +1,13 @@
 import $ from 'jquery';
 import _ from 'underscore';
+import { ipcRenderer } from 'electron';
 import NodeService from './NodeService.js';
 const { dialog } = require('electron').remote;
 import TileTemplate from '../../Templates/TileTemplate.html';
 import { getDependantNodes, userWantsToSave, populateSelectionDropdownsWithEventData } from '../Utils/UtilFunctions.js';
-import { ipcRenderer } from 'electron';
+import { buildGemLookup } from '../Utils/Converter.js';
+import eventTriggers from '../Objects/EventTriggers.js';
+import { createNode } from '../Utils/Converter.js';
 // import ProgressionPreviewService from './ProgressionPreviewService.js';
 
 export default class ProgressionCreationService {
@@ -16,13 +19,17 @@ export default class ProgressionCreationService {
 		this.descriptionInput = $('#descriptionInput');
 		this.comletionTypeSelect = $('#completionType');
 		this.zoneSelection = $('#areaInput');
-		this.areaNameTypeahead = $('#areaInputTypeaheadList');
 		this.itemSlotSelection = $('#itemSlotSelection');
 		this.levelSelection = $('#levelSelection');
 		this.modSearchInput = $('#modSearchInput');
+		this.gemSelection = $('#gemSelection');
+		this.gemSelectionPreview = $('#gemSelectionPreview');
 		this.previewTitle = $('#nodePreview .tileTitle');
 		this.previewDescription = $('#nodePreview .tileDescription');
 		this.progressionPreview = $('#progressionPreview');
+
+		this.group2 = $('#group2');
+		this.group3 = $('#group3');
 
 		this.uploadButton = $('#createProgressionUpload');
 		this.saveButton = $('#createProgressionSave');
@@ -37,7 +44,6 @@ export default class ProgressionCreationService {
 
 		this.nodeService = new NodeService();
 		
-		this.currentTrigger = [];
 		this.currentProgressionNode = {};
 	}
 
@@ -70,51 +76,61 @@ export default class ProgressionCreationService {
 
 		this.comletionTypeSelect.on('change', () => {
 			const val = this.comletionTypeSelect.val() || '';
+			this.group2.children().addClass('hidden');
+			this.group3.children().addClass('hidden');
 			if (val === 'area') {
 				this.zoneSelection.removeClass('hidden');
 				this.zoneSelection.val('');
-				this.itemSlotSelection.addClass('hidden');
-				this.levelSelection.addClass('hidden');
-				this.modSearchInput.addClass('hidden');
-				this.currentTrigger = [null, null];
+				this.currentProgressionNode.completionTrigger = [null, null];
 			} else if (val === 'item') {
-				this.zoneSelection.addClass('hidden');
 				this.itemSlotSelection.removeClass('hidden');
 				this.itemSlotSelection.val('');
-				this.levelSelection.addClass('hidden');
-				this.modSearchInput.addClass('hidden');
-				this.currentTrigger = [null, null, null];
+				this.currentProgressionNode.completionTrigger = [null, null, null];
 			} else if (val === 'level') {
-				this.zoneSelection.addClass('hidden');
-				this.itemSlotSelection.addClass('hidden');
 				this.levelSelection.removeClass('hidden');
 				this.levelSelection.val('');
-				this.modSearchInput.addClass('hidden');
-				this.currentTrigger = [null, null];
+				this.currentProgressionNode.completionTrigger = [null, null];
+			} else if (val === 'gems') {
+				this.gemSelection.removeClass('hidden');
+				this.gemSelection.val('');
+				this.gemSelectionPreview.removeClass('hidden');
+				this.gemSelectionPreview.html('');
+				this.currentProgressionNode.completionTrigger = [null, null];
 			}
-			this.currentTrigger[0] = `[${val}]`;
+			this.currentProgressionNode.completionTrigger[0] = `${val}`;
 		});
 
 		this.zoneSelection.on('change', () => {
-			this.currentTrigger[1] = `[${this.zoneSelection.val()}]`;
+			this.currentProgressionNode.completionTrigger[1] = this.zoneSelection.val();
+		});
+
+		this.gemSelection.on('change', () => {
+			const values = this.gemSelection.val();
+			this.currentProgressionNode.completionTrigger[1] = values.join(',');
+			this.gemSelectionPreview.html('');
+			for (let value of values) {
+				this.gemSelectionPreview.append(buildGemLookup(value));
+			}
 		});
 
 		this.itemSlotSelection.on('change', () => {
-			const val = this.itemSlotSelection.val();
-			this.currentTrigger[1] = `[${val}]`;
+			this.currentProgressionNode.completionTrigger[1] = this.itemSlotSelection.val();
 			this.modSearchInput.removeClass('hidden');
 		});
 
 		this.levelSelection.on('change', () => {
-			this.currentTrigger[1] = `[${this.levelSelection.val()}]`;
+			this.currentProgressionNode.completionTrigger[1] = this.levelSelection.val();
 		});
 
 		this.modSearchInput.on('input', () => {
-			this.modSearchInput.css('width', `${this.modSearchInput.val().length*.9}ch`);
+			const val = this.modSearchInput.val();
+			this.modSearchInput.css('width', `${val.length*.9}ch`);
+			this.currentProgressionNode.completionTrigger[2] = val;
 		});
 
 		this.uploadButton.on('click', () => {
 			let doSave = false;
+			this.saveCurrentNode();
 			if (!this.nodeService.canSave() || !(doSave = userWantsToSave())) {
 				const filenames = dialog.showOpenDialog({
 					filters: [{
@@ -141,6 +157,7 @@ export default class ProgressionCreationService {
 		});
 
 		this.saveButton.on('click', () => {
+			this.saveCurrentNode();
 			this.nodeService.save();
 		});
 
@@ -178,7 +195,7 @@ export default class ProgressionCreationService {
 			this.setCurrentNode(this.nodeService.nodeMap[this.currentNodeList.val()].progressionData);
 		});
 
-		populateSelectionDropdownsWithEventData(this.itemSlotSelection, this.levelSelection, this.zoneSelection);
+		populateSelectionDropdownsWithEventData(this.itemSlotSelection, this.levelSelection, this.zoneSelection, this.gemSelection);
 	}
 
 	populateCurrentNodes() {
@@ -240,7 +257,7 @@ export default class ProgressionCreationService {
 	setCurrentNode(progressionData) {
 
 		if (this.currentProgressionNode.title) {
-			this.nodeService.nodeMap[this.currentProgressionNode.id].progressionData = this.currentProgressionNode;
+			this.saveCurrentNode();
 		}
 
 		this.currentProgressionNode = progressionData;
@@ -254,6 +271,7 @@ export default class ProgressionCreationService {
 		this.completedCheckbox.attr('checked', progressionData.completed);
 		
 		const triggerParts = progressionData.completionTrigger.toLowerCase().split('|');
+		this.gemSelectionPreview.html('');
 		if (triggerParts.length > 1) {
 			this.comletionTypeSelect.val(triggerParts[0]);
 			this.comletionTypeSelect.change();
@@ -269,6 +287,10 @@ export default class ProgressionCreationService {
 				case 'area':
 					this.zoneSelection.val(triggerParts[1]);
 					break;
+				case 'gems':
+					this.gemSelection.val(triggerParts[1].split(','));
+					this.gemSelection.change();
+					break;
 			}
 
 			if (triggerParts[2]) {
@@ -283,26 +305,24 @@ export default class ProgressionCreationService {
 			}
 		}
 
-		this.currentTrigger = triggerParts;
+		this.currentProgressionNode.completionTrigger = triggerParts;
 	}
 
 	addDependantNodeIds(ids) {
 		for (let id of ids) {
-			this.currentProgressionNode.nodesNeeded.push(id);
 			this.addDependantNode(id);
+			this.currentProgressionNode.nodesNeeded.push(id);
 		}
 	}
 
 	addDependantNode(id) {
-		let dependant = $(_.template(TileTemplate)({
-			level: '1',
-			progression: {
-				hidden: false,
-				id,
-				title: this.nodeService.nodeMap[id].progressionData.title,
-				description: this.nodeService.nodeMap[id].progressionData.description
-			}
-		}));
+		let dependant = $(createNode({
+			hidden: false,
+			id,
+			title: this.nodeService.nodeMap[id].progressionData.title,
+			description: this.nodeService.nodeMap[id].progressionData.description,
+			completionTrigger: this.nodeService.nodeMap[id].progressionData.completionTrigger
+		}, '1'));
 
 		// Close icon removes the node
 		dependant.find('.closeIcon').on('click', () => {
@@ -324,6 +344,14 @@ export default class ProgressionCreationService {
 		return this.currentNodeList.children().clone().filter((index, element) => {
 			return element.value !== selected && !dependants.includes(element.value);
 		});
+	}
+
+	saveCurrentNode() {
+		if (!$.isEmptyObject(this.currentProgressionNode)) {
+			this.nodeService.nodeMap[this.currentProgressionNode.id].progressionData = this.currentProgressionNode;
+			this.nodeService.nodeMap[this.currentProgressionNode.id].progressionData.completionTrigger = 
+					this.currentProgressionNode.completionTrigger ? this.currentProgressionNode.completionTrigger.join('|') : '';
+		}
 	}
 
 	resetSelections() {

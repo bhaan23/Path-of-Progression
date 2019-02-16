@@ -1,6 +1,6 @@
 {
   "name": "path-of-progression",
-  "version": "0.6.0",
+  "version": "0.6.14",
   "description": "App to help track the character leveling process in Path of Exile",
   "main": "main.js",
   "scripts": {
@@ -12,21 +12,24 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "http://github.com/bhaan23/Path-of-Progression.git"
+    "url": "https://github.com/bhaan23/Path-of-Progression.git"
   },
   "author": {
     "name": "Brandon Haan"
   },
   "build": {
-    "publish": [{
-      "provider": "github",
-      "owner": "bhaan23",
-      "repo": "Path-of-Progression"
-    }]
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "bhaan23",
+        "repo": "Path-of-Progression"
+      }
+    ]
   },
   "license": "ISC",
   "devDependencies": {
     "electron": "^4.0.1",
+    "electron-builder": "^20.38.5",
     "electron-packager": "^13.0.1",
     "electron-updater": "^4.0.6",
     "electron-winstaller": "^2.7.0"
@@ -37,6 +40,7 @@
     "babel-register": "^6.26.0",
     "electron-prompt": "^1.3.0",
     "electron-settings": "^3.2.0",
+    "electron-updater": "^4.0.6",
     "jquery": "^3.3.1",
     "poe-log-monitor": "^1.2.5",
     "underscore": "^1.9.1"

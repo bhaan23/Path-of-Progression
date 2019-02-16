@@ -48,7 +48,7 @@ export function getDependantNodes(nodeSelectorHtml, callback) {
 		multiple: 'multiple',
 		autofocus: 'autofocus',
 		id: 'dependantNodesSelector',
-		size: nodeSelectorHtml.length > 10 ? 10 : nodeSelectorHtml.length
+		size: Math.max(Math.min(3, nodeSelectorHtml.length), 7)
 	});
 	select.html(nodeSelectorHtml);
 
@@ -89,7 +89,7 @@ export function userWantsToSave() {
 	return result === 0; // They said yes
 }
 
-export function populateSelectionDropdownsWithEventData(itemSlotSelection, levelSelection, zoneSelection) {
+export function populateSelectionDropdownsWithEventData(itemSlotSelection, levelSelection, zoneSelection, gemSelection) {
 	
 	// Item slot population
 	itemSlotSelection.html('');
@@ -152,5 +152,29 @@ export function populateSelectionDropdownsWithEventData(itemSlotSelection, level
 			}));
 		}
 		zoneSelection.append(group);
+	}
+
+	// Equip gem population
+	gemSelection.html('');
+
+	// Default option
+	gemSelection.append($('<option>', {
+		value: '',
+		class: 'hidden',
+		text: 'Select gems to link...'
+	}));
+
+	// Populate the other options
+	for (let skillGemType of Object.keys(EventTriggers.gems)) {
+		let group = $('<optgroup>', {
+			label: skillGemType
+		});
+		for (let gem of Object.keys(EventTriggers.gems[skillGemType])) {
+			group.append($('<option>', {
+				value: gem,
+				text: EventTriggers.gems[skillGemType][gem]
+			}));
+		}
+		gemSelection.append(group);
 	}
 }

@@ -3,5 +3,10 @@
 	<div class="tileDescriptionContainer">
 		<span class="tileTitle"><%=progression.title%></span>
 		<span class="tileDescription"><%=progression.description%></span>
+		<% if (gems.length > 0) { %>
+			<span class="gemPreviewContainer">
+				<%=gems.html()%>
+			</span>
+		<% } %>
 	</div>
 </div>

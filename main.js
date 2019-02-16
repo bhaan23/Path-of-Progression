@@ -1,5 +1,5 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
 const { autoUpdater } = require('electron-updater');
+const { app, BrowserWindow, ipcMain } = require('electron');
 
 let win;
 
@@ -23,32 +23,50 @@ function createWindow() {
 	// Open dev tools for debugging
 	win.webContents.openDevTools();
 
-	win.on('close', () => { win = null; });
+	win.on('close', () => { win = null; app.quit(); });
 }
 
-// Start app
-app.on('ready', () => {
-	createWindow();
-	// autoUpdater.checkForUpdates();
-});
+try {
+	// Start app
+	app.on('ready', () => {
+		createWindow();
+		setTimeout(() => {
+			autoUpdater.checkForUpdates();
+		}, 60000); // Let everything load before checking for an update
+	});
 
-autoUpdater.on('update-available', (info) => { });
-
-// Send a message to the window that a new update is ready
-autoUpdater.on('update-downloaded', () => {
-	ipcMain.send('update-ready', { callback: autoUpdater.quitAndInstall });
-});
+	// autoUpdater.on('update-downloaded', (info) => {});
+	// autoUpdater.on('checking-for-update', (info) => {});
+	// autoUpdater.on('update-not-available', (info) => {});
+	// autoUpdater.on('download-progress', (progress) => {});
 
 
-// Get rid of menu on load
-app.on('browser-window-created', (e, window) => {
-	window.setMenu(null);
-});
+	// Send a message to the window that a new update is downloaded
+	autoUpdater.on('update-downloaded', (info) => {
+		win.webContents.send('update-downloaded');
+	});
 
-app.on('window-all-closed', () => {
-	app.quit();
-});
+	autoUpdater.on('error', (error) => {
+		console.log(error);
+	});
 
-ipcMain.on('app_quit', (event, info) => {
-	app.quit();
-});
+	// Get rid of menu on load
+	app.on('browser-window-created', (e, window) => {
+		window.setMenu(null);
+	});
+
+	app.on('window-all-closed', () => {
+		app.quit();
+	});
+
+	ipcMain.on('quit-and-install', () => {
+		autoUpdater.quitAndInstall();
+	});
+
+	ipcMain.on('app_quit', (event, info) => {
+		app.quit();
+	});
+
+} catch (e) {
+	console.log(e);
+}

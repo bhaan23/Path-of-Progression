@@ -36,7 +36,7 @@
 		"id": "4",
 		"title": "Grab a quicksilver flask",
 		"completionTrigger": "item|flask|Quicksilver",
-		"description": "Enter The Tidal Island to the right of the Coast waypoint. Travel around the left side until you find find Hailrake. Kill him to get the Medicine Chest and portal back to town to get your quicksilver flask reward from Nessa.",
+		"description": "Enter The Tidal Island to the right of the Coast waypoint. Travel around the left side until you find Hailrake. Kill him to get the Medicine Chest and portal back to town to get your quicksilver flask reward from Nessa.",
 		"nodesNeeded": [
 			"3"
 		],
@@ -82,7 +82,7 @@
 		"completionTrigger": "area|Lioneye's Watch",
 		"description": "Navigate through the zone to find The Deep Dweller. Kill it to finish the quest, then portal back to town to recieve your reward.",
 		"nodesNeeded": [
-			"7"
+			"6"
 		],
 		"hidden": false,
 		"completed": false
@@ -135,7 +135,7 @@
 		"id": "13",
 		"title": "Continue to The Warden's Chambers and Kill Brutus",
 		"completionTrigger": "area|Prisoner's Gate",
-		"description": "Make your way through the zone and enter The Warden's Chambers.",
+		"description": "Make your way through the zone and enter The Warden's Chambers. ",
 		"nodesNeeded": [
 			"11"
 		],

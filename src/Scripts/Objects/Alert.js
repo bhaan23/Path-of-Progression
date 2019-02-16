@@ -1,6 +1,7 @@
 import $ from 'jquery';
 import _ from 'underscore';
 import AlertTemplate from '../../Templates/AlertTemplate.html';
+import { AlertType } from './Enums';
 
 export default class Alert {
 
@@ -36,5 +37,31 @@ export default class Alert {
 		setTimeout(() => {
 			alertHtml.addClass('showAlert');
 		}, 300);
+
+
+		let timeout;
+		switch (this.type) {
+			case AlertType.POSITIVE:
+				timeout = 1000*5;
+				break;
+			case AlertType.WARNING:
+				timeout = 1000*10;
+				break;
+			case AlertType.NEGATIVE:
+				timeout = 1000*30;
+				break;
+			case AlertType.MESSAGE:
+				timeout = 1000*60;
+				break;
+		}
+
+		setTimeout(() => {
+			if (alertHtml.hasClass('showAlert')) {
+				alertHtml.removeClass('showAlert');
+				setTimeout(() => {
+					alertHtml.remove();
+				}, 800);
+			}
+		}, timeout+300);
 	}
 }
