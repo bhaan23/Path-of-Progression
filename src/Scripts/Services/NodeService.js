@@ -76,7 +76,7 @@ export default class NodeService {
 				}
 				if (progressionNode.completed) {
 					this.completedNodeIds.push(progressionNode.id);
-				} else if (progressionNode.completionTrigger.toLowerCase().startsWith('item|')) {
+				} else if (progressionNode.completionTrigger.toLowerCase().startsWith('item|') || progressionNode.completionTrigger.toLowerCase().startsWith('gems|')) {
 					this.needsItemLookup = true;
 				}
 				this.nodeMap[progressionNode.id] = {

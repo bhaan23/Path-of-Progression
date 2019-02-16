@@ -19,7 +19,7 @@ export function logMessageToTrigger(type, logData) {
 	return trigger;
 };
 
-export function hasNodeTriggeredFromItem(trigger, characterInventory) {
+export function hasNodeTriggeredFromItemOrLink(trigger, characterInventory) {
 	
 	if (trigger.toLowerCase().startsWith('item|')) {
 		const triggerParts = trigger.toLowerCase().split('|');
@@ -87,7 +87,36 @@ export function hasNodeTriggeredFromItem(trigger, characterInventory) {
 		}
 		return found;
 	}
+
+	else if (trigger.toLowerCase().startsWith('gems|')) {
+		const gemsToComplete = trigger.toLowerCase().split('|')[1].split(',');
+		for (let group of characterInventory.gemLinks) {
+			if (group.length < gemsToComplete) {
+				continue;
+			}
+			for (let gem of gemsToComplete) {
+				if (!includesWithVaalGemCheck(group, gem)) {
+					continue;
+				}
+			}
+			return true;
+		}
+	}
+
 	return false;
+};
+
+function includesWithVaalGemCheck(group, gem) {
+	let found = false;
+	for (let characterGem of group) {
+		if (characterGem === gem) {
+			found = true;
+		} else if (characterGem.replace(/vaal /, '').replace(/impurity/, 'purity') === gem) {
+			found = true;
+		}
+	}
+
+	return found;
 };
 
 export function jsonNodeToHtml(nodeMap, topNodeIds) {

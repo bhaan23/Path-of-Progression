@@ -19,10 +19,9 @@ export default class CharacterInventoryService extends EventEmitter {
 		this.gloves = null;
 		this.boots = null;
 		this.belt = null;
-
 		this.flasks = [];
-		this.gemLinkGroups = {};
-		this.socketGroups = {};
+		
+		this.gemLinks = [];
 
 		this.itemService = new ItemService();
 	}
@@ -38,7 +37,7 @@ export default class CharacterInventoryService extends EventEmitter {
 			this.itemService.fetchItems();
 			this.interval = setInterval(() => {
 				this.itemService.fetchItems();
-			}, 60000); // One minute	
+			}, 1000*60); // One minute	
 		}
 	}
 
@@ -47,50 +46,30 @@ export default class CharacterInventoryService extends EventEmitter {
 	}
 
 	parseInventoryData(items) {
-		this.gemLinkGroups = {};
-		this.socketGroups = {};
+		// Reset items
+		this.gemLinks = [];
 		this.flasks = [];
+
 		for (let item of items) {
 
 			// Socket groups
-			if (item.sockets) {
-				let groups = {};
-				let gemGroups = {};
+			if (item.socketedItems && item.socketedItems.length > 0) {
+				
+				let currentGroup = [];
+				let currentGroupNumber = item.socketedItems[0].socket;
 
-				// Loop through sockets and create a map of socket group to colors in that socket group
-				for (let socket of item.sockets) {
-					if (groups[socket.group]) {
-						groups[socket.group].push(SocketColor.lookup(socket.sColour));
-					} else {
-						groups[socket.group] = [SocketColor.lookup(socket.sColour)];
-						gemGroups[socket.group] = [];
+				// Build up each set of gem links
+				for (let socketedItem of item.socketedItems) {
+					const socketGroup = item.sockets[socketedItem.socket].group;
+
+					if (currentGroupNumber !== socketGroup) {
+						this.gemLinks.push(currentGroup);
+						currentGroup = [];
+						currentGroupNumber = socketGroup;
 					}
+					currentGroup.push(socketedItem.typeLine);
 				}
-
-				// Add those socket groups to the overall map
-				for (let groupKey of Object.keys(groups)) {
-					const group = groups[groupKey];
-					if (this.socketGroups[group.length]) {
-						this.socketGroups[group.length].push(group);
-					} else {
-						this.socketGroups[group.length] = [group];
-					}
-				}
-
-				// Loop through the socketed items and create the gem link groups
-				for (let socketItem of item.socketedItems) {
-					gemGroups[item.sockets[socketItem.socket].group].push(socketItem.typeLine); // Place only the name of the skill gem in the list
-				}
-
-				// Add those gem groups to the overall map
-				for (let gemGroupKey of Object.keys(gemGroups)) {
-					const group = groups[gemGroupKey];
-					if (this.socketGroups[group.length]) {
-						this.socketGroups[group.length].push(group);
-					} else {
-						this.socketGroups[group.length] = [group];
-					}
-				}
+				this.gemLinks.push(currentGroup);
 			}
 
 			const parsedItem = {
@@ -144,7 +123,7 @@ export default class CharacterInventoryService extends EventEmitter {
 					break;
 				case 'MainInventory':
 					if (item.category.currency) {
-						// TODO tally currency
+						// TODO tally currency?
 					}
 					break;
 			}

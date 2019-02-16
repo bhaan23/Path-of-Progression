@@ -6,7 +6,7 @@ import PathOfExileLog from 'poe-log-monitor';
 import { AlertType } from '../Objects/Enums.js';
 import { StoredSettings } from '../Objects/Enums.js';
 import CharacterInventoryService from './CharacterInventoryService';
-import { logMessageToTrigger, hasNodeTriggeredFromItem, jsonNodeToHtml } from '../Utils/Converter.js';
+import { logMessageToTrigger, jsonNodeToHtml, hasNodeTriggeredFromItemOrLink } from '../Utils/Converter.js';
 
 export default class ProgressionService {
 
@@ -86,7 +86,7 @@ export default class ProgressionService {
 		// Go backwards since can remove some items
 		for (let i = this.nodeService.topNodeIds.length -1; i > -1; i--) {
 			const nodeId = this.nodeService.topNodeIds[i];
-			if (hasNodeTriggeredFromItem(this.nodeService.nodeMap[nodeId].progressionData.completionTrigger, this.characterInventoryService)) {
+			if (hasNodeTriggeredFromItemOrLink(this.nodeService.nodeMap[nodeId].progressionData.completionTrigger, this.characterInventoryService)) {
 				this.completeNode(nodeId);
 			}
 		}
