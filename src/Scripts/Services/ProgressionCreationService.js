@@ -3,10 +3,8 @@ import _ from 'underscore';
 import { ipcRenderer } from 'electron';
 import NodeService from './NodeService.js';
 const { dialog } = require('electron').remote;
-import TileTemplate from '../../Templates/TileTemplate.html';
 import { getDependantNodes, userWantsToSave, populateSelectionDropdownsWithEventData } from '../Utils/UtilFunctions.js';
 import { buildGemLookup } from '../Utils/Converter.js';
-import eventTriggers from '../Objects/EventTriggers.js';
 import { createNode } from '../Utils/Converter.js';
 // import ProgressionPreviewService from './ProgressionPreviewService.js';
 
@@ -58,6 +56,7 @@ export default class ProgressionCreationService {
 			const text = this.titleInput.val() || '';
 			this.previewTitle.text(text);
 			this.currentProgressionNode.title = text;
+			this.currentNodeList.find(':selected').text(text);
 		});
 
 		this.hiddenCheckbox.on('change', () => {
@@ -96,6 +95,8 @@ export default class ProgressionCreationService {
 				this.gemSelectionPreview.removeClass('hidden');
 				this.gemSelectionPreview.html('');
 				this.currentProgressionNode.completionTrigger = [null, null];
+			} else if (!val) {
+				return;
 			}
 			this.currentProgressionNode.completionTrigger[0] = `${val}`;
 		});
@@ -248,6 +249,10 @@ export default class ProgressionCreationService {
 			this.deleteCurrentNodeButton.addClass('hidden');
 		}
 
+		for (let node of Object.keys(this.nodeService.nodeMap)) {
+			this.nodeService.nodeMap[node].progressionData.nodesNeeded.remove(this.currentProgressionNode.id);
+		}
+
 		const newSelectedNode = this.currentNodeList.children().first();
 		newSelectedNode.attr('selected', 'selected');
 		this.currentProgressionNode = {};
@@ -275,6 +280,7 @@ export default class ProgressionCreationService {
 		if (triggerParts.length > 1) {
 			this.comletionTypeSelect.val(triggerParts[0]);
 			this.comletionTypeSelect.change();
+			this.modSearchInput.val('');
 
 			switch (triggerParts[0]) {
 				case 'item':
@@ -296,6 +302,10 @@ export default class ProgressionCreationService {
 			if (triggerParts[2]) {
 				this.modSearchInput.val(triggerParts[2]);
 			}
+		} else {
+			this.comletionTypeSelect.val('');
+			this.comletionTypeSelect.change();
+			this.modSearchInput.val('');
 		}
 
 		this.dependantNodesContainer.html('');
@@ -341,7 +351,16 @@ export default class ProgressionCreationService {
 	findPossibleDependantNodes() {
 		const selected = this.currentNodeList.val();
 		const dependants = this.currentProgressionNode.nodesNeeded;
-		return this.currentNodeList.children().clone().filter((index, element) => {
+		return this.currentNodeList.children().clone().sort((a, b) => {
+			const aVal = parseInt(a.value);
+			const bVal = parseInt(b.value);
+			if (aVal < bVal) {
+				return 1;
+			} else if (aVal > bVal) {
+				return -1;
+			}
+			return 0;
+		}).filter((index, element) => {
 			return element.value !== selected && !dependants.includes(element.value);
 		});
 	}
@@ -350,7 +369,7 @@ export default class ProgressionCreationService {
 		if (!$.isEmptyObject(this.currentProgressionNode)) {
 			this.nodeService.nodeMap[this.currentProgressionNode.id].progressionData = this.currentProgressionNode;
 			this.nodeService.nodeMap[this.currentProgressionNode.id].progressionData.completionTrigger = 
-					this.currentProgressionNode.completionTrigger ? this.currentProgressionNode.completionTrigger.join('|') : '';
+					this.currentProgressionNode.completionTrigger instanceof Array ? this.currentProgressionNode.completionTrigger.join('|') : this.currentProgressionNode.completionTrigger;
 		}
 	}
 
@@ -376,6 +395,6 @@ export default class ProgressionCreationService {
 		while (idList.includes(newId.toString())) {
 			newId += 1;
 		}
-		return newId;
+		return newId.toString();
 	}
 }

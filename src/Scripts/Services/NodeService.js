@@ -108,7 +108,7 @@ export default class NodeService {
 	createSaveObject() {
 		let outputList = [];
 		for (let node of this.allNodes) {
-			if (this.nodeMap[node.id]) {
+			if (node && this.nodeMap[node.id]) {
 				outputList.push(this.nodeMap[node.id].progressionData);
 			}
 		}

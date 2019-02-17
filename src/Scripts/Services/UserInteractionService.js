@@ -200,11 +200,12 @@ export default class UserInteractionService {
 
 	loadKnownProgression(progressionFile) {
 		if (progressionFile) {
-			this.setupProgressionService(progressionFile);
+			this.setupProgressionService(progressionFile, false);
+			this.progressionService.nodeService.progressionFileLocation = ''; // Don't allow overwritting of base files
 		}
 	}
 
-	setupProgressionService(filename) {
+	setupProgressionService(filename, saveProgressionFileLocation) {
 		// Clean the infinitely running functions before creating new ones 
 		if (this.progressionService) {
 			this.progressionService.shutdown();
@@ -212,7 +213,9 @@ export default class UserInteractionService {
 		this.progressionService = new ProgressionService($('#tiles'));
 		this.progressionService.setup(filename);
 		this.progressionFileDisplay.text(filename.substring(filename.lastIndexOf('\\')+1));
-		this.settings.set(StoredSettings.PROGRESSION_FILE, filename);
+		if (saveProgressionFileLocation) {
+			this.settings.set(StoredSettings.PROGRESSION_FILE, filename);
+		}
 	}
 
 	populateCharacterNames(characters) {
