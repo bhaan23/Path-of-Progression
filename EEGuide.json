@@ -222,7 +222,7 @@
       "id": "21",
       "title": "To the Left",
       "completionTrigger": "area|the riverways",
-      "description": "Enter The Western Forest. From here you will find Alira, Oak, and the Ancient Pyramind.",
+      "description": "Enter The The Riverways. From here you will find Alira, Oak, and the Ancient Pyramind.",
       "nodesNeeded": [
         "20"
       ],
@@ -650,7 +650,7 @@
     {
       "id": "60",
       "title": "Find Deshret's spirit and The Crystal Veins",
-      "completionTrigger": "area|kaom's dream",
+      "completionTrigger": "area|the crystal veins",
       "description": "Continue through the second level of The Mines. Here you will want to free Deshret's spirit for a skill point. Then continue to The Crystal Veins",
       "nodesNeeded": [
         "59"
@@ -1729,7 +1729,7 @@
       "id": "157",
       "title": "Kill Garukhan and proceed to The Refinery",
       "completionTrigger": "area|the refinery",
-      "description": "Grab the waypoint in the middle of the zone, then continue to the bottom left where you will find the Shrine of The Winds. Kill Garukhan there to recieve a skill point, then head to the top left where you will find the entrance to The Refinery.",
+      "description": "Grab the waypoint in the middle of the zone, then continue to the bottom left where you will find the Shrine of The Winds. Kill Garukhan there to recieve a skill point, then head to the top right where you will find the entrance to The Refinery.",
       "nodesNeeded": [],
       "hidden": false,
       "completed": false

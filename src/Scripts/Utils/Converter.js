@@ -50,7 +50,10 @@ export function hasNodeTriggeredFromItemOrLink(trigger, characterInventory) {
 				itemData = [characterInventory.ring1, characterInventory.ring2];
 				break;
 			case 'weapon':
-				itemData = [characterInventory.weapon1, characterInventory.weapon2];
+				itemData = [characterInventory.weapon1, characterInventory.offhand1];
+				break;
+			case 'offhand':
+				itemData = [characterInventory.weapon2, characterInventory.offhand2];
 				break;
 		}
 

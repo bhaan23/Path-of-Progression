@@ -1,1 +1,1760 @@
-{ "progression": []}
+{
+  "progression": [
+    {
+      "id": "1",
+      "title": "Kill Hillock",
+      "completionTrigger": "area|lioneye's watch",
+      "description": "Navigate through The Twilight Strand until you encounter Hillock. Kill him and enter town for your reward.",
+      "nodesNeeded": [],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "2",
+      "title": "Equip movespeed boots",
+      "completionTrigger": "item|boots|% increased movement speed",
+      "description": "Look to purchase movement speed boots from Tarkleigh.",
+      "nodesNeeded": [
+        "1"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "3",
+      "title": "Go to The Coast",
+      "completionTrigger": "area|the coast",
+      "description": "Enter The Coast, run through any mobs and continue until you tag the waypoint.",
+      "nodesNeeded": [
+        "1"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "4",
+      "title": "Grab a quicksilver flask",
+      "completionTrigger": "item|flask|quicksilver",
+      "description": "Enter The Tidal Island to the right of the Coast waypoint. Kill Hillrake then return back to town to recieve a quicksilver flask from Nessa.",
+      "nodesNeeded": [
+        "5"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "5",
+      "title": "Break some eggs",
+      "completionTrigger": "area|the submerged passage",
+      "description": "Enter The Mud Flats and pick up the three glyphs from the Rhoa nests. Touch the wall next to Nessa and make your way to The Submerged Passage.",
+      "nodesNeeded": [
+        "3"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "6",
+      "title": "To The Ledge!",
+      "completionTrigger": "area|the ledge",
+      "description": "Enter The Submerged Passage and look for the bridge. Continue over the bridge and onto The Ledge.",
+      "nodesNeeded": [
+        "5"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "7",
+      "title": "Equip Flame Dash",
+      "completionTrigger": "gems|flame dash",
+      "description": "Take Flame Dash as a reqard from Tarkleigh after killing Brutus. ",
+      "nodesNeeded": [
+        "16"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "9",
+      "title": "Proceed to The Climb",
+      "completionTrigger": "area|the climb",
+      "description": "From the waypoint in The Ledge, continue onwards to the next zone: The Climb.",
+      "nodesNeeded": [
+        "6"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "10",
+      "title": "Continue to The Lower Prison",
+      "completionTrigger": "area|the lower prison",
+      "description": "Continue through The Climb until you find the entrance to the Lower Prison.",
+      "nodesNeeded": [
+        "9"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "11",
+      "title": "Move up in the Prison",
+      "completionTrigger": "area|the upper prison",
+      "description": "Continue through the zone and enter The Upper Prison.",
+      "nodesNeeded": [
+        "10"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "13",
+      "title": "Continue to The Warden's Chambers and Kill Brutus",
+      "completionTrigger": "area|prisoner's gate",
+      "description": "Make your way through the zone and enter The Warden's Chambers. Kill Brutus, then go back to town to grab an Added Lightning Damage Support from Nessa. Then go to Prisoner's Gate.",
+      "nodesNeeded": [
+        "11"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "15",
+      "title": "Go to The Ship Graveyard",
+      "completionTrigger": "area|the ship graveyard",
+      "description": "Continue through the prisoner's gate to The Ship Graveyard.",
+      "nodesNeeded": [
+        "13"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "16",
+      "title": "Reach Level 10",
+      "completionTrigger": "level|10",
+      "description": "Reach Level 10 where you can equip Flamedash.",
+      "nodesNeeded": [
+        "25"
+      ],
+      "hidden": true,
+      "completed": true
+    },
+    {
+      "id": "17",
+      "title": "Enter The Den",
+      "completionTrigger": "area|the den",
+      "description": "Enter The Den in The Crossroads to kill The Great White Beast.",
+      "nodesNeeded": [
+        "22"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "18",
+      "title": "Find The Cavern of Wrath",
+      "completionTrigger": "area|the cavern of wrath",
+      "description": "Continue through The Ship Graveyard to find The Cavern of Wrath.",
+      "nodesNeeded": [
+        "15"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "14",
+      "title": "To the Right",
+      "completionTrigger": "area|the old fields",
+      "description": "Go right and enter The Old Fields from town.",
+      "nodesNeeded": [
+        "20"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "19",
+      "title": "Find the Cavern of Anger and Kill Merveil",
+      "completionTrigger": "area|the southern forest",
+      "description": "Continue through The Cavern of Anger until you find Merveil's lair. Kill Merveil and proceed to Act 2.",
+      "nodesNeeded": [
+        "18"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "20",
+      "title": "Find the Act 2 Town",
+      "completionTrigger": "area|the forest encampment",
+      "description": "Find The Forest Encampment through The Southern Forest.",
+      "nodesNeeded": [
+        "19"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "21",
+      "title": "To the Left",
+      "completionTrigger": "area|the riverways",
+      "description": "Enter The The Riverways. From here you will find Alira, Oak, and the Ancient Pyramind.",
+      "nodesNeeded": [
+        "20"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "22",
+      "title": "Find The Crossroads",
+      "completionTrigger": "area|the crossroads",
+      "description": "Mode through The Old Fields and enter The Crossroads. Drop a waypoint before the entrance so you can come back to The Den and recieve another quicksilver flask as a reward.",
+      "nodesNeeded": [
+        "14"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "23",
+      "title": "Enter The Chamber of Sins",
+      "completionTrigger": "area|the chamber of sins level 1",
+      "description": "From The Crossroads waypoint, head up and to the left to find the Chamber of Sins.",
+      "nodesNeeded": [
+        "22"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "24",
+      "title": "Continue through the Chamber",
+      "completionTrigger": "area|the chamber of sins level 2",
+      "description": "Find the waypoint in the middle of The Chamber of Sins Level 1, then continue onwards to The Chamber of Sins Level 2.",
+      "nodesNeeded": [
+        "23"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "26",
+      "title": "Obtain the Baleful Gem",
+      "completionTrigger": "area|the vaal ruins",
+      "description": "Find and Kill Fidelitas to obtain the Baleful Gem. One piece needed to gain access to The Vaal Ruins.",
+      "nodesNeeded": [
+        "24"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "27",
+      "title": "Find Krailyn in The Broken Bridge",
+      "completionTrigger": "area|the broken bridge",
+      "description": "Take the waypoint back to The Crossroads and go up and to the right to find The Broken Bridge where you will find Krailyn, one of the bandits.",
+      "nodesNeeded": [
+        "30"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "28",
+      "title": "Find The Western Forest and Alira",
+      "completionTrigger": "area|the western forest",
+      "description": "From the waypoint in The Riverways, go left to find the entrace to The Western Forest. Here you will find Alira, one of the Bandits.",
+      "nodesNeeded": [
+        "21"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "29",
+      "title": "Kill the Blackguards",
+      "completionTrigger": "area|lioneye's watch",
+      "description": "Keeping navigating downwards until you find the Blackguards. Kill them, pick up the Thaumetic Emblem, place the emblem into the wall at the bottom of the zone to complete the quest. You must return to Lioneye's Watch in Act 1 to recieve your reward.",
+      "nodesNeeded": [
+        "28"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "30",
+      "title": "Find The Weaver's Chambers",
+      "completionTrigger": "area|the weaver's chambers",
+      "description": "Opposite Alira will be the entrace to The Weaver's Chambers. As you get closer, trees will be covered in webs.",
+      "nodesNeeded": [
+        "28"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "31",
+      "title": "Defeat The Weaver",
+      "completionTrigger": "area|the vaal ruins",
+      "description": "Move through The Weaver's Chambers until you find The Weaver's Nest. Enter and kill The Weaver to recieve Maligaro's Spike. You will need this Spike to enter The Vaal Ruins.",
+      "nodesNeeded": [
+        "30"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "32",
+      "title": "Find The Wetlands and Oak",
+      "completionTrigger": "area|the wetlands",
+      "description": "From The Riverways waypoint, move upwards until you find The Wetlands. Here you will encounter Oak, one of the bandits, in the center of the zone.",
+      "nodesNeeded": [
+        "27"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "33",
+      "title": "Enter The Vaal Ruins",
+      "completionTrigger": "area|the vaal ruins",
+      "description": "Find the waypoint in The Wetlands and use Maligaro's Spike and The Baleful Gem to break the roots nearby, granting you access to The Vaal Ruins.",
+      "nodesNeeded": [
+        "32"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "34",
+      "title": "Break the seal, Enter the Northern Forest",
+      "completionTrigger": "area|northern forest",
+      "description": "Move through The Vaal Ruins until you find The Ancient Seal. Break the seal and continue onwards to The Northern Forest.",
+      "nodesNeeded": [
+        "33"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "35",
+      "title": "Find The Caverns",
+      "completionTrigger": "area|the caverns",
+      "description": "Once you have entered The Northern Forest, continue up the river to find The Caverns.",
+      "nodesNeeded": [
+        "34"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "36",
+      "title": "Find The Ancient Pyramind",
+      "completionTrigger": "area|the ancient pyramid",
+      "description": "Continue through the zone until you find the entrance to The Ancient Pyramind.",
+      "nodesNeeded": [
+        "35"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "37",
+      "title": "Kill The Vaal Oversoul",
+      "completionTrigger": "area|the city of sarn",
+      "description": "Reach the Pyramind Apex and active the Dark Altar to unlease The Vaal Oversoul. Kill it to obtain the entrance to Act 3.",
+      "nodesNeeded": [
+        "36"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "38",
+      "title": "Talk with Clarissa and enter town",
+      "completionTrigger": "area|the sarn encampment",
+      "description": "Defeat the guards and talk with Clarissa before continuing on to town.",
+      "nodesNeeded": [
+        "37"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "39",
+      "title": "Enter the Slums",
+      "completionTrigger": "area|the slums",
+      "description": "Once in town, enter The Slums at the top right to continue your journey.",
+      "nodesNeeded": [
+        "38"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "40",
+      "title": "Locate the Sewer and find The Crematorium",
+      "completionTrigger": "area|the crematorium",
+      "description": "Make sure to find the Sewer, as you will need to enter this at a later point, then continue to The Crematorium.",
+      "nodesNeeded": [
+        "39"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "42",
+      "title": "Defeat Piety and her guards",
+      "completionTrigger": "area|the sewers",
+      "description": "Defeat Piety in the Crematorium to obtain Tolman's Bracelet. Bring this back to Clarissa to gain obtain the keys to the Sewer. Return back to The Slums where you can now enter The Sewers.",
+      "nodesNeeded": [
+        "40"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "43",
+      "title": "Obtain the busts and continue to The Marketplace",
+      "completionTrigger": "area|the marketplace",
+      "description": "Find all three stashes which contain platinum busts. Once you have found all three you can return to town for a skill point. Continue onwards to The Marketplace.",
+      "nodesNeeded": [
+        "42"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "44",
+      "title": "Find The Battlefront",
+      "completionTrigger": "area|the battlefront",
+      "description": "Make your way through The Marketplace until you find The Battlefront.",
+      "nodesNeeded": [
+        "43"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "45",
+      "title": "Grab the Ribbon Spool and head to The Solaris Temple",
+      "completionTrigger": "area|the solaris temple level 1",
+      "description": "Find the Ribbon Spool next to the waypoint in The Battlefront. Once you have that, make your way to The Solaris Temple Level 1.",
+      "nodesNeeded": [
+        "44"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "46",
+      "title": "Obtain the Thaumetic Sulphite",
+      "completionTrigger": "area|the ebony barracks",
+      "description": "Enter The Docks and look for the Thaumetic Sulphite. Once you find this, take it to Dialla in The Solaris Temple to obtain the Infernal Talc.",
+      "nodesNeeded": [
+        "47"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "47",
+      "title": "Move to The Solaris Temple",
+      "completionTrigger": "area|the solaris temple level 1",
+      "description": "After finding the Thaumetic Sulphite in The Docks. Head to The Solaris Temple where you will find Dialla.",
+      "nodesNeeded": [
+        "45"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "48",
+      "title": "Find Lady Dialla",
+      "completionTrigger": "area|the ebony barracks",
+      "description": "Proceed to The Solaris Temple Level 2 where you will find Lady Dialla. Talk to her to recieve the Infernal Talc in exchange for the Ribbon Spool and the Thaumetic Sulphite. Use this to clear the blockage in The Sewers and proceed to The Ebony Barracks.",
+      "nodesNeeded": [
+        "47"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "49",
+      "title": "Kill Gravicius and move to The Lunaris Temple",
+      "completionTrigger": "area|the lunaris temple level 1",
+      "description": "Take the staircases upwards until you find Gravicius. Kill him to complete a quest then continue upwards to The Lunaris Temple.",
+      "nodesNeeded": [
+        "48"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "50",
+      "title": "Continue till you find and kill Piety. Then go to The Imperial Gardens",
+      "completionTrigger": "area|the imperial gardens",
+      "description": "Continue downards to The Lunaris Temple Level 2. Navigate through until you find an orange portal leading to Piety. Kill her to obtain the Tower Key. After this, proceed to The Imperial Gardens.",
+      "nodesNeeded": [
+        "49"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "52",
+      "title": "Find The Sceptre of God",
+      "completionTrigger": "area|the sceptre of god",
+      "description": "Navigate through The Imperial Gardens until you find The Sceptre of God. Use the Tower Key you obtained from killing Pierty to gain access.",
+      "nodesNeeded": [
+        "50"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "53",
+      "title": "Enter the Imperial Gardens",
+      "completionTrigger": "area|the imperial gardens",
+      "description": "Enter the Imperial Gardens.",
+      "nodesNeeded": [
+        "46"
+      ],
+      "hidden": true,
+      "completed": false
+    },
+    {
+      "id": "54",
+      "title": "Continue to The Upper Sceptre of God",
+      "completionTrigger": "area|the upper sceptre of god",
+      "description": "Make your way up various staircases until you find The Upper Sceptre of God.",
+      "nodesNeeded": [
+        "52"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "55",
+      "title": "Find and Kill Dominus",
+      "completionTrigger": "area|the aqueduct",
+      "description": "Ascend up more staircases until you find The Tower Rooftop. Here you will fight Dominus. Kill him to proceed to Act 4.",
+      "nodesNeeded": [
+        "54"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "56",
+      "title": "Find the Act 4 town",
+      "completionTrigger": "area|highgate",
+      "description": "Continue through The Aqueducts until you reach Highgate.",
+      "nodesNeeded": [
+        "55"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "57",
+      "title": "Enter the Dried Lake",
+      "completionTrigger": "area|the dried lake",
+      "description": "Enter The Dried Lake at the bottom left of the town to find Deshret's Banner which will unlock the mines.",
+      "nodesNeeded": [
+        "56"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "58",
+      "title": "Obtain Deshret's Banner and enter The Mines",
+      "completionTrigger": "area|the mines level 1",
+      "description": "Kill Voll to obtain Deshre't Banner to open the entrance to the mines.",
+      "nodesNeeded": [
+        "57"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "59",
+      "title": "Proceed deeper into the mine",
+      "completionTrigger": "area|the mines level 2",
+      "description": "Continue through the first level of the mines until you reach the second level.",
+      "nodesNeeded": [
+        "58"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "60",
+      "title": "Find Deshret's spirit and The Crystal Veins",
+      "completionTrigger": "area|the crystal veins",
+      "description": "Continue through the second level of The Mines. Here you will want to free Deshret's spirit for a skill point. Then continue to The Crystal Veins",
+      "nodesNeeded": [
+        "59"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "61",
+      "title": "Find Lady Dialla and enter Daresso's Dream",
+      "completionTrigger": "area|daresso's dream",
+      "description": "After meeting Dialla, enter Daresso's Dream to the right.",
+      "nodesNeeded": [
+        "60"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "62",
+      "title": "Find Lady Dialla and enter Kaom's Dream",
+      "completionTrigger": "area|kaom's dream",
+      "description": "After meeting Dialla, enter Kaom's Dream to the right.",
+      "nodesNeeded": [
+        "60"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "63",
+      "title": "Proceed to The Grand Arena",
+      "completionTrigger": "area|the grand arena",
+      "description": "Fight through enemies until you find The Grand Arena.",
+      "nodesNeeded": [
+        "61"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "64",
+      "title": "Kill Daresso in The Ring of Blades",
+      "completionTrigger": "area|the crystal veins",
+      "description": "Proceed through the arena until you find Daresso. Kill him to obtain The Eye of Desire. Bring this back to Dialla.",
+      "nodesNeeded": [
+        "63"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "65",
+      "title": "Proceed to Kaom's Stronghold",
+      "completionTrigger": "area|kaom's stronghold",
+      "description": "Make your way through to Kaom's Stronghold.",
+      "nodesNeeded": [
+        "62"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "66",
+      "title": "Kill Kaom in The Caldera of The King",
+      "completionTrigger": "area|the crystal veins",
+      "description": "Proceed through the arena until you find Kaom. Kill him to obtain The Eye of Fury. Bring this back to Dialla.",
+      "nodesNeeded": [
+        "65"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "67",
+      "title": "Enter The Belly of The Beast",
+      "completionTrigger": "area|the belly of the beast level 1",
+      "description": "Take both eyes back to Dialla and she will open the entrance to The Belly of The Beast.",
+      "nodesNeeded": [
+        "64",
+        "66"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "68",
+      "title": "Proceed to Level 2",
+      "completionTrigger": "area|the belly of the beast level 2",
+      "description": "Continue through the Belly of The Beast until you reach the second level.",
+      "nodesNeeded": [
+        "67"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "69",
+      "title": "Kill Piety and proceed to The Harvest",
+      "completionTrigger": "area|the harvest",
+      "description": "Continue through The Belly of The Beast Level 2 until you reach Piety. Kill her then continue to The Harvest.",
+      "nodesNeeded": [
+        "68"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "70",
+      "title": "Defeat Malachai to obtain access to The Ascent",
+      "completionTrigger": "area|the ascent",
+      "description": "Obtain the the organs in The Harvest by killing Doedre, Maligaro, and Shavronne. Then make your way to The Black Core where you will fight Malachai.",
+      "nodesNeeded": [
+        "69"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "71",
+      "title": "Proceed to Act 5",
+      "completionTrigger": "area|the slave pens",
+      "description": "Once you have defeated Malachai. Portal back to town and enter The Ascent. Continue through until you find a portal to Oriath.",
+      "nodesNeeded": [
+        "70"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "72",
+      "title": "Find the Act 5 town",
+      "completionTrigger": "area|overseer's tower",
+      "description": "Continue through The Slave Pens. Kill Overseer Krow to gain access to the town.",
+      "nodesNeeded": [
+        "71"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "73",
+      "title": "Enter The Control Blocks",
+      "completionTrigger": "area|the control blocks",
+      "description": "After talking with Vendors for quest rewards, continue to The Control Blocks.",
+      "nodesNeeded": [
+        "72"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "74",
+      "title": "Find the Miasmeter and continue to Oriath Square",
+      "completionTrigger": "area|oriath square",
+      "description": "Find the Miasmeter, then continue until you find Justicar Casticus. Kill him then continue to Oriath Square.",
+      "nodesNeeded": [
+        "73"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "75",
+      "title": "Find The Templar Courts",
+      "completionTrigger": "area|the templar courts",
+      "description": "Navigate through the Oriath Square until you find The Templar Courts.",
+      "nodesNeeded": [
+        "74"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "76",
+      "title": "Proceed to The Chamber of Innocence",
+      "completionTrigger": "area|the chamber of innocence",
+      "description": "Move through The Templar Courts until you find The Chamber of Innocence.",
+      "nodesNeeded": [
+        "75"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "77",
+      "title": "Kill Innocence and proceed to The Torched Courts",
+      "completionTrigger": "area|the torched courts",
+      "description": "Find and kill Innocence, then proceed out of The Chamber of Innocnence and into The Torched Courts.",
+      "nodesNeeded": [
+        "76"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "78",
+      "title": "Return back to The Ruined Square",
+      "completionTrigger": "area|the ruined square",
+      "description": "Make your way through The Torched Courts until you find your way back to the Ruined Square.",
+      "nodesNeeded": [
+        "77"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "82",
+      "title": "Enter The Ossuary",
+      "completionTrigger": "area|the ossuary",
+      "description": "Find the entrance to The Ossuary next to the waypoint in The Ruined Square.",
+      "nodesNeeded": [
+        "78"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "83",
+      "title": "Obtain the Sign of Purity",
+      "completionTrigger": "area|the twilight strand",
+      "description": "In the Ossuary obtain The Sign of Purity as the center. You will need this to fight Kitava.",
+      "nodesNeeded": [
+        "82"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "84",
+      "title": "Proceed to The Solaris Concourse",
+      "completionTrigger": "area|the solaris temple level 2",
+      "description": "Make your way to The Solaris Concourse after defeating Dawn and obtaining the Sun Orb.",
+      "nodesNeeded": [
+        "142"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "85",
+      "title": "Find The Lunaris Concourse",
+      "completionTrigger": "area|the lunaris concourse",
+      "description": "Make your way to The Lunaris Concourse through The Harbour Bridge.",
+      "nodesNeeded": [
+        "132"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "86",
+      "title": "Head to The Cathedral Rooftop",
+      "completionTrigger": "area|the cathedral rooftop",
+      "description": "Find the Cathedral Rooftop from The Ruined Square where you will meet Kitava.",
+      "nodesNeeded": [
+        "78"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "87",
+      "title": "Kill Kitava and proceed to Act 6",
+      "completionTrigger": "area|lioneye's watch",
+      "description": "Make your way to the Cathedral Apex where you will fight Kitava. Kill Kitava in order to gain access to the act 6 town.",
+      "nodesNeeded": [
+        "86"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "88",
+      "title": "Proceed to The Coast",
+      "completionTrigger": "area|the coast",
+      "description": "Enter The Coast from Lioneye's Watch to begin Act 6.",
+      "nodesNeeded": [
+        "87"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "89",
+      "title": "Proceed to The Mud Flats",
+      "completionTrigger": "area|the mud flats",
+      "description": "Grab the waypoint at the end of The Coast and enter The Mud Flats",
+      "nodesNeeded": [
+        "88"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "90",
+      "title": "Enter The Karui Fortress",
+      "completionTrigger": "area|the karui fortress",
+      "description": "First kill The Dishonored Queen to obtain the Eye of Conquest. Take this and use it to access the gate to The Karui Fortress.",
+      "nodesNeeded": [
+        "89"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "91",
+      "title": "Defeat Tukohama and proceed to The Ridge",
+      "completionTrigger": "area|the ridge",
+      "description": "Defeat Tukohama in Tukohama's Keep to the right of the zone entrance. Then continue onwards to The Ridge.",
+      "nodesNeeded": [
+        "90"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "92",
+      "title": "Find The Lower Prison",
+      "completionTrigger": "area|the lower prison",
+      "description": "Navigate through The Ridge to The Lower Prison.",
+      "nodesNeeded": [
+        "91"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "96",
+      "title": "Continue to The Western Forest",
+      "completionTrigger": "area|the western forest",
+      "description": "Continue onwards to The Western Forest.",
+      "nodesNeeded": [
+        "95"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "97",
+      "title": "Proceed to The Riverways",
+      "completionTrigger": "area|the riverways",
+      "description": "Follow the path until you find The Riverways.",
+      "nodesNeeded": [
+        "96"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "98",
+      "title": "Continue to The Southern Forest",
+      "completionTrigger": "area|the southern forest",
+      "description": "Find the waypoint then continue to The Southern Forest.",
+      "nodesNeeded": [
+        "97"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "101",
+      "title": "Find The Cavern of Anger",
+      "completionTrigger": "area|the cavern of anger",
+      "description": "Proceed dowwards through The Southern Forest to find The Cavern of Anger.",
+      "nodesNeeded": [
+        "98"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "102",
+      "title": "Proceed to The Beacon with The Black Flag",
+      "completionTrigger": "area|the beacon",
+      "description": "Take the Black Flag and continue through the Passage to The Beacon.",
+      "nodesNeeded": [
+        "101"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "103",
+      "title": "Light the Beacon and sail to The Brine King's Reef",
+      "completionTrigger": "area|the brine king's reef",
+      "description": "Make your way to the beacon where you will need to escort totems to their place under the beacon. Then light the beacon and talk with Weylam to sail to The Brine King's Reef.",
+      "nodesNeeded": [
+        "102"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "104",
+      "title": "Kill The Brine King",
+      "completionTrigger": "area|the bridge encampment",
+      "description": "Find The Brine King's Throne and kill The Brine King. Then sail to Act 7.",
+      "nodesNeeded": [
+        "103"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "105",
+      "title": "Go to The Broken Bridge",
+      "completionTrigger": "area|the broken bridge",
+      "description": "Move through town to enter The Broken Bridge.",
+      "nodesNeeded": [
+        "104"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "106",
+      "title": "Find The Crossroads",
+      "completionTrigger": "area|the crossroads",
+      "description": "Go left through The Broken Bridge until you find The Crossroads.",
+      "nodesNeeded": [
+        "105"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "107",
+      "title": "Head to The Fellshrine Ruins",
+      "completionTrigger": "area|the fellshrine ruins",
+      "description": "Once you reach the waypoint in The Crossroads, head downwards to The Fellshrine Ruins.",
+      "nodesNeeded": [
+        "106"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "108",
+      "title": "Find The Crypt",
+      "completionTrigger": "area|the crypt",
+      "description": "Make your way downwards through the zone until you find The Crypt.",
+      "nodesNeeded": [
+        "107"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "112",
+      "title": "Enter Maligaro's Sanctum",
+      "completionTrigger": "area|maligaro's sanctum",
+      "description": "Go to the center of The Chamber of Sins where you can place Maligaro's Map that you found in The Crypt into the map device. This will open a portal to Maligaro's Sanctum.",
+      "nodesNeeded": [
+        "111"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "113",
+      "title": "Kill Maligaro and talk to Sin",
+      "completionTrigger": "area|the chamber of sins level 2",
+      "description": "Move through Maligaro's Sanctum until you find Maligaro, The Artist. Kill him to obtain the Black Venom which you can give to Sin. Once you have done this, he will give you an Obsidian Key you can use to access The Chamber of Sins Level 2.",
+      "nodesNeeded": [
+        "112"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "115",
+      "title": "Find the secret passage to The Den",
+      "completionTrigger": "area|the den",
+      "description": "Navigate through the zone going to the top right until you find The Secret Passage. Use the key Silk gave you to access The Den.",
+      "nodesNeeded": [
+        "113"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "116",
+      "title": "Find The Ashen Fields",
+      "completionTrigger": "area|the ashen fields",
+      "description": "Continue until you find The Ashen Fields entrance.",
+      "nodesNeeded": [
+        "115"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "117",
+      "title": "Kill Greust and enter The Northern Forest",
+      "completionTrigger": "area|the northern forest",
+      "description": "Continue through The Ashen Fields until you find The Forest Encampment. Here you will need to Kill Greust to proceed to The Northern Forest.",
+      "nodesNeeded": [
+        "116"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "118",
+      "title": "Find The Dread Thicket",
+      "completionTrigger": "area|the northern forest",
+      "description": "Find The Dread Thicket in The Northern Forest.",
+      "nodesNeeded": [
+        "117"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "119",
+      "title": "Collect Fireflies and Kill Gruthkul",
+      "completionTrigger": "area|the temple of decay level 1",
+      "description": "Collect the fireflies for Yeena and kill Gruthkul in The Den of Despair to recieve a skill point.",
+      "nodesNeeded": [
+        "118"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "120",
+      "title": "Find The Causeway",
+      "completionTrigger": "area|the causeway",
+      "description": "Follow the right of the zone to the top to find the entrace to The Causeway.",
+      "nodesNeeded": [
+        "117"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "121",
+      "title": "Grab Kishara's Star and continue to The Vaal City",
+      "completionTrigger": "area|the vaal city",
+      "description": "Move through the zone until you find a box containing Kishara's Star. Grab it, and continue to The Vaal City.",
+      "nodesNeeded": [
+        "120"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "122",
+      "title": "Talk to Yeena and enter The Temple of Decay",
+      "completionTrigger": "area|the temple of decay level 1",
+      "description": "Find Yeena and deliver the fireflies you collected to gain access to The Temple of Decay.",
+      "nodesNeeded": [
+        "121"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "123",
+      "title": "Continue to The Temple of Decay Level 2",
+      "completionTrigger": "area|the temple of decay level 2",
+      "description": "Continue downards to The Temple of Decay Level 2.",
+      "nodesNeeded": [
+        "122"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "124",
+      "title": "Kill Arakaali and proceed to Act 8",
+      "completionTrigger": "area|the bridge encampment",
+      "description": "Find Arakaali's Web and kill Arakaali to gain access to The Sarn Ramparts.",
+      "nodesNeeded": [
+        "123"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "125",
+      "title": "Find the Act 8 town",
+      "completionTrigger": "area|the sarn encampment",
+      "description": "Continue till you find The Sarn Encampment.",
+      "nodesNeeded": [
+        "124"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "128",
+      "title": "Find Doedre's Cesspool",
+      "completionTrigger": "area|doedre's cesspool",
+      "description": "Find the entrance to Doedre's Cesspool.",
+      "nodesNeeded": [
+        "127"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "129",
+      "title": "Kill Doedre",
+      "completionTrigger": "area|the grand promenade",
+      "description": "Find and Kill Doedre to gain access to The Grand Promenade.",
+      "nodesNeeded": [
+        "128"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "132",
+      "title": "Proceed to The Harbour Bridge",
+      "completionTrigger": "area|the harbour bridge",
+      "description": "Make your way to The Harbour Bridge from The Solaris Concourse.",
+      "nodesNeeded": [
+        "84"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "135",
+      "title": "Find The Lunaris Temple",
+      "completionTrigger": "area|the lunaris temple level 1",
+      "description": "Move through The Lunaris Concourse until you find the entrance to The Lunaris Temple.",
+      "nodesNeeded": [
+        "85"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "136",
+      "title": "Proceed to The Lunaris Temple Level 2",
+      "completionTrigger": "area|the lunaris temple level 2",
+      "description": "Find the waypoint and proceed to The Lunaris Temple Level 2.",
+      "nodesNeeded": [
+        "135"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "137",
+      "title": "Kill Dusk, Harbinger of Lunaris",
+      "completionTrigger": "area|the blood aqueduct",
+      "description": "Make your way through The Lunaris Temple until you find a portal. Here you will encounter Dusk. Kill Dusk and pick up The Moon Orb.",
+      "nodesNeeded": [
+        "136"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "138",
+      "title": "Find The Quay",
+      "completionTrigger": "area|the quay",
+      "description": "Move to the right of the waypoint to find the entrance to The Quay.",
+      "nodesNeeded": [
+        "129"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "139",
+      "title": "Proceed to The Grain Gate",
+      "completionTrigger": "area|the grain gate",
+      "description": "Continue through the zone until you reach The Grain Gate.",
+      "nodesNeeded": [
+        "138"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "140",
+      "title": "Kill The Gemling Legion and proceed to The Imperial Fields",
+      "completionTrigger": "area|the imperial fields",
+      "description": "Find the Gemling Legion, who you can kill for a skill point. Then continue to ",
+      "nodesNeeded": [
+        "139"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "141",
+      "title": "Find The Solaris Temple",
+      "completionTrigger": "area|the solaris temple level 1",
+      "description": "Move through The Imperial Fields until you find the entrance to The Lunaris Temple.",
+      "nodesNeeded": [
+        "140"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "142",
+      "title": "Proceed to The Solaris Temple Level 2",
+      "completionTrigger": "area|the solaris temple level 2",
+      "description": "Continue upwards and to the right through the zone until you find The Solaris Temple Level 2.",
+      "nodesNeeded": [
+        "141"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "143",
+      "title": "Kill Dawn, Harbinger of Solaris",
+      "completionTrigger": "area|the blood aqueduct",
+      "description": "Make your way through The Lunaris Temple until you find a portal. Here you will encounter Dawn. Kill Dawn and pick up The Sun Orb.",
+      "nodesNeeded": [
+        "142"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "145",
+      "title": "Kill Lunaris and Solaris",
+      "completionTrigger": "area|the blood aqueduct",
+      "description": "Find The Sky Shrine in the middle of The Harbour Bridge. There place the Sun Orb and Moon Orb in the Statue of The Sisters. Then Kill the sisters and proceed to The Blood Aqueduct.",
+      "nodesNeeded": [
+        "144"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "146",
+      "title": "Find the Act 9 Town",
+      "completionTrigger": "area|highgate",
+      "description": "Continue through The Blood Acqueduct until you find Highgate.",
+      "nodesNeeded": [
+        "145"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "149",
+      "title": "Proceed to The Foothills",
+      "completionTrigger": "area|the foothills",
+      "description": "Move to the top left of the zone from the waypoint to find The Foothills.",
+      "nodesNeeded": [
+        "148"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "152",
+      "title": "Find The Boiling Lake",
+      "completionTrigger": "area|the boiling lake",
+      "description": "From the waypoint, move right and enter The Boiling Lake.",
+      "nodesNeeded": [
+        "149"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "153",
+      "title": "Kill The Basalisk and take the Acid",
+      "completionTrigger": "area|the belly of the beast",
+      "description": "Find and kill The Basalisk. Then pick up the Basalisk Acid to give to Sin later.",
+      "nodesNeeded": [
+        "152"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "154",
+      "title": "Find The Tunnel",
+      "completionTrigger": "area|the tunnel",
+      "description": "Proceed left of the waypoint until you find the entrance to The Tunnel.",
+      "nodesNeeded": [
+        "149"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "156",
+      "title": "Find The Quarry",
+      "completionTrigger": "area|the quarry",
+      "description": "Proceed through The Tunnel to The Quarry.",
+      "nodesNeeded": [
+        "154"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "157",
+      "title": "Proceed to The Refinery",
+      "completionTrigger": "area|the refinery",
+      "description": "Grab the waypoint in the middle of the zone, then continue head to the top right where you will find the entrance to The Refinery.",
+      "nodesNeeded": [],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "158",
+      "title": "Kill Gernal Adus and grab the powder",
+      "completionTrigger": "area|the belly of the beast",
+      "description": "Find General Adus, kill him, and take the Trarthan Powder back to Sin at the Quarry.",
+      "nodesNeeded": [
+        "157"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "159",
+      "title": "Enter The Belly of The Beast",
+      "completionTrigger": "area|the belly of the beast",
+      "description": "Talk to Sin back at The Quary to gain access to The Belly of The Beast.",
+      "nodesNeeded": [
+        "157",
+        "152"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "160",
+      "title": "Enter The Rotting Core",
+      "completionTrigger": "area|the rotting core",
+      "description": "Find the entrance to The Rotting Core.",
+      "nodesNeeded": [
+        "159"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "161",
+      "title": "Kill The Depraved Trinity and proceed to Act 10",
+      "completionTrigger": "area|oriath docks",
+      "description": "Find The Black Heart and talk to Sin. Then kill the three spirits of Shavronne, Maligaro, and Doedre. Finally kill the Depraved Trinity and talk to Lilly to sail back to Oriath and begin Act 10.",
+      "nodesNeeded": [
+        "160"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "162",
+      "title": "Go to The Cathedral Rooftop",
+      "completionTrigger": "area|the cathedral rooftop",
+      "description": "Make your way through town to The Cathedral Rooftop.",
+      "nodesNeeded": [
+        "161"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "163",
+      "title": "Talk to Bannon and continue to The Ravaged Square",
+      "completionTrigger": "area|the ravaged square",
+      "description": "When you first enter The Cathedral Rooftop, go left and kill of guards and talk to Bannon. Then continue to the right until you find The Ravaged Square.",
+      "nodesNeeded": [
+        "162"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "164",
+      "title": "Proceed to Torched Courts",
+      "completionTrigger": "area|the torched courts",
+      "description": "Moved upwards and to the right to find The Torched Courts.",
+      "nodesNeeded": [
+        "163"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "171",
+      "title": "Enter The Canals",
+      "completionTrigger": "area|the canals",
+      "description": "Next to the waypoint in The Ravaged Square, talk to Innocence and enter The Canals.",
+      "nodesNeeded": [
+        "166"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "172",
+      "title": "Proceed to The Feeding Trough",
+      "completionTrigger": "area|the feeding trough",
+      "description": "Continue through till you find The Feeding Trough",
+      "nodesNeeded": [
+        "171"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "173",
+      "title": "Kill Kitava",
+      "completionTrigger": "area|oriath",
+      "description": "Make your way to the end of The Feeding Trough where you will find Sin and Innocence. Enter the Arena and Kill Kitava. Then proceed to Oriath to begin the end game.",
+      "nodesNeeded": [
+        "172"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "12",
+      "title": "Equip Explosive Trap",
+      "completionTrigger": "gems|explosive trap",
+      "description": "Grab explosive trap from either a mule character, a buddy, or your stash for early single target damage.",
+      "nodesNeeded": [
+        "1"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "25",
+      "title": "Reach Level 4",
+      "completionTrigger": "level|4",
+      "description": "Reach level 4 to equip Frostbomb and Onslaught",
+      "nodesNeeded": [],
+      "hidden": true,
+      "completed": true
+    },
+    {
+      "id": "41",
+      "title": "Setup Frostbomb",
+      "completionTrigger": "gems|frost bomb,onslaught support",
+      "description": "Get Frost Bomb from Tarkleigh as a reward, and purchase Onslaught from Nessa.",
+      "nodesNeeded": [
+        "25"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "51",
+      "title": "Equip War Banner",
+      "completionTrigger": "gems|war banner",
+      "description": "Equip War Banner which you can buy from Nessa",
+      "nodesNeeded": [
+        "25"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "79",
+      "title": "Link Frost Bomb with Arcane Surge",
+      "completionTrigger": "gems|frost bomb,arcane surge support,onslaught support",
+      "description": "After linking Onslaught to Frost Bomb, link Arcane Surge",
+      "nodesNeeded": [
+        "41"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "8",
+      "title": "Swap out Arcane Surge for Added Lightning",
+      "completionTrigger": "gems|frost bomb,added lightning damage support,onslaught support",
+      "description": "Replace Arcane Surge Support with Added Lightning Damage Support in your Frost Bomb setup.",
+      "nodesNeeded": [
+        "79"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "80",
+      "title": "Kill The Great White Beast",
+      "completionTrigger": "item|flask|quicksilver",
+      "description": "Kill The Great White Beast then portal back to town to recieve another quicksilver flask from Yeena.",
+      "nodesNeeded": [
+        "17"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "81",
+      "title": "Reach Level 12",
+      "completionTrigger": "level|12",
+      "description": "Reach Level 12 so you can equip Storm Brand",
+      "nodesNeeded": [
+        "16"
+      ],
+      "hidden": true,
+      "completed": false
+    },
+    {
+      "id": "93",
+      "title": "Replace Frost Bomb with Storm Brand",
+      "completionTrigger": "gems|storm brand,added lightning damage support,onslaught support",
+      "description": "Replace your Frost Bomb setup with Storm Brand",
+      "nodesNeeded": [
+        "81"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "109",
+      "title": "Reach Level 16",
+      "completionTrigger": "level|16",
+      "description": "Reach Level 16",
+      "nodesNeeded": [
+        "81"
+      ],
+      "hidden": true,
+      "completed": true
+    },
+    {
+      "id": "131",
+      "title": "Equip Brand Recall",
+      "completionTrigger": "gems|brand recall",
+      "description": "Equip Brand Recall",
+      "nodesNeeded": [
+        "109"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "155",
+      "title": "Equip Faster Casting to Flame Dash",
+      "completionTrigger": "gems|flame dash,faster casting support",
+      "description": "",
+      "nodesNeeded": [
+        "109"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "169",
+      "title": "Reach Level 24",
+      "completionTrigger": "level|24",
+      "description": "Reach Level 24",
+      "nodesNeeded": [
+        "109"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "170",
+      "title": "Equip Conductivity",
+      "completionTrigger": "gems|conductivity",
+      "description": "",
+      "nodesNeeded": [
+        "169"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "174",
+      "title": "Enter The Library",
+      "completionTrigger": "area|the library",
+      "description": "Enter The Library to complete the Siosa quest",
+      "nodesNeeded": [
+        "53"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "175",
+      "title": "Enter The Archives and collect the Golden Pages",
+      "completionTrigger": "gems|lightning spire trap",
+      "description": "Enter The Archives to complete the Golden Pages quest from Siosa. Then take Lightning Penetration Support as a reward, and purchase Lightning Spire Trap from Siosa.",
+      "nodesNeeded": [
+        "174"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "176",
+      "title": "Link gems to Lightning Spire Trap",
+      "completionTrigger": "gems|lightning spire trap,added lightning damage support,faster casting support",
+      "description": "",
+      "nodesNeeded": [
+        "175"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "177",
+      "title": "4-link Storm Brand",
+      "completionTrigger": "gems|,storm brand,added lightning damage support,controlled destruction support,onslaught support",
+      "description": "Once you get a BBBG piece of armour, link Storm Brand.",
+      "nodesNeeded": [
+        "93"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "114",
+      "title": "Swap Added Lightning Damage with Lightining Penetration",
+      "completionTrigger": "gems|lightning spire trap,faster casting support,lightning penetration support",
+      "description": "After linking Storm Brand swap in Lighting Penetration to Lightning Spire Trap",
+      "nodesNeeded": [
+        "177"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "178",
+      "title": "Get a 4-link Lightning Spire Trap",
+      "completionTrigger": "gems|lightning spire trap,faster casting support,lightning penetration support,trap and mine damage support",
+      "description": "Once you find another BBBG piece of armour. Add Trap and Mine Damage to your Lightning Spire Trap Links. You can purchase this from the Act 2 town.",
+      "nodesNeeded": [
+        "176"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "84",
+      "title": "Proceed to The Solaris Concourse",
+      "completionTrigger": "area|the solaris temple level 2",
+      "description": "Make your way to The Solaris Concourse after defeating Dawn and obtaining the Sun Orb.",
+      "nodesNeeded": [
+        "142"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "85",
+      "title": "Find The Lunaris Concourse",
+      "completionTrigger": "area|the lunaris concourse",
+      "description": "Make your way to The Lunaris Concourse through The Harbour Bridge.",
+      "nodesNeeded": [
+        "132"
+      ],
+      "hidden": false,
+      "completed": false
+    }
+  ]
+}

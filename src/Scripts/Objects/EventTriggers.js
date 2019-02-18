@@ -504,7 +504,8 @@ const eventTriggers = {
 		'gloves': 'Gloves',
 		'helm': 'Helm',
 		'ring': 'Ring',
-		'weapon': 'Weapon'
+		'weapon': 'Weapon',
+		'offhand': 'Offhand'
 	}
 };
 

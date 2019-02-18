@@ -243,20 +243,23 @@ export default class ProgressionCreationService {
 	}
 
 	deleteCurrentNode() {
+		
+		for (let node of Object.keys(this.nodeService.nodeMap)) {
+			const index = this.nodeService.nodeMap[node].progressionData.nodesNeeded.indexOf(this.currentProgressionNode.id);
+			if (index > -1) {
+				this.nodeService.nodeMap[node].progressionData.nodesNeeded = this.nodeService.nodeMap[node].progressionData.nodesNeeded.filter((value, arrIndex) => { return index != arrIndex; })
+			}
+		}
+
 		this.currentNodeList.find(`option[value="${this.currentProgressionNode.id}"]`).remove();
 		this.nodeService.removeNode(this.currentProgressionNode.id);
-
+		const newSelectedNode = this.currentNodeList.children().first();
+		newSelectedNode.attr('selected', 'selected');
 		if (this.currentNodeList.children().length === 1) {
 			this.addDependantNodesButton.prop('disabled', true);
 			this.deleteCurrentNodeButton.addClass('hidden');
 		}
-
-		for (let node of Object.keys(this.nodeService.nodeMap)) {
-			this.nodeService.nodeMap[node].progressionData.nodesNeeded.remove(this.currentProgressionNode.id);
-		}
-
-		const newSelectedNode = this.currentNodeList.children().first();
-		newSelectedNode.attr('selected', 'selected');
+		
 		this.currentProgressionNode = {};
 		this.setCurrentNode(this.nodeService.nodeMap[newSelectedNode.attr('value')].progressionData);
 	}
@@ -275,7 +278,9 @@ export default class ProgressionCreationService {
 		this.descriptionInput.val(progressionData.description);
 		this.descriptionInput.trigger('input');
 		this.hiddenCheckbox.attr('checked', progressionData.hidden);
+		this.hiddenCheckbox.change();
 		this.completedCheckbox.attr('checked', progressionData.completed);
+		this.completedCheckbox.change();
 		
 		const triggerParts = progressionData.completionTrigger.toLowerCase().split('|');
 		this.gemSelectionPreview.html('');
@@ -317,7 +322,7 @@ export default class ProgressionCreationService {
 			}
 		}
 
-		this.currentProgressionNode.completionTrigger = triggerParts;
+		this.currentProgressionNode.completionTrigger = triggerParts || [];
 	}
 
 	addDependantNodeIds(ids) {

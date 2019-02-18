@@ -1,3 +1,4 @@
+Add typeahead for larger inputs (area, skill gems)
 d3 progression creation tool:
 	- Make d3 creation tool infinitely draggable/zoomable
 	- Let creation tool take in a started progression and draw nodes from it
@@ -6,5 +7,3 @@ Add currency to inventory search?
 Add icons to title indicating skill points quests (src="https://web.poecdn.com/image/Art/2DItems/QuestItems/SkillBook.png?scale=1")?
 
 Add link for how to add session information and such to the view progression page
-Map out a full progression from a WR speedrun
-Add typeahead for larger inputs (area, skill gems)
