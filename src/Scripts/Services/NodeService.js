@@ -128,7 +128,7 @@ export default class NodeService {
 		} else {
 			filename = dialog.showSaveDialog({
 				filters: [{
-					name: 'Progression File', extensions: ['json']
+					name: 'JSON', extensions: ['json']
 				}]
 			});
 			if (filename) {

@@ -119,7 +119,7 @@ export default class UserInteractionService {
 			} else {
 				const filenames = dialog.showOpenDialog({
 					filters: [{
-						name: 'Progression', extensions: ['json']
+						name: 'JSON', extensions: ['json']
 					}],
 					properties: [
 						'openFile'
@@ -166,6 +166,8 @@ export default class UserInteractionService {
 
 		this.saveButton.on('click', () => {
 			this.progressionService.save();
+			this.progressionFileDisplay.text(this.progressionService.nodeService.progressionFileLocation.substr(
+				this.progressionService.nodeService.progressionFileLocation.lastIndexOf('\\')+1));
 		});
 
 		// Check if the user wants to save data before the app closes

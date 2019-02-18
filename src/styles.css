@@ -577,6 +577,10 @@ label:active:after {
 	transform: scale(0.8, 0.8);
 }
 
+#currentSaveFile {
+	margin-left: 0.5rem;
+}
+
 /* Modal styles */
 
 #modal {

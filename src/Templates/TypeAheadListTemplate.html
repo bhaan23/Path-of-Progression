@@ -1,0 +1,12 @@
+<% for (let groupName of data) { %>
+	<div class="typeAheadGroupTitle">
+		<span class="typeAheadGroupTitle">
+			<%=groupName%>
+		</span>
+		<% for (let itemValue of Object.keys(data[groupName])) { %>
+			<span value="<%=itemValue%>" class="typeAheadItem">
+				<%=data[groupName][itemValue]%>
+			</span>
+		<% } %>
+	</div>
+<% } %>

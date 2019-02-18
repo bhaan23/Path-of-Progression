@@ -25,6 +25,7 @@ export default class ProgressionCreationService {
 		this.previewTitle = $('#nodePreview .tileTitle');
 		this.previewDescription = $('#nodePreview .tileDescription');
 		this.progressionPreview = $('#progressionPreview');
+		this.currentSaveFile = $('#currentSaveFile');
 
 		this.group2 = $('#group2');
 		this.group3 = $('#group3');
@@ -135,16 +136,16 @@ export default class ProgressionCreationService {
 			if (!this.nodeService.canSave() || !(doSave = userWantsToSave())) {
 				const filenames = dialog.showOpenDialog({
 					filters: [{
-						name: 'Progression', extensions: ['json']
+						name: 'JSON', extensions: ['json']
 					}],
 					properties: [
 						'openFile'
-					],
-					defaultPath: this.progressionFileHelpPath ? this.progressionFileHelpPath : null
+					]
 				});
 	
 				if (filenames && filenames.length > 0) {
 					this.importFromFile(filenames[0]);
+					this.currentSaveFile.text(filenames[0].substr(filenames[0].lastIndexOf('\\')+1));
 					this.saveButton.removeClass('hidden');
 					this.creationContainer.show();
 				}
@@ -160,6 +161,7 @@ export default class ProgressionCreationService {
 		this.saveButton.on('click', () => {
 			this.saveCurrentNode();
 			this.nodeService.save();
+			this.currentSaveFile.text(this.nodeService.progressionFileLocation.substr(this.nodeService.progressionFileLocation.lastIndexOf('\\')+1));
 		});
 
 		ipcRenderer.on('create-progression', () => {
