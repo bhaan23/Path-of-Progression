@@ -11,6 +11,7 @@ Report bugs at https://github.com/bhaan23/Path-of-Progression/issues
 - [Install and Setup](https://imgur.com/a/XhqyBam)
 - [No trust from Windows](#no-trust-from-windows)
 - [How it runs](#how-it-runs)
+- [FAQs](#faqs)
 - [Help us out](#help-us-out)
 - [Contact](#contact)
 - [Acknowledgements](#acknowledgements)
@@ -28,6 +29,14 @@ We do not own a certificate to sign the application. This means that when you fi
 Currently the app runs with [Electron](https://electronjs.org) which lets us convert a web application to a runnable .exe
 
 The app then takes in a progression .json file with an array of [progression nodes](https://github.com/bhaan23/Path-of-Progression/blob/master/progression.md) which will queue off of log events and items equipped to show you what to do next.
+
+## FAQs
+
+Q: I equipped an item, but the node isn't dissapearing. Why?
+- A: To not spam GGG's servers, I have set a timeout on the call to collect character data. That timeout is 1 minute. If the issue persists it is possible the trigger to complete the node is incorrect. If not, report a bug.
+
+Q: Why don't the lab trials in the included progression dissapear?
+- A: Unfortunately, do to how GGG does their logging, things such as lab trials are not entered in log at all. You can simply know which area they are in. I included them as it is useful information while leveling on a first character in a league. But you will have to manually close out each of the nodes when you complete the trials.
 
 ## Help us out
 
