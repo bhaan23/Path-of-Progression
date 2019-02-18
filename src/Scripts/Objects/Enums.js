@@ -46,8 +46,8 @@ class AlertTypeEnum {
 
 	constructor() {
 		this.POSITIVE = 1;
-		this.NEGATIVE = 2;
-		this.WARNING = 3;
+		this.WARNING = 2;
+		this.NEGATIVE = 3;
 		this.MESSAGE = 4;
 	}
 }

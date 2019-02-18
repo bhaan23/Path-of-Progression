@@ -88,20 +88,26 @@ export default class NodeService {
 	}
 
 	createDependencyGraph() {
-		for (let id of Object.keys(this.nodeMap)) {
-			const dependantNodeIds = this.nodeMap[id].progressionData.nodesNeeded;
-			let i = 0;
-			for (let dependantId of dependantNodeIds) {
-				if (!this.completedNodeIds.includes(dependantId)) {
-					this.nodeMap[dependantId].dependantNodeIds.push(id);
-					i += 1;
+		let id;
+		try {
+			for (id of Object.keys(this.nodeMap)) {
+				const dependantNodeIds = this.nodeMap[id].progressionData.nodesNeeded;
+				let i = 0;
+				for (let dependantId of dependantNodeIds) {
+					if (!this.completedNodeIds.includes(dependantId)) {
+						this.nodeMap[dependantId].dependantNodeIds.push(id);
+						i += 1;
+					}
+				}
+
+				// Top level node
+				if (i === 0 && !this.completedNodeIds.includes(id)) {
+					this.topNodeIds.push(id);
 				}
 			}
-
-			// Top level node
-			if (i === 0 && !this.completedNodeIds.includes(id)) {
-				this.topNodeIds.push(id);
-			}
+		} catch (e) {
+			new Alert(`There was an error finding the dependencies for the node with id: ${id}. Stopping creation.`, AlertType.NEGATIVE, () => { });
+			throw Error(`There was an error finding the dependencies for the node with id: ${id}`);
 		}
 	}
 

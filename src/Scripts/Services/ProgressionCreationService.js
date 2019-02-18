@@ -65,7 +65,7 @@ export default class ProgressionCreationService {
 		});
 
 		this.completedCheckbox.on('change', () => {
-			this.currentProgressionNode.completed = this.hiddenCheckbox.is(':checked');
+			this.currentProgressionNode.completed = this.completedCheckbox.is(':checked');
 		});
 
 		this.descriptionInput.on('input', () => {

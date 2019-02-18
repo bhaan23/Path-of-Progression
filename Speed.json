@@ -139,7 +139,7 @@
         "25"
       ],
       "hidden": true,
-      "completed": true
+      "completed": false
     },
     {
       "id": "17",
@@ -924,6 +924,28 @@
       "completed": false
     },
     {
+      "id": "94",
+      "title": "Continue to Shavronne's Tower",
+      "completionTrigger": "area|shavronne's tower",
+      "description": "Continue through The Lower Prison to Shavronne's Tower.",
+      "nodesNeeded": [
+        "92"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "95",
+      "title": "Kill Shavronne to access The Prisoner's Gate",
+      "completionTrigger": "area|prisoner's gate",
+      "description": "Make your way to The Prison Rooftop. Here you will encounted Brutus and Shavronne. Kill them both to obtain access to The Prisoner's Gate.",
+      "nodesNeeded": [
+        "94"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
       "id": "96",
       "title": "Continue to The Western Forest",
       "completionTrigger": "area|the western forest",
@@ -1023,23 +1045,12 @@
       "completed": false
     },
     {
-      "id": "107",
-      "title": "Head to The Fellshrine Ruins",
-      "completionTrigger": "area|the fellshrine ruins",
-      "description": "Once you reach the waypoint in The Crossroads, head downwards to The Fellshrine Ruins.",
+      "id": "111",
+      "title": "Enter The Chamber of Sins",
+      "completionTrigger": "area|the chamber of sins level 1",
+      "description": "From the waypoint in The Crossroads, move upwards until you find The Chamber of Sins.",
       "nodesNeeded": [
         "106"
-      ],
-      "hidden": false,
-      "completed": false
-    },
-    {
-      "id": "108",
-      "title": "Find The Crypt",
-      "completionTrigger": "area|the crypt",
-      "description": "Make your way downwards through the zone until you find The Crypt.",
-      "nodesNeeded": [
-        "107"
       ],
       "hidden": false,
       "completed": false
@@ -1188,6 +1199,17 @@
       "completed": false
     },
     {
+      "id": "127",
+      "title": "Enter The Toxic Conduits",
+      "completionTrigger": "area|the toxic conduits",
+      "description": "Find the entrance to The Toxic Conduits from town.",
+      "nodesNeeded": [
+        "125"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
       "id": "128",
       "title": "Find Doedre's Cesspool",
       "completionTrigger": "area|doedre's cesspool",
@@ -1325,7 +1347,7 @@
       "completionTrigger": "area|the blood aqueduct",
       "description": "Find The Sky Shrine in the middle of The Harbour Bridge. There place the Sun Orb and Moon Orb in the Statue of The Sisters. Then Kill the sisters and proceed to The Blood Aqueduct.",
       "nodesNeeded": [
-        "144"
+        "142", "136"
       ],
       "hidden": false,
       "completed": false
@@ -1337,6 +1359,28 @@
       "description": "Continue through The Blood Acqueduct until you find Highgate.",
       "nodesNeeded": [
         "145"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "147",
+      "title": "Enter The Descent",
+      "completionTrigger": "area|the descent",
+      "description": "Go to the top right of Highgate and enter The Descent.",
+      "nodesNeeded": [
+        "146"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
+      "id": "148",
+      "title": "Find the Vastiri Desert",
+      "completionTrigger": "area|the vastiri desert",
+      "description": "Continue down The Descent until you find The Vastiri Desert",
+      "nodesNeeded": [
+        "147"
       ],
       "hidden": false,
       "completed": false
@@ -1401,7 +1445,9 @@
       "title": "Proceed to The Refinery",
       "completionTrigger": "area|the refinery",
       "description": "Grab the waypoint in the middle of the zone, then continue head to the top right where you will find the entrance to The Refinery.",
-      "nodesNeeded": [],
+      "nodesNeeded": [
+        "156"
+      ],
       "hidden": false,
       "completed": false
     },
@@ -1484,6 +1530,27 @@
       "completed": false
     },
     {
+      "id": "165",
+      "title": "Find The Desecrated Chambers",
+      "completionTrigger": "area|the desecrated chambers",
+      "description": "Proceed through The Torched Courts until you find The Desecrated Chambers.",
+      "nodesNeeded": [
+        "164"
+      ],
+      "hidden": false,
+      "completed": false
+    },{
+      "id": "166",
+      "title": "Kill Avarius, Reassembled",
+      "completionTrigger": "area|the ravaged square",
+      "description": "Make your way to the Sanctum of Innocence and kill Avarius, Reassembled. Then make your way back to The Ravaged Square.",
+      "nodesNeeded": [
+        "165"
+      ],
+      "hidden": false,
+      "completed": false
+    },
+    {
       "id": "171",
       "title": "Enter The Canals",
       "completionTrigger": "area|the canals",
@@ -1534,7 +1601,7 @@
       "description": "Reach level 4 to equip Frostbomb and Onslaught",
       "nodesNeeded": [],
       "hidden": true,
-      "completed": true
+      "completed": false
     },
     {
       "id": "41",
@@ -1622,7 +1689,7 @@
         "81"
       ],
       "hidden": true,
-      "completed": true
+      "completed": false
     },
     {
       "id": "131",
@@ -1730,28 +1797,6 @@
       "description": "Once you find another BBBG piece of armour. Add Trap and Mine Damage to your Lightning Spire Trap Links. You can purchase this from the Act 2 town.",
       "nodesNeeded": [
         "176"
-      ],
-      "hidden": false,
-      "completed": false
-    },
-    {
-      "id": "84",
-      "title": "Proceed to The Solaris Concourse",
-      "completionTrigger": "area|the solaris temple level 2",
-      "description": "Make your way to The Solaris Concourse after defeating Dawn and obtaining the Sun Orb.",
-      "nodesNeeded": [
-        "142"
-      ],
-      "hidden": false,
-      "completed": false
-    },
-    {
-      "id": "85",
-      "title": "Find The Lunaris Concourse",
-      "completionTrigger": "area|the lunaris concourse",
-      "description": "Make your way to The Lunaris Concourse through The Harbour Bridge.",
-      "nodesNeeded": [
-        "132"
       ],
       "hidden": false,
       "completed": false

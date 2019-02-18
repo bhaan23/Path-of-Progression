@@ -90,6 +90,10 @@ input, select, textarea {
 	transition: all 0.25s linear;
 }
 
+select:disabled {
+	border-bottom-color: #005486;
+}
+
 input:focus, select:focus {
 	outline: none;
 	border-color: #0081ce;
@@ -255,6 +259,10 @@ label:active:after {
 }
 
 /* About section */
+
+#about {
+	font-size: 1.2em;
+}
 
 #startingOptionsContainer {
 	display: flex;
