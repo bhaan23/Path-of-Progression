@@ -26,7 +26,13 @@ export default class ItemService extends EventEmitter {
 			neededValues.push(StoredSettings.ACCOUNT_NAME);
 		} else {
 			this.accountName = accountName;
-			this.characterName = this.settingsService.get(StoredSettings.CHARACTER_NAME);
+		}
+
+		let characterName = this.settingsService.get(StoredSettings.CHARACTER_NAME);
+		if (!characterName) {
+			neededValues.push(StoredSettings.CHARACTER_NAME);
+		} else {
+			this.characterName = characterName;
 		}
 
 		let sessionId = this.settingsService.get(StoredSettings.SESSION_ID);
@@ -38,7 +44,7 @@ export default class ItemService extends EventEmitter {
 
 		if (neededValues.length > 0) {
 			this.canFetchItems = false;
-			const alertBody = `We detected that you are looking for things on from your character's inventory. If you do not enter your ${neededValues.toString()}, you will not be able to complete these nodes.`;
+			const alertBody = `We detected that you are looking for things on from your character's inventory. If you do not enter your ${neededValues.join(', ')}, you will not be able to complete these nodes.`;
 			new Alert(alertBody, AlertType.WARNING, () => { });
 		} else {
 			this.canFetchItems = true;

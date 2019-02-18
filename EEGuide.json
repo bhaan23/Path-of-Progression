@@ -1730,7 +1730,9 @@
       "title": "Kill Garukhan and proceed to The Refinery",
       "completionTrigger": "area|the refinery",
       "description": "Grab the waypoint in the middle of the zone, then continue to the bottom left where you will find the Shrine of The Winds. Kill Garukhan there to recieve a skill point, then head to the top right where you will find the entrance to The Refinery.",
-      "nodesNeeded": [],
+      "nodesNeeded": [
+        "156"
+      ],
       "hidden": false,
       "completed": false
     },

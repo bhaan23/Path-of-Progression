@@ -8,7 +8,7 @@ const { dialog } = require('electron').remote;
 import { AlertType } from '../Objects/Enums.js';
 import { StoredSettings } from '../Objects/Enums.js';
 import ProgressionService from './ProgressionService.js';
-import { isValidSessionId, userWantsToSave } from '../Utils/UtilFunctions.js';
+import { isValidSessionId, userWantsToSave, getClientLogFilename, propmtForClientLog } from '../Utils/UtilFunctions.js';
 
 export default class UserInteractionService {
 	
@@ -21,6 +21,7 @@ export default class UserInteractionService {
 		this.progressionFileDisplay = $('#currentProgressionFile');
 		this.progressionFileHelpPath = null;
 		this.progressionFileUploadButton = $('#progressionFileUploadButton');
+		this.clientFileLogPath = null;
 		this.clientFileDisplay = $('#currentClientFile');
 		this.clientFileUploadButton = $('#clientFileUploadButton');
 		this.saveButton = $('#saveButton');
@@ -35,6 +36,8 @@ export default class UserInteractionService {
 		const settingsAccountName = this.settings.get(StoredSettings.ACCOUNT_NAME);
 		if (settingsAccountName) {
 			this.accountNameInput.val(settingsAccountName);
+			this.characterNameUpdate.prop('disabled', false);
+			this.sessionIdUpdate.prop('disabled', false);
 		}
 
 		const settingsCharacterName = this.settings.get(StoredSettings.CHARACTER_NAME);
@@ -43,6 +46,7 @@ export default class UserInteractionService {
 				value: settingsCharacterName,
 				text: settingsCharacterName
 			}));
+			this.characterNameDropdown.prop('disabled', false);
 		}
 
 		const settingsSessionId = this.settings.get(StoredSettings.SESSION_ID);
@@ -59,11 +63,19 @@ export default class UserInteractionService {
 		if (settingsClientLogFile && existsSync(settingsClientLogFile)) {
 			this.clientFileDisplay.text(settingsClientLogFile.substring(settingsClientLogFile.lastIndexOf('\\')+1));
 			this.progressionFileUploadButton.prop('disabled', false);
+			this.clientFileLogPath = settingsClientLogFile;
 		}
 
 		this.accountNameInput.on('input', () => {
 			// Remove any letters that aren't able to be part of an account name
 			this.accountNameInput.val(this.accountNameInput.val().replace(/[^a-zA-Z0-9_]/g, ''));
+			if (this.accountNameInput.val().length > 0) {
+				this.characterNameUpdate.prop('disabled', false);
+				this.sessionIdUpdate.prop('disabled', false);
+			} else {
+				this.characterNameUpdate.prop('disabled', true);
+				this.sessionIdUpdate.prop('disabled', true);
+			}
 		});
 
 		this.characterNameDropdown.on('change', () => {
@@ -128,7 +140,7 @@ export default class UserInteractionService {
 				});
 
 				if (filenames && filenames.length > 0) {
-					this.setupProgressionService(filenames[0]);
+					this.setupProgressionService(filenames[0], true);
 					this.saveButton.removeClass('hidden');
 				} else {
 					this.progressionFileDisplay.text(this.noFileSelectedText);
@@ -138,30 +150,8 @@ export default class UserInteractionService {
 		});
 
 		this.clientFileUploadButton.on('click', () => {
-			const clientSuggestedPath = existsSync('C:/Program Files/Steam/steamapps/common/Path of Exile/logs') ?
-				'C:/Program Files/Steam/steamapps/common/Path of Exile/logs' : 'C:/Program Files (x86)/Grinding Gear Games/Path of Exile/logs';
-			const filenames = dialog.showOpenDialog({
-				filters: [{
-					name: 'Client.txt Log', extensions: ['txt']
-				}],
-				properties: [
-					'openFile'
-				],
-
-				// Two default paths for POE logs to help people out
-				defaultPath: clientSuggestedPath
-			});
-
-			if (filenames && filenames.length > 0) {
-				const filename = filenames[0];
-				if (existsSync(filename) && filename.toLowerCase().endsWith('client.txt')) {
-					this.settings.set(StoredSettings.CLIENT_FILE_LOCATION, filename);
-					this.clientFileDisplay.text(filename.substring(filename.lastIndexOf('\\')+1));
-					this.progressionFileUploadButton.prop('disabled', false);
-				} else {
-					this.progressionFileDisplay.text(this.noFileSelectedText);
-				}
-			}
+			const filename = getClientLogFilename();
+			this.validateClientLog(filename);
 		});
 
 		this.saveButton.on('click', () => {
@@ -184,8 +174,17 @@ export default class UserInteractionService {
 
 		// One time function for reloading your last file
 		ipcRenderer.once('load-progression', () => {
-			this.loadKnownProgression(this.settings.get(StoredSettings.PROGRESSION_FILE));
-			this.saveButton.removeClass('hidden');
+			if (!this.clientFileLogPath) {
+				propmtForClientLog((filename) => {
+					if (this.validateClientLog(filename)) {
+						const lastFileUsed = this.settings.get(StoredSettings.PROGRESSION_FILE);
+						if (existsSync(lastFileUsed)) {
+							this.loadKnownProgression(lastFileUsed);
+							this.saveButton.removeClass('hidden');
+						}
+					}
+				});
+			}
 		});
 
 		// Function for handling the about page button clicks
@@ -201,9 +200,15 @@ export default class UserInteractionService {
 	}
 
 	loadKnownProgression(progressionFile) {
-		if (progressionFile) {
+		if (this.clientFileLogPath) {
 			this.setupProgressionService(progressionFile, false);
 			this.progressionService.nodeService.progressionFileLocation = ''; // Don't allow overwritting of base files
+		} else {
+			propmtForClientLog((filename) => {
+				if (this.validateClientLog(filename)) {
+					this.loadKnownProgression(progressionFile);
+				}
+			})
 		}
 	}
 
@@ -218,6 +223,21 @@ export default class UserInteractionService {
 		if (saveProgressionFileLocation) {
 			this.settings.set(StoredSettings.PROGRESSION_FILE, filename);
 		}
+	}
+
+	validateClientLog(filename) {
+		if (filename) {
+			if (existsSync(filename) && filename.toLowerCase().endsWith('client.txt')) {
+				this.settings.set(StoredSettings.CLIENT_FILE_LOCATION, filename);
+				this.clientFileDisplay.text(filename.substring(filename.lastIndexOf('\\')+1));
+				this.progressionFileUploadButton.prop('disabled', false);
+				this.clientFileLogPath = filename;
+				return true;
+			} else {
+				this.progressionFileDisplay.text(this.noFileSelectedText);
+			}
+		}
+		return false;
 	}
 
 	populateCharacterNames(characters) {

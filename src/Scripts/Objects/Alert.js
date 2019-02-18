@@ -45,10 +45,10 @@ export default class Alert {
 				timeout = 1000*5;
 				break;
 			case AlertType.WARNING:
-				timeout = 1000*10;
+				timeout = 1000*15;
 				break;
 			case AlertType.NEGATIVE:
-				timeout = 1000*30;
+				timeout = 1000*45;
 				break;
 			case AlertType.MESSAGE:
 				timeout = 1000*60;

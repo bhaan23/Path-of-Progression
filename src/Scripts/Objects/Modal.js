@@ -17,18 +17,18 @@ export default class Modal {
 			footerButtons: this.footerButtons
 		}));
 
+		this.addListeners(modalHtml);
 		$('body').prepend(modalHtml);
-		this.addListeners();
 	}
 
 	erase() {
 		$('#modal').remove();
 	}
 
-	addListeners() {
-		$('#modal').on('click', (event) => {
+	addListeners(modalHtml) {
+		modalHtml.find('#modal').on('click', (event) => {
 			event.stopPropagation();
 		});
-		$('#modalCloseIcon').on('click', () => this.erase());
+		modalHtml.find('#modalCloseIcon').on('click', () => this.erase());
 	}
 }

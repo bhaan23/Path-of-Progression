@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import { existsSync } from 'fs';
 import Modal from '../Objects/Modal.js';
 const { session, dialog } = require('electron').remote;
 import EventTriggers from '../Objects/EventTriggers.js';
@@ -77,6 +78,56 @@ class DepdantNodesModal extends Modal {
 			this.callback(values);
 		});
 		$('#modalCancelButton').on('click', () => this.erase());
+	}
+}
+
+export function propmtForClientLog(callback) {
+	const message = `We have detected that your Client.txt log has not been entered, or is no longer valid. This is currently a requirement for all progressions.\n
+					Please choose your Client.txt log file to get the base functionality.`;
+	new ClientLogModal(message, callback).draw();
+}
+
+class ClientLogModal extends Modal {
+	constructor(body, callback) {
+		super('Choose Client.txt file', body, [{
+			id: 'modalShowOpenDialog',
+			class: 'primaryButton',
+			text: 'Choose Client.txt File'
+		}]);
+		this.callback = callback;
+	}
+
+	addListeners(modalHtml) {
+		super.addListeners(modalHtml);
+		
+		modalHtml.find('#modalShowOpenDialog').on('click', () => {
+			const filename = getClientLogFilename();
+			this.callback(filename);
+			this.erase();
+		});
+	}
+}
+
+export function getClientLogFilename() {
+	const clientSuggestedPath = existsSync('C:\\Program Files\\Steam\\steamapps\\common\\Path of Exile\\logs') ?
+		'C:\\Program Files\\Steam\\steamapps\\common\\Path of Exile\\logs' : 'C:\\Program Files (x86)\\Grinding Gear Games\\Path of Exile\\logs';
+	
+	const filenames = dialog.showOpenDialog({
+		filters: [{
+			name: 'Client.txt Log', extensions: ['txt']
+		}],
+		properties: [
+			'openFile'
+		],
+
+		// Two default paths for POE logs to help people out
+		defaultPath: clientSuggestedPath
+	});
+
+	if (filenames && filenames.length > 0) {
+		return filenames[0];
+	} else {
+		return '';
 	}
 }
 
