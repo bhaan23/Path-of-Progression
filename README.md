@@ -1,5 +1,5 @@
-Path of Progression
-===
+# Path of Progression
+
 A tool for Path of Exile used to aid the leveling process by tracking which zones to go to next and what gear you can equip at certain points within the leveling process.
 
 Download the latest release at https://github.com/bhaan23/Path-of-Progression/releases/latest
@@ -27,9 +27,11 @@ We do not own a certificate to sign the application. This means that when you fi
 
 Currently the app runs with [Electron](https://electronjs.org) which lets us convert a web application to a runnable .exe
 
+The app then takes in a progression .json file with an array of [progression nodes](https://github.com/bhaan23/Path-of-Progression/blob/master/progression.md) which will queue off of log events and items equipped to show you what to do next.
+
 ## Help us out
 
-If you would like to assist in the development you are certainly welcome. To setup the project make sure you have npm installed. Then in the root of the directory just run the following commands:
+If you would like to assist in the development you are certainly welcome. To setup the project make sure you have [npm](https://www.npmjs.com/get-npm) installed. Then in the root of the directory just run the following commands:
 
 ```
 npm install

@@ -122,7 +122,7 @@
     {
       "id": "12",
       "title": "Complete the trial of ascendency (L1)",
-      "completionTrigger": "item|amulet|lab trial",
+      "completionTrigger": "",
       "description": "Complete the trial of ascendency in The Lower Prison.",
       "nodesNeeded": [
         "10"
@@ -265,7 +265,7 @@
     {
       "id": "25",
       "title": "Complete the trial of ascendency (L2)",
-      "completionTrigger": "item|amulet|lab trial",
+      "completionTrigger": "",
       "description": "Complete the trial of ascendency in The Chamber of Sins Level 2.",
       "nodesNeeded": [
         "24"
@@ -441,7 +441,7 @@
     {
       "id": "41",
       "title": "Complete the trial of ascendency (L3)",
-      "completionTrigger": "item|amulet|lab trial",
+      "completionTrigger": "",
       "description": "Complete the trial of ascendency in The Crematorium.",
       "nodesNeeded": [
         "40"
@@ -551,7 +551,7 @@
     {
       "id": "51",
       "title": "Complete the trial of ascendency (L4)",
-      "completionTrigger": "item|amulet|lab trial",
+      "completionTrigger": "",
       "description": "Complete the trial of ascendency in The Imperial Gardens.",
       "nodesNeeded": [
         "53"
@@ -860,7 +860,7 @@
     {
       "id": "81",
       "title": "Complete the trial of ascendency (L5)",
-      "completionTrigger": "item|amulet|lab trial",
+      "completionTrigger": "",
       "description": "Complete the trial of ascendency in The Catacombs.",
       "nodesNeeded": [
         "43"
@@ -871,7 +871,7 @@
     {
       "id": "79",
       "title": "Complete the trial of ascendency (L6)",
-      "completionTrigger": "item|amulet|lab trial",
+      "completionTrigger": "",
       "description": "Complete the trial of ascendency in The Crypt.",
       "nodesNeeded": [
         "22"
@@ -882,7 +882,7 @@
     {
       "id": "80",
       "title": "Complete your first lab",
-      "completionTrigger": "item|amulet|lab completion",
+      "completionTrigger": "",
       "description": "Go to The Aspirant's plaza from the Act 3 town and complete the Labryinth to ascend.",
       "nodesNeeded": [
         "12",
@@ -1019,7 +1019,7 @@
     {
       "id": "93",
       "title": "Complete the trial of ascendency (C1)",
-      "completionTrigger": "item|amulet|lab trial",
+      "completionTrigger": "",
       "description": "Complete the trial of ascendency for Cruel Lab in The Lower Prison.",
       "nodesNeeded": [
         "92"
@@ -1195,7 +1195,7 @@
     {
       "id": "109",
       "title": "Complete the trial of ascendency (C2)",
-      "completionTrigger": "item|amulet|lab trial",
+      "completionTrigger": "",
       "description": "Complete the trial of ascendency for Cruel lab in The Crypt.",
       "nodesNeeded": [
         "108"
@@ -1250,7 +1250,7 @@
     {
       "id": "114",
       "title": "Complete the trial of ascendency (C3)",
-      "completionTrigger": "item|amulet|lab trial",
+      "completionTrigger": "",
       "description": "Complete the trial of ascendency for Cruel lab in The Chamber of Sins Level 2.",
       "nodesNeeded": [
         "113"
@@ -1382,7 +1382,7 @@
     {
       "id": "126",
       "title": "Complete Cruel Lab",
-      "completionTrigger": "item|amulet|lab completion",
+      "completionTrigger": "",
       "description": "Complete Cruel Lab.",
       "nodesNeeded": [
         "125",
@@ -1441,7 +1441,7 @@
     {
       "id": "131",
       "title": "Complete the trial of ascendency (M1)",
-      "completionTrigger": "item|amulet|lab trial",
+      "completionTrigger": "",
       "description": "Complete the trial of ascendency for Merciless lab in The Bath House.",
       "nodesNeeded": [
         "130"
@@ -1706,7 +1706,7 @@
     {
       "id": "155",
       "title": "Complete the trial of ascendency (M2)",
-      "completionTrigger": "item|amulet|lab trial",
+      "completionTrigger": "",
       "description": "Complete the trial of ascendency for Merciless lab in The Tunnel.",
       "nodesNeeded": [
         "154"
@@ -1861,7 +1861,7 @@
     {
       "id": "169",
       "title": "Complete the trial of ascendency (M3)",
-      "completionTrigger": "item|amulet|lab trial",
+      "completionTrigger": "",
       "description": "Complete the trial of ascendency for Merciless lab in The Ossuary.",
       "nodesNeeded": [
         "170"
@@ -1916,7 +1916,7 @@
     {
       "id": "174",
       "title": "Complete Merciless Lab",
-      "completionTrigger": "item|amulet|lab completion",
+      "completionTrigger": "",
       "description": "Complete your Merciless Lab",
       "nodesNeeded": [
         "169",
