@@ -24,7 +24,7 @@ export function hasNodeTriggeredFromItemOrLink(trigger, characterInventory) {
 	if (trigger.toLowerCase().startsWith('item|')) {
 		const triggerParts = trigger.toLowerCase().split('|');
 		let itemData;
-		switch (triggerParts[0]) { // Find the right item type to search for
+		switch (triggerParts[1]) { // Find the right item type to search for
 			case 'amulet':
 				itemData = [characterInventory.amulet];
 				break;
@@ -85,7 +85,7 @@ export function hasNodeTriggeredFromItemOrLink(trigger, characterInventory) {
 
 		let found = true;
 		compareData = compareData.toLowerCase();
-		for (let text of triggerParts[1].split(',')) { // Check if we match all text we are looking for
+		for (let text of triggerParts[2].split(',')) { // Check if we match all text we are looking for
 			found = found && compareData.includes(text.trim());
 		}
 		return found;

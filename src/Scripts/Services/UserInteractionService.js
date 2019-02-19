@@ -87,20 +87,7 @@ export default class UserInteractionService {
 
 		this.characterNameUpdate.on('click', () => {
 			const accountName = this.accountNameInput.val();
-			if (accountName) {
-				this.settings.set(StoredSettings.ACCOUNT_NAME, accountName);
-				$.ajax(`https://www.pathofexile.com/character-window/get-characters?accountName=${encodeURIComponent(accountName)}`, {
-					method: 'GET',
-					success: (response) => this.populateCharacterNames(response),
-					error: (xhr, status, error) => {
-						new Alert('There was an error retrieving characters', AlertType.NEGATIVE, () => { });
-						console.log(status, error);
-					},
-					dataType: 'json'
-				});
-			} else {
-				new Alert('Please enter a valid account name to update your character selection.', AlertType.WARNING, () => { });
-			}
+			this.updateCharacterNames(accountName);
 		});
 
 		this.sessionIdInput.on('input', () => {
@@ -122,6 +109,7 @@ export default class UserInteractionService {
 						new Alert(`Your session id was invalid. Here's why: ${response.message}`, AlertType.NEGATIVE, () => { });
 					}
 				});
+				this.updateCharacterNames(accountName);
 			}
 		});
 
@@ -189,14 +177,28 @@ export default class UserInteractionService {
 
 		// Function for handling the about page button clicks
 		ipcRenderer.on('start-with-file', (event, file) => {
-			if (file === 'EEGuide') {
-				this.loadKnownProgression(path.resolve(__dirname, '..\\..\\..\\EEGuide.json'));
-				this.saveButton.removeClass('hidden');
-			} else if (file === 'Speed') {
-				this.loadKnownProgression(path.resolve(__dirname, '..\\..\\..\\Speed.json'));
+			if (file === 'EEGuide' || file === 'Speed') {
+				this.loadKnownProgression(path.resolve(__dirname, `..\\..\\..\\${file}.json`));
 				this.saveButton.removeClass('hidden');
 			}
 		});
+	}
+
+	updateCharacterNames(accountName) {
+		if (accountName) {
+			this.settings.set(StoredSettings.ACCOUNT_NAME, accountName);
+			$.ajax(`https://www.pathofexile.com/character-window/get-characters?accountName=${encodeURIComponent(accountName)}`, {
+				method: 'GET',
+				success: (response) => this.populateCharacterNames(response),
+				error: (xhr, status, error) => {
+					new Alert('There was an error retrieving characters', AlertType.NEGATIVE, () => { });
+					console.log(status, error);
+				},
+				dataType: 'json'
+			});
+		} else {
+			new Alert('Please enter a valid account name to update your character selection.', AlertType.WARNING, () => { });
+		}
 	}
 
 	loadKnownProgression(progressionFile) {
