@@ -21,7 +21,7 @@ function createWindow() {
 	win.loadFile('./src/index.html');
 
 	// Open dev tools for debugging
-	win.webContents.openDevTools();
+	// win.webContents.openDevTools();
 
 	win.on('close', () => { win = null; app.quit(); });
 }
