@@ -25,6 +25,7 @@ export default class UserInteractionService {
 		this.clientFileDisplay = $('#currentClientFile');
 		this.clientFileUploadButton = $('#clientFileUploadButton');
 		this.saveButton = $('#saveButton');
+		this.popoutButton = $('#popout');
 
 		this.noFileSelectedText = this.clientFileDisplay.text();
 
@@ -130,9 +131,11 @@ export default class UserInteractionService {
 				if (filenames && filenames.length > 0) {
 					this.setupProgressionService(filenames[0], true);
 					this.saveButton.removeClass('hidden');
+					this.popoutButton.removeClass('hidden');
 				} else {
 					this.progressionFileDisplay.text(this.noFileSelectedText);
 					this.saveButton.addClass('hidden');
+					this.popoutButton.addClass('hidden');
 				}
 			}
 		});
@@ -146,6 +149,15 @@ export default class UserInteractionService {
 			this.progressionService.save();
 			this.progressionFileDisplay.text(this.progressionService.nodeService.progressionFileLocation.substr(
 				this.progressionService.nodeService.progressionFileLocation.lastIndexOf('\\')+1));
+		});
+
+		this.popoutButton.on('click', () => {
+			ipcRenderer.send('create-popout-window', $('#tiles').html());
+			this.popoutButton.prop('disabled', true);
+		});
+
+		ipcRenderer.on('popout-closed', () => {
+			this.popoutButton.prop('disabled', false);
 		});
 
 		// Check if the user wants to save data before the app closes
@@ -169,6 +181,7 @@ export default class UserInteractionService {
 						if (existsSync(lastFileUsed)) {
 							this.loadKnownProgression(lastFileUsed);
 							this.saveButton.removeClass('hidden');
+							this.popoutButton.removeClass('hidden');
 						}
 					}
 				});
@@ -180,6 +193,7 @@ export default class UserInteractionService {
 			if (file === 'EEGuide' || file === 'Speed') {
 				this.loadKnownProgression(path.resolve(__dirname, `..\\..\\..\\${file}.json`));
 				this.saveButton.removeClass('hidden');
+				this.popoutButton.removeClass('hidden');
 			}
 		});
 	}

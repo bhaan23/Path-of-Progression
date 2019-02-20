@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Progression Overlay</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			width: 100%;
+			height: 100%;
+			position: relative;
+		}
+
+		#popoutHeader {
+			-webkit-app-region: drag;
+			-webkit-user-select: none;
+			cursor: pointer;
+			background-color: rgb(58, 58, 58);
+			height: 1rem;
+			width: 100%;
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			color: white;
+			position: fixed;
+			top: 0;
+			left: 0;
+		}
+
+		#popoutClose {
+			-webkit-app-region: none;
+		}
+
+		#popoutHeader, #popoutBody {
+			padding: 4px;
+		}
+
+		.tile {
+			height: 1.2rem;
+			width: 100%;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			display: flex;
+			flex-direction: row-reverse;
+			justify-content: space-between;
+		}
+
+		.tile[data-level="1"] {
+			color: rgb(27, 212, 27);
+		}
+
+		.tile[data-level="2"] {
+			color: yellow;
+		}
+
+		.tile[data-level="3"] {
+			color: red;
+		}
+
+		/* Don't show the close icons for nodes that are not on top */
+		.tile[data-level="2"] .closeIcon,
+		.tile[data-level="3"] .closeIcon {
+			z-index: -1;
+			opacity: 0;
+		}
+
+		::-webkit-scrollbar {
+			width: 0px;
+			height: 0px;
+			background: transparent;
+		}
+
+		#popoutBody {
+			padding-top: 1.5rem;
+			background-color: rgb(90, 90, 90);
+			width: 100%;
+			overflow-y: scroll;
+			height: 100%;
+		}
+
+		.closeIcon {
+			color: white;
+			cursor: pointer;
+			margin-right: 9px;
+		}
+
+		.tileDescriptionContainer {
+			display: inline;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			white-space: nowrap;
+		}
+
+		.tileDescription {
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<div id="popoutHeader">
+		<span>Progression Tracker</span>
+		<span id="popoutClose" class="closeIcon">X</span>
+	</div>
+	<div id="popoutBody">
+		<div class="tile " data-level="1" id="tile_1">
+			<span class="closeIcon">X</span>
+			<div class="tileDescriptionContainer">
+				<span class="tileTitle">Kill Hillock and go to the place that's way too long</span>
+				<span class="tileDescription">Navigate through The Twilight Strand until you encounter Hillock. Kill him and enter town for your reward.</span>
+			</div>
+		</div>
+		<div class="tile " data-level="1" id="tile_1">
+			<span class="closeIcon">X</span>
+			<div class="tileDescriptionContainer">
+				<span class="tileTitle">Kill Hillock and go to the place that's way too long</span>
+				<span class="tileDescription">Navigate through The Twilight Strand until you encounter Hillock. Kill him and enter town for your reward.</span>
+			</div>
+		</div>
+		<div class="tile " data-level="2" id="tile_1">
+			<span class="closeIcon">X</span>
+			<div class="tileDescriptionContainer">
+				<span class="tileTitle">Kill Hillock</span>
+				<span class="tileDescription">Navigate through The Twilight Strand until you encounter Hillock. Kill him and enter town for your reward.</span>
+			</div>
+		</div>
+		<div class="tile " data-level="2" id="tile_1">
+			<span class="closeIcon">X</span>
+			<div class="tileDescriptionContainer">
+				<span class="tileTitle">Kill Hillock</span>
+				<span class="tileDescription">Navigate through The Twilight Strand until you encounter Hillock. Kill him and enter town for your reward.</span>
+			</div>
+		</div>
+		<div class="tile " data-level="3" id="tile_1">
+			<span class="closeIcon">X</span>
+			<div class="tileDescriptionContainer">
+				<span class="tileTitle">Kill Hillock</span>
+				<span class="tileDescription">Navigate through The Twilight Strand until you encounter Hillock. Kill him and enter town for your reward.</span>
+			</div>
+		</div>
+		<div class="tile " data-level="3" id="tile_1">
+			<span class="closeIcon">X</span>
+			<div class="tileDescriptionContainer">
+				<span class="tileTitle">Kill Hillock</span>
+				<span class="tileDescription">Navigate through The Twilight Strand until you encounter Hillock. Kill him and enter town for your reward.</span>
+			</div>
+		</div>
+	</div>
+	<script>
+		require('babel-register');
+		require('./Scripts/Services/PopoutService.js');
+	</script>
+</body>
+</html>

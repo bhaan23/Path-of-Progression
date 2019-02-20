@@ -44,6 +44,19 @@ export function resetCookie(sessid, callback) {
 	});
 };
 
+export function resortTiles(container) {
+	container.append(container.children().detach().sort((a, b) => {
+		const aLev = $(a).attr('data-level');
+		const bLev = $(b).attr('data-level');
+		if (aLev > bLev) {
+			return 1;
+		} else if (aLev < bLev) {
+			return -1;
+		}
+		return $(a).text() > $(b).text();
+	}));
+}
+
 export function getDependantNodes(nodeSelectorHtml, callback) {
 	let select = $('<select>', {
 		multiple: 'multiple',
