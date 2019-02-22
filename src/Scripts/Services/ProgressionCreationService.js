@@ -15,7 +15,7 @@ export default class ProgressionCreationService {
 		this.hiddenCheckbox = $('#hiddenInput');
 		this.completedCheckbox = $('#completedInput');
 		this.descriptionInput = $('#descriptionInput');
-		this.comletionTypeSelect = $('#completionType');
+		this.completionTypeSelect = $('#completionType');
 		this.zoneSelection = $('#areaInput');
 		this.itemSlotSelection = $('#itemSlotSelection');
 		this.levelSelection = $('#levelSelection');
@@ -74,10 +74,12 @@ export default class ProgressionCreationService {
 			this.currentProgressionNode.description = text;
 		});
 
-		this.comletionTypeSelect.on('change', () => {
-			const val = this.comletionTypeSelect.val() || '';
+		this.completionTypeSelect.on('change', () => {
+			const val = this.completionTypeSelect.val() || '';
 			this.group2.children().addClass('hidden');
 			this.group3.children().addClass('hidden');
+			this.gemSelectionPreview.addClass('hidden');
+			this.gemSelectionPreview.html('');
 			if (val === 'area') {
 				this.zoneSelection.removeClass('hidden');
 				this.zoneSelection.val('');
@@ -94,7 +96,6 @@ export default class ProgressionCreationService {
 				this.gemSelection.removeClass('hidden');
 				this.gemSelection.val('');
 				this.gemSelectionPreview.removeClass('hidden');
-				this.gemSelectionPreview.html('');
 				this.currentProgressionNode.completionTrigger = [null, null];
 			} else if (!val) {
 				return;
@@ -285,8 +286,8 @@ export default class ProgressionCreationService {
 		const triggerParts = progressionData.completionTrigger.toLowerCase().split('|');
 		this.gemSelectionPreview.html('');
 		if (triggerParts.length > 1) {
-			this.comletionTypeSelect.val(triggerParts[0]);
-			this.comletionTypeSelect.change();
+			this.completionTypeSelect.val(triggerParts[0]);
+			this.completionTypeSelect.change();
 			this.modSearchInput.val('');
 
 			switch (triggerParts[0]) {
@@ -310,8 +311,8 @@ export default class ProgressionCreationService {
 				this.modSearchInput.val(triggerParts[2]);
 			}
 		} else {
-			this.comletionTypeSelect.val('');
-			this.comletionTypeSelect.change();
+			this.completionTypeSelect.val('');
+			this.completionTypeSelect.change();
 			this.modSearchInput.val('');
 		}
 
@@ -383,7 +384,7 @@ export default class ProgressionCreationService {
 	resetSelections() {
 		this.currentNodeList.html('');
 		this.itemSlotSelection.val('');
-		this.comletionTypeSelect.val('');
+		this.completionTypeSelect.val('');
 		this.zoneSelection.val('');
 		this.itemSlotSelection.val('');
 		this.modSearchInput.val('');

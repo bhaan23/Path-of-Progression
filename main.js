@@ -65,7 +65,7 @@ try {
 		createMainWindow();
 		setTimeout(() => {
 			autoUpdater.checkForUpdates();
-		}, 60000); // Let everything load before checking for an update
+		}, 20000); // Let everything load before checking for an update
 	});
 
 	// Send a message to the window that a new update is downloaded
