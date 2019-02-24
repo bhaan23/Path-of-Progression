@@ -42,7 +42,7 @@ export default class ProgressionService {
 		}
 
 		// Draw the progression nodes
-		const progressionTileHtml = jsonNodeToHtml(this.nodeService.nodeMap, this.nodeService.topNodeIds);
+		const progressionTileHtml = jsonNodeToHtml(this.nodeService.nodeMap, this.nodeService.topNodeIds, false);
 		this.tilesParent.html('');
 		this.tilesParent.append(progressionTileHtml);
 		progressionTileHtml.each((index, element) => {
@@ -66,6 +66,10 @@ export default class ProgressionService {
 			this.characterInventoryService.start();
 			this.characterInventoryService.on('CharacterInventoryService.NewItems', () => this.checkNodesForItems());
 		}
+	}
+
+	createOverlayHtml() {
+		return jsonNodeToHtml(this.nodeService.nodeMap, this.nodeService.topNodeIds, true);
 	}
 
 	shutdown() {

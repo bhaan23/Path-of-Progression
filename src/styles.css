@@ -177,6 +177,42 @@ label:active:after {
 	width: 1.3rem;
 }
 
+/* Typeahead */
+
+.typeAheadContainer {
+	position: relative;
+}
+
+.typeAheadList {
+	position: absolute;
+	top: auto;
+	background-color: white;
+	color: black;
+	padding: 1rem;
+	max-height: 10rem;
+	overflow-y: scroll;
+}
+
+.typeAheadGroup {
+	display: flex;
+	flex-direction: column;
+	width: max-content;
+}
+
+.typeAheadItem {
+	margin-left: 1rem;
+	cursor: pointer;
+}
+
+.typeAheadGroupTitle {
+	font-weight: bold;
+}
+
+.typeAheadSelected {
+	text-decoration: underline;
+	font-weight: bold;
+}
+
 /* Header styles */
 
 #header {

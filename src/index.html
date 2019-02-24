@@ -122,7 +122,10 @@
 								<option value="gems">Link gems</option>
 							</select>
 							<span id="group2">
-								<select id="areaInput" class="hidden"></select>
+								<span class="typeAheadContainer hidden">
+									<input type="text" id="areaInput" placeholder="Input an area..." />
+									<div class="hidden typeAheadList" id="typeAheadList"></div>
+								</span>
 								<select id="itemSlotSelection" class="hidden"></select>
 								<select id="levelSelection" class="hidden"></select>
 								<select id="gemSelection" multiple size="5" class="hidden"></select>

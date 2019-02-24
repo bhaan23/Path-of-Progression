@@ -1,6 +1,5 @@
-Add typeahead for larger inputs (area, skill gems)
+Add typeahead for larger inputs (skill gems)
 d3 progression creation tool:
-	- Make d3 creation tool infinitely draggable/zoomable
 	- Let creation tool take in a started progression and draw nodes from it
 	- Create a button to connect one node to another
 Add currency to inventory search?

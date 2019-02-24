@@ -1,8 +1,9 @@
 import $ from 'jquery';
 import _ from 'underscore';
+import eventTriggers from '../Objects/EventTriggers';
 import { GemImageMap } from '../Objects/GemImageMap';
 import TileTemplate from '../../Templates/TileTemplate.html';
-import eventTriggers from '../Objects/EventTriggers';
+import OverlayTemplate from '../../Templates/OverlayTemplate.html';
 
 export function logMessageToTrigger(type, logData) {
 	let trigger;
@@ -122,9 +123,10 @@ function includesWithVaalGemCheck(group, gem) {
 	return found;
 };
 
-export function jsonNodeToHtml(nodeMap, topNodeIds) {
+export function jsonNodeToHtml(nodeMap, topNodeIds, isoverlay) {
 	let tops = topNodeIds.length, middles = 0;
 	let nodeHtml = $('<div>');
+	let seen = [];
 	let queue = [].concat(topNodeIds);
 	while (queue.length > 0) {
 
@@ -139,7 +141,12 @@ export function jsonNodeToHtml(nodeMap, topNodeIds) {
 		
 		const id = queue.shift();
 		const node = nodeMap[id];
-		queue = queue.concat(node.dependantNodeIds);
+		for (let nodeId of node.dependantNodeIds) {
+			if (!seen.includes(nodeId)) {
+				queue.push(nodeId);
+				seen.push(nodeId);
+			}
+		}
 
 		let gems = $();
 		if (nodeMap[id].progressionData.completionTrigger.toLowerCase().startsWith('gems|')) {
@@ -150,7 +157,7 @@ export function jsonNodeToHtml(nodeMap, topNodeIds) {
 			gems = group;
 		}
 
-		const tileHtml = _.template(TileTemplate)({ progression: nodeMap[id].progressionData, level, gems });
+		const tileHtml = _.template(isoverlay ? OverlayTemplate : TileTemplate)({ progression: nodeMap[id].progressionData, level, gems });
 		nodeHtml.append(tileHtml);
 		
 		if (tops > 0) {
@@ -161,7 +168,11 @@ export function jsonNodeToHtml(nodeMap, topNodeIds) {
 		}
 	}
 
-	return nodeHtml.children();
+	if (isoverlay) {
+		return nodeHtml;
+	} else {
+		return nodeHtml.children();
+	}
 };
 
 export function createNode(node, level) {

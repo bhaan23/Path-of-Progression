@@ -13,19 +13,23 @@ class PopoutService {
 	}
 
 	setup() {
+		$('#popoutClose').text('');
 		$('#popoutClose').on('click', () => {
 			remote.getCurrentWindow().close();
 		});
 
 		ipcRenderer.on('tile-data', (event, tileHtml) => {
 			$('#popoutBody').html(tileHtml);
-			
-			$('.tile .closeIcon').each((index, element) => {
-				$(element).text('X');
-				$(element).on('click', () => {
-					const tile = $(element).closest('.tile');
+
+			$('.tile').each((_, tileElement) => {
+				const tile = $(tileElement);
+				tile.find('.closeIcon').on('click', () => {
 					ipcRenderer.send('overlay-node-removed', tile.attr('id'));
 					tile.remove();
+				});
+
+				tile.find('.toggle').on('click', () => {
+					tile.toggleClass('collapsed').toggleClass('expanded');
 				});
 			});
 		});

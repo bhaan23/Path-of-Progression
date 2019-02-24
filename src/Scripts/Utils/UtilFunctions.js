@@ -83,14 +83,14 @@ class DepdantNodesModal extends Modal {
 		this.callback = callback;
 	}
 
-	addListeners() {
-		super.addListeners();
-		$('#modalAddButton').on('click', () => {
-			const values = $('#dependantNodesSelector').val();
+	addListeners(modalHtml) {
+		super.addListeners(modalHtml);
+		modalHtml.find('#modalAddButton').on('click', () => {
+			const values = modalHtml.find('#dependantNodesSelector').val();
 			this.erase();
 			this.callback(values);
 		});
-		$('#modalCancelButton').on('click', () => this.erase());
+		modalHtml.find('#modalCancelButton').on('click', () => this.erase());
 	}
 }
 
@@ -153,7 +153,7 @@ export function userWantsToSave() {
 	return result === 0; // They said yes
 }
 
-export function populateSelectionDropdownsWithEventData(itemSlotSelection, levelSelection, zoneSelection, gemSelection) {
+export function populateSelectionDropdownsWithEventData(itemSlotSelection, levelSelection, areaTypeAheadList, gemSelection) {
 	
 	// Item slot population
 	itemSlotSelection.html('');
@@ -194,28 +194,26 @@ export function populateSelectionDropdownsWithEventData(itemSlotSelection, level
 	}
 
 	// Zone population
-	zoneSelection.html('');
-
-	// Default option
-	zoneSelection.append($('<option>', {
-		value: '',
-		class: 'hidden',
-		selected: 'selected',
-		text: 'Select an area...'
-	}));
+	areaTypeAheadList.html('');
 
 	// Populate the other options
 	for (let act of Object.keys(EventTriggers.area)) {
-		let group = $('<optgroup>', {
-			label: act
+		let group = $('<div>', {
+			class: 'typeAheadGroup',
 		});
+		group.append($('<span>', {
+			class: "typeAheadGroupTitle",
+			text: act
+		}));
+
 		for (let zone of Object.keys(EventTriggers.area[act])) {
-			group.append($('<option>', {
+			group.append($('<span>', {
+				class: 'typeAheadItem',
 				value: zone,
 				text: EventTriggers.area[act][zone]
 			}));
 		}
-		zoneSelection.append(group);
+		areaTypeAheadList.append(group);
 	}
 
 	// Equip gem population

@@ -152,7 +152,7 @@ export default class UserInteractionService {
 		});
 
 		this.popoutButton.on('click', () => {
-			ipcRenderer.send('create-popout-window', $('#tiles').html());
+			ipcRenderer.send('create-popout-window', this.progressionService.createOverlayHtml().html());
 			this.popoutButton.prop('disabled', true);
 		});
 

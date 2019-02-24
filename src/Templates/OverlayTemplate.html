@@ -1,0 +1,13 @@
+<div class="tile collapsed <% if (progression.hidden) { print('hidden') } %>" data-level="<%=level%>" id="tile_<%=progression.id%>">
+	<span class="toggle"></span>
+	<span class="tileTitle"><%=progression.title%></span>
+	<span class="closeIcon"></span>
+	<div class="tileDescriptionContainer">
+		<span class="tileDescription"><%=progression.description%></span>
+		<% if (gems.length > 0) { %>
+			<div class="gemPreviewContainer">
+				<%=gems.html()%>
+			</div>
+		<% } %>
+	</div>
+</div>

@@ -6,6 +6,7 @@ const { dialog } = require('electron').remote;
 import { getDependantNodes, userWantsToSave, populateSelectionDropdownsWithEventData } from '../Utils/UtilFunctions.js';
 import { buildGemLookup } from '../Utils/Converter.js';
 import { createNode } from '../Utils/Converter.js';
+import TypeAheadService from './TypeAheadService.js';
 // import ProgressionPreviewService from './ProgressionPreviewService.js';
 
 export default class ProgressionCreationService {
@@ -16,7 +17,6 @@ export default class ProgressionCreationService {
 		this.completedCheckbox = $('#completedInput');
 		this.descriptionInput = $('#descriptionInput');
 		this.completionTypeSelect = $('#completionType');
-		this.zoneSelection = $('#areaInput');
 		this.itemSlotSelection = $('#itemSlotSelection');
 		this.levelSelection = $('#levelSelection');
 		this.modSearchInput = $('#modSearchInput');
@@ -26,6 +26,8 @@ export default class ProgressionCreationService {
 		this.previewDescription = $('#nodePreview .tileDescription');
 		this.progressionPreview = $('#progressionPreview');
 		this.currentSaveFile = $('#currentSaveFile');
+		this.typeAheadInput = $('#areaInput');
+		this.typeAheadList = $('#typeAheadList');
 
 		this.group2 = $('#group2');
 		this.group3 = $('#group3');
@@ -81,8 +83,9 @@ export default class ProgressionCreationService {
 			this.gemSelectionPreview.addClass('hidden');
 			this.gemSelectionPreview.html('');
 			if (val === 'area') {
-				this.zoneSelection.removeClass('hidden');
-				this.zoneSelection.val('');
+				this.typeAheadInput.removeClass('hidden');
+				this.typeAheadInput.parent().removeClass('hidden');
+				this.typeAheadInput.val('');
 				this.currentProgressionNode.completionTrigger = [null, null];
 			} else if (val === 'item') {
 				this.itemSlotSelection.removeClass('hidden');
@@ -101,10 +104,6 @@ export default class ProgressionCreationService {
 				return;
 			}
 			this.currentProgressionNode.completionTrigger[0] = `${val}`;
-		});
-
-		this.zoneSelection.on('change', () => {
-			this.currentProgressionNode.completionTrigger[1] = this.zoneSelection.val();
 		});
 
 		this.gemSelection.on('change', () => {
@@ -163,6 +162,7 @@ export default class ProgressionCreationService {
 			this.saveCurrentNode();
 			this.nodeService.save();
 			this.currentSaveFile.text(this.nodeService.progressionFileLocation.substr(this.nodeService.progressionFileLocation.lastIndexOf('\\')+1));
+			this.currentProgressionNode.completionTrigger = this.currentProgressionNode.completionTrigger.split('|');
 		});
 
 		ipcRenderer.on('create-progression', () => {
@@ -199,7 +199,18 @@ export default class ProgressionCreationService {
 			this.setCurrentNode(this.nodeService.nodeMap[this.currentNodeList.val()].progressionData);
 		});
 
-		populateSelectionDropdownsWithEventData(this.itemSlotSelection, this.levelSelection, this.zoneSelection, this.gemSelection);
+		populateSelectionDropdownsWithEventData(this.itemSlotSelection, this.levelSelection, this.typeAheadList, this.gemSelection);
+		
+		this.areaTypeAheadService = new TypeAheadService(this.typeAheadInput, this.typeAheadList, true);
+		this.areaTypeAheadService.setup();
+		this.areaTypeAheadService.on('optionSelected', (option) => {
+			this.currentProgressionNode.completionTrigger[1] = option.toLowerCase();
+			this.typeAheadInput.val(option);
+		});
+
+		this.typeAheadInput.on('input', () => {
+			this.currentProgressionNode.completionTrigger[1] = this.typeAheadInput.val().toLowerCase();
+		});
 	}
 
 	populateCurrentNodes() {
@@ -299,7 +310,7 @@ export default class ProgressionCreationService {
 					this.levelSelection.val(triggerParts[1]);
 					break;
 				case 'area':
-					this.zoneSelection.val(triggerParts[1]);
+					this.typeAheadInput.val(triggerParts[1]);
 					break;
 				case 'gems':
 					this.gemSelection.val(triggerParts[1].split(','));
@@ -385,7 +396,7 @@ export default class ProgressionCreationService {
 		this.currentNodeList.html('');
 		this.itemSlotSelection.val('');
 		this.completionTypeSelect.val('');
-		this.zoneSelection.val('');
+		this.typeAheadList.val('');
 		this.itemSlotSelection.val('');
 		this.modSearchInput.val('');
 		this.levelSelection.val('');

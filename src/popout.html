@@ -26,24 +26,49 @@
 			position: fixed;
 			top: 0;
 			left: 0;
+			padding: 4px;
+			z-index: 1;
 		}
 
 		#popoutClose {
 			-webkit-app-region: none;
-		}
+			margin-right: 6px;
 
-		#popoutHeader, #popoutBody {
-			padding: 4px;
 		}
 
 		.tile {
-			height: 1.2rem;
+			min-height: 1.2rem;
 			width: 100%;
 			overflow: hidden;
 			text-overflow: ellipsis;
-			display: flex;
-			flex-direction: row-reverse;
-			justify-content: space-between;
+
+			display: grid;
+			grid-template-columns: 1rem calc(100% - 2rem) 1rem;
+		}
+
+		.tile.collapsed {
+			grid-template-rows: 100%;
+			grid-template-areas: "toggle title close";
+		}
+
+		.tile.expanded {
+			grid-template-rows: 100% 100%;
+			grid-template-areas:
+					"toggle title close"
+					"description description description";
+		}
+
+		.tile[data-level="2"],
+		.tile[data-level="3"] {
+			grid-template-columns: 1rem calc(100% - 1rem);
+			grid-template-areas: "toggle title";
+		}
+
+		.tile[data-level="2"].expanded,
+		.tile[data-level="3"].expanded {
+			grid-template-areas:
+					"toggle title"
+					"description description";
 		}
 
 		.tile[data-level="1"] {
@@ -61,8 +86,7 @@
 		/* Don't show the close icons for nodes that are not on top */
 		.tile[data-level="2"] .closeIcon,
 		.tile[data-level="3"] .closeIcon {
-			z-index: -1;
-			opacity: 0;
+			display: none;
 		}
 
 		::-webkit-scrollbar {
@@ -82,17 +106,117 @@
 		.closeIcon {
 			color: white;
 			cursor: pointer;
-			margin-right: 9px;
+			margin-right: 2px;
+			position: relative;
+			float: right;
+			width: 1rem;
+			height: 1rem;
+		}
+
+		.tile .closeIcon {
+			grid-area: close;
+		}
+
+		.closeIcon:before, .closeIcon:after {
+			position: absolute;
+			content: " ";
+			height: 1rem;
+			width: 2px;
+			background-color: white;
+			left: 8px;
+		}
+
+		.closeIcon:after:hover, .closeIcon:before:hover {
+			cursor: pointer;
+		}
+
+		.closeIcon:before {
+			transform: rotate(45deg);
+		}
+
+		.closeIcon:after {
+			transform: rotate(-45deg);
 		}
 
 		.tileDescriptionContainer {
-			display: inline;
-			text-overflow: ellipsis;
+			display: none;
+			grid-area: description;
+		}
+
+		.tileTitle {
+			padding-left: 4px;
+
+			grid-area: title;
 			overflow: hidden;
+			text-overflow: ellipsis;
 			white-space: nowrap;
 		}
 
+		.expanded .tileDescriptionContainer {
+			display: block;
+			background-color: darkslategray;
+			white-space: normal;
+		}
+
 		.tileDescription {
+			padding: 4px;
+		}
+
+		.collapsed .toggle, .expanded .toggle {
+			width: 1rem;
+			height: 1rem;
+			position: relative;
+			float: left;
+			cursor: pointer;
+
+			grid-area: toggle;
+		}
+
+		.collapsed .toggle:after, .collapsed .toggle:before, .expanded .toggle:after {
+			content: " ";
+			position: absolute;
+			background-color: white;
+		}
+
+		/* Horizonal */
+		.collapsed .toggle:after {
+			top: 0.5rem;
+			left: 0;
+			width: 100%;
+			height: 2px;
+			margin-left: 1px;
+			margin-right: 1px;
+		}
+
+		/* Vertical */
+		.collapsed .toggle:before {
+			top: 0;
+			left: 0.5rem;
+			width: 2px;
+			height: 100%;
+			margin-top: 1px;
+			margin-bottom: 1px;
+		}
+
+		.expanded .toggle:after {
+			top: 0.5rem;
+			left: 0;
+			width: 100%;
+			height: 2px;
+			margin-left: 1px;
+			margin-right: 1px;
+		}
+		
+		.hidden {
+			display: none;
+		}
+
+		.gemPreview img {
+			transform: scale(0.9);
+		}
+
+		/* Remove the text from the gem since we have a relatively larger image in an overlay */
+		.gemPreview span {
 			display: none;
 		}
 	</style>
@@ -102,50 +226,7 @@
 		<span>Progression Tracker</span>
 		<span id="popoutClose" class="closeIcon">X</span>
 	</div>
-	<div id="popoutBody">
-		<div class="tile " data-level="1" id="tile_1">
-			<span class="closeIcon">X</span>
-			<div class="tileDescriptionContainer">
-				<span class="tileTitle">Kill Hillock and go to the place that's way too long</span>
-				<span class="tileDescription">Navigate through The Twilight Strand until you encounter Hillock. Kill him and enter town for your reward.</span>
-			</div>
-		</div>
-		<div class="tile " data-level="1" id="tile_1">
-			<span class="closeIcon">X</span>
-			<div class="tileDescriptionContainer">
-				<span class="tileTitle">Kill Hillock and go to the place that's way too long</span>
-				<span class="tileDescription">Navigate through The Twilight Strand until you encounter Hillock. Kill him and enter town for your reward.</span>
-			</div>
-		</div>
-		<div class="tile " data-level="2" id="tile_1">
-			<span class="closeIcon">X</span>
-			<div class="tileDescriptionContainer">
-				<span class="tileTitle">Kill Hillock</span>
-				<span class="tileDescription">Navigate through The Twilight Strand until you encounter Hillock. Kill him and enter town for your reward.</span>
-			</div>
-		</div>
-		<div class="tile " data-level="2" id="tile_1">
-			<span class="closeIcon">X</span>
-			<div class="tileDescriptionContainer">
-				<span class="tileTitle">Kill Hillock</span>
-				<span class="tileDescription">Navigate through The Twilight Strand until you encounter Hillock. Kill him and enter town for your reward.</span>
-			</div>
-		</div>
-		<div class="tile " data-level="3" id="tile_1">
-			<span class="closeIcon">X</span>
-			<div class="tileDescriptionContainer">
-				<span class="tileTitle">Kill Hillock</span>
-				<span class="tileDescription">Navigate through The Twilight Strand until you encounter Hillock. Kill him and enter town for your reward.</span>
-			</div>
-		</div>
-		<div class="tile " data-level="3" id="tile_1">
-			<span class="closeIcon">X</span>
-			<div class="tileDescriptionContainer">
-				<span class="tileTitle">Kill Hillock</span>
-				<span class="tileDescription">Navigate through The Twilight Strand until you encounter Hillock. Kill him and enter town for your reward.</span>
-			</div>
-		</div>
-	</div>
+	<div id="popoutBody"></div>
 	<script>
 		require('babel-register');
 		require('./Scripts/Services/PopoutService.js');
