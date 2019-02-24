@@ -1,6 +1,6 @@
 {
   "name": "path-of-progression",
-  "version": "0.7.2",
+  "version": "0.7.3",
   "description": "App to help track the character leveling process in Path of Exile",
   "main": "main.js",
   "scripts": {
