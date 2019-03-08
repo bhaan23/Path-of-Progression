@@ -1,5 +1,7 @@
 # Path of Progression
 
+NOTE: This will not be my focus during the beginning of the Synthesis league. However, after a month or so, I will return to this project.
+
 A tool for Path of Exile used to aid the leveling process by tracking which zones to go to next and what gear you can equip at certain points within the leveling process.
 
 Download the latest release at https://github.com/bhaan23/Path-of-Progression/releases/latest
